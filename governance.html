@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<style>
+  .mobile-nav-toggle,
+  .mobile-nav-panel {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none !important;
+    }
+
+    .mobile-nav-toggle {
+      display: block !important;
+      background: transparent;
+      border: none;
+      color: #180c04;
+      font-size: 34px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    body.mobile-nav-open .mobile-nav-panel {
+      display: flex !important;
+      position: fixed;
+      top: 92px;
+      left: 18px;
+      right: 18px;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 18px;
+      padding: 24px;
+      background: rgba(252, 250, 238, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .mobile-nav-panel a {
+      color: #fff;
+      text-decoration: none;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+</style>
+  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Foundation Governance — board, officers, compliance architecture, and institutional portfolios." />
