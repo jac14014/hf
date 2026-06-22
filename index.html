@@ -14,51 +14,39 @@
   <script type="module" crossorigin src="./assets/index-DB9sFV2e.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
     <style>
-  .mobile-menu-button {
-    display: none;
-  }
-
   @media (max-width: 768px) {
-    .mobile-menu-button {
-      display: flex !important;
-      position: fixed;
-      top: 28px;
-      right: 24px;
-      z-index: 9999;
-      width: 42px;
-      height: 42px;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(24,12,4,0.16);
-      color: #180c04;
-      font-size: 24px;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    nav a:not(:first-child) {
+    .desktop-nav-links {
       display: none !important;
     }
 
-    body.mobile-menu-open nav a {
+    .mobile-menu-toggle {
       display: block !important;
     }
 
-    body.mobile-menu-open nav {
-      background: rgba(252,250,238,0.92) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
+    .mobile-menu-panel {
+      position: fixed;
+      top: 92px;
+      left: 18px;
+      right: 18px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 24px;
+      background: rgba(24, 12, 4, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
-    body.mobile-menu-open nav div {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 18px !important;
-      padding-top: 72px !important;
-      padding-bottom: 28px !important;
+    .mobile-menu-panel a {
+      color: #fff;
+      text-decoration: none;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
   }
 </style>
