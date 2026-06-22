@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-  .mobile-nav-toggle { display: none; }
+  .mobile-nav-toggle,
+  .mobile-nav-panel {
+    display: none;
+  }
 
   @media (max-width: 768px) {
     .nav-links {
@@ -13,41 +16,35 @@
       background: transparent;
       border: none;
       color: #180c04;
-      font-size: 28px;
+      font-size: 34px;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 10000;
     }
 
-    body.mobile-nav-open .nav-links {
+    body.mobile-nav-open .mobile-nav-panel {
       display: flex !important;
-      position: fixed !important;
-      top: 92px !important;
-      left: 18px !important;
-      right: 18px !important;
-      z-index: 9999 !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 18px !important;
-      padding: 24px !important;
-      background: rgba(24, 12, 4, 0.78) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
-      border: 1px solid rgba(255,255,255,0.18) !important;
-      height: auto !important;
-      opacity: 1 !important;
-      visibility: visible !important;
+      position: fixed;
+      top: 92px;
+      left: 18px;
+      right: 18px;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 18px;
+      padding: 24px;
+      background: rgba(24, 12, 4, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
-    body.mobile-nav-open .nav-links a,
-    body.mobile-nav-open .nav-link {
-      display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      color: #fff !important;
-      font-size: 12px !important;
-      letter-spacing: 2px !important;
-      text-decoration: none !important;
-      width: 100% !important;
+    .mobile-nav-panel a {
+      color: #fff;
+      text-decoration: none;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
   }
 </style>
@@ -115,6 +112,19 @@
   </footer>
   <script>
   const mobileToggle = document.querySelector(".mobile-nav-toggle");
+
+  const panel = document.createElement("div");
+  panel.className = "mobile-nav-panel";
+  panel.innerHTML = `
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="lineage.html">Lineage</a>
+    <a href="governance.html">Governance</a>
+    <a href="doctrine.html">Doctrine</a>
+    <a href="fellowship.html">Fellowship</a>
+    <a href="amazon-lab.html">Amazon Lab</a>
+  `;
+  document.body.appendChild(panel);
 
   mobileToggle.addEventListener("click", function () {
     document.body.classList.toggle("mobile-nav-open");
