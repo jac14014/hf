@@ -122,5 +122,26 @@
       <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+  const mobileToggle = document.querySelector(".mobile-nav-toggle");
+
+  const panel = document.createElement("div");
+  panel.className = "mobile-nav-panel";
+  panel.innerHTML = `
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="lineage.html">Lineage</a>
+    <a href="governance.html">Governance</a>
+    <a href="doctrine.html">Doctrine</a>
+    <a href="fellowship.html">Fellowship</a>
+    <a href="amazon-lab.html">Amazon Lab</a>
+  `;
+  document.body.appendChild(panel);
+
+  mobileToggle.addEventListener("click", function () {
+    document.body.classList.toggle("mobile-nav-open");
+    mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
+  });
+</script>
 </body>
 </html>
