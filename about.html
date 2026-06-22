@@ -1,5 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  .mobile-nav-toggle { display: none; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none !important; }
+
+    .mobile-nav-toggle {
+      display: block !important;
+      background: transparent;
+      border: none;
+      color: #180c04;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    body.mobile-nav-open .nav-links {
+      display: flex !important;
+      position: fixed;
+      top: 92px;
+      left: 18px;
+      right: 18px;
+      z-index: 999;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 24px;
+      background: rgba(24, 12, 4, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    body.mobile-nav-open .nav-link {
+      color: #fff !important;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+  }
+</style>
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +54,10 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-brand">Hasse Foundation</a>
-      <div class="nav-links">
+
+<button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
+
+<div class="nav-links">
         <a href="/" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
         <a href="lineage.html" class="nav-link">Lineage</a>
@@ -58,5 +101,13 @@
       <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+  const mobileToggle = document.querySelector(".mobile-nav-toggle");
+
+  mobileToggle.addEventListener("click", function () {
+    document.body.classList.toggle("mobile-nav-open");
+    mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
+  });
+</script>
 </body>
 </html>
