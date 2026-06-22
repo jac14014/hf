@@ -15,6 +15,27 @@
   <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
 </head>
   <body>
-    <div id="root"></div>
-  </body>
+  <div id="root"></div>
+
+  <script>
+    document.addEventListener("click", function (event) {
+      const text = event.target.textContent.trim().toUpperCase();
+
+      const links = {
+        "HOME": "./",
+        "ABOUT": "./about.html",
+        "LINEAGE": "./lineage.html",
+        "GOVERNANCE": "./governance.html",
+        "DOCTRINE": "./doctrine.html",
+        "FELLOWSHIP": "./fellowship.html",
+        "AMAZON LAB": "./amazon-lab.html"
+      };
+
+      if (links[text]) {
+        event.preventDefault();
+        window.location.href = links[text];
+      }
+    }, true);
+  </script>
+</body>
 </html>
