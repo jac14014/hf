@@ -1,31 +1,46 @@
 <!doctype html>
 <html lang="">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Johann Christian Hasse Foundation</title>
-    <meta name="description" content="Johann Christian Hasse Foundation: legal architecture, anticipatory governance, and living systems research." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-DB9sFV2e.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
-  </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Johann Christian Hasse Foundation</title>
+
+  <meta
+    name="description"
+    content="Johann Christian Hasse Foundation: legal architecture, anticipatory governance, and living systems research."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ADICIONE ESTA LINHA -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script type="module" crossorigin src="./assets/index-DB9sFV2e.js"></script>
+
+  <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
+</head>
   <body>
-    <nav style="position:fixed;top:0;left:0;width:100%;z-index:101;background:rgba(252,250,238,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(24,12,4,0.08);padding:0;">
-      <div style="max-width:1200px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;">
-        <a href="/" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:500;color:#180c04;letter-spacing:2px;text-decoration:none;text-transform:uppercase;">Hasse Foundation</a>
-        <div style="display:flex;gap:28px;align-items:center;">
-          <a href="/" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Home</a>
-          <a href="about.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">About</a>
-          <a href="lineage.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Lineage</a>
-          <a href="governance.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Governance</a>
-          <a href="doctrine.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Doctrine</a>
-          <a href="fellowship.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Fellowship</a>
-          <a href="amazon-lab.html" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#180c04;letter-spacing:1.3px;text-decoration:none;text-transform:uppercase;opacity:0.85;transition:color 0.6s ease;">Amazon Lab</a>
-        </div>
-      </div>
-    </nav>
+    <nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Hasse Foundation</a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="lineage.html" class="nav-link">Lineage</a>
+      <a href="governance.html" class="nav-link">Governance</a>
+      <a href="doctrine.html" class="nav-link">Doctrine</a>
+      <a href="fellowship.html" class="nav-link">Fellowship</a>
+      <a href="amazon-lab.html" class="nav-link">Amazon Lab</a>
+    </div>
+  </div>
+</nav>
     <div id="root"></div>
   </body>
 </html>
