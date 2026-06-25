@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Integrated Funding Plan 001-2026 | Johann Christian Hasse Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A227;
+  --gold-light:#D4AF37;
+  --gold-dark:#8B6914;
+  --gold-pale:#F5F0E8;
+
+  --green:#1E3A2F;
+  --green-soft:#EEF4EF;
+
+  --blue:#263F5F;
+  --red:#7A2F2F;
+
+  --ink:#1A1A1A;
+  --ink-light:#444;
+  --cream:#FDFCF8;
+  --paper:#FFFFFF;
+  --soft:#F8F5EE;
+  --line:#D8C99A;
+
+  --shadow:0 0 30px rgba(0,0,0,.12);
+
+  --font-main:"Cormorant Garamond", Garamond, Georgia, serif;
+  --font-display:"Cormorant Garamond", Garamond, Georgia, serif;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:var(--font-main);
+  background:linear-gradient(135deg,#f5f0e8 0%,#ede6d8 100%);
+  color:var(--ink);
+  line-height:1.62;
+  font-size:11pt;
+  min-height:100vh;
+  padding-bottom:.75in;
+}
+
+/* =========================
+   TOP NAVIGATION
+========================= */
+
+.nav-tabs{
+  display:flex;
+  justify-content:center;
+  gap:0;
+  background:white;
+  border-bottom:1px solid var(--gold);
+  position:sticky;
+  top:0;
+  z-index:50;
+  flex-wrap:wrap;
+}
+
+.nav-tab{
+  padding:.1in .16in;
+  border:none;
+  background:transparent;
+  font-family:var(--font-display);
+  font-size:8.2pt;
+  font-weight:600;
+  color:#777;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  border-bottom:2px solid transparent;
+  transition:all .25s ease;
+}
+
+.nav-tab:hover,
+.nav-tab.active{
+  color:var(--gold-dark);
+  border-bottom-color:var(--gold);
+  background:#fffaf0;
+}
+
+/* =========================
+   PRINT BAR
+========================= */
+
+.print-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:2px solid var(--gold);
+  padding:.12in;
+  display:flex;
+  justify-content:center;
+  gap:.15in;
+  box-shadow:0 -4px 15px rgba(0,0,0,.1);
+  z-index:100;
+}
+
+.btn{
+  padding:.08in .25in;
+  border:1px solid var(--gold);
+  background:white;
+  color:var(--gold-dark);
+  font-family:var(--font-display);
+  font-size:9pt;
+  font-weight:600;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.btn:hover,
+.btn-primary{
+  background:var(--gold);
+  color:white;
+}
+
+/* =========================
+   TAB STRUCTURE
+========================= */
+
+.tab-content{
+  display:none;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+/* =========================
+   PAGE STRUCTURE
+========================= */
+
+.page{
+  width:8.5in;
+  min-height:11in;
+  margin:0 auto .35in;
+  background:white;
+  position:relative;
+  box-shadow:var(--shadow);
+  padding:0 .75in .75in;
+  overflow:hidden;
+}
+
+.page::before{
+  content:'';
+  position:absolute;
+  top:.3in;
+  left:.3in;
+  right:.3in;
+  bottom:.3in;
+  border:1.5px solid var(--gold);
+  pointer-events:none;
+  z-index:1;
+}
+
+.page::after{
+  content:'';
+  position:absolute;
+  top:.4in;
+  left:.4in;
+  right:.4in;
+  bottom:.4in;
+  border:.5px solid var(--gold-light);
+  pointer-events:none;
+  opacity:.55;
+  z-index:1;
+}
+
+.letterhead{
+  text-align:center;
+  padding:.4in .75in .2in;
+  border-bottom:1px solid var(--gold);
+  background:white;
+  position:relative;
+  z-index:2;
+}
+
+.seal{
+  width:1.18in;
+  height:1.18in;
+  margin:0 auto .1in;
+  border:none;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.seal img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.org-name{
+  font-family:var(--font-display);
+  font-size:15pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.org-address{
+  font-size:9pt;
+  color:#666;
+  margin-top:.03in;
+  font-style:italic;
+}
+
+.org-motto{
+  font-size:8pt;
+  color:var(--gold);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-top:.05in;
+}
+
+.content{
+  padding-top:.3in;
+  position:relative;
+  z-index:2;
+}
+
+.doc-title{
+  text-align:center;
+  margin-bottom:.28in;
+}
+
+.chapter-kicker{
+  font-family:var(--font-display);
+  font-size:8.5pt;
+  font-weight:600;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  margin-bottom:.08in;
+}
+
+.doc-title h1{
+  font-family:var(--font-display);
+  font-size:19pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  line-height:1.25;
+}
+
+.doc-title .subtitle{
+  font-family:var(--font-main);
+  font-size:10.5pt;
+  color:#666;
+  font-style:italic;
+  margin-top:.08in;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.body-text p{
+  margin-bottom:.12in;
+  text-align:justify;
+  text-indent:.2in;
+}
+
+.body-text p.no-indent,
+.body-text .highlight-box p,
+.body-text .note-box p,
+.body-text .figure-box p,
+.body-text .method-box p,
+.body-text .warning-box p,
+.body-text .analysis-box p,
+.body-text .methodology-box p{
+  text-indent:0;
+}
+
+.lead-text{
+  font-size:12pt;
+  line-height:1.7;
+  background:#fbfaf6;
+  border-left:5px solid var(--gold);
+  padding:.16in .18in;
+  margin:.18in 0 .25in;
+  text-indent:0 !important;
+}
+
+.section-header{
+  font-family:var(--font-display);
+  font-size:11.5pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:.25in 0 .12in;
+  border-left:3px solid var(--gold);
+  padding-left:.1in;
+}
+
+.subsection-header{
+  font-family:var(--font-display);
+  font-size:10pt;
+  font-weight:600;
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin:.18in 0 .08in;
+}
+
+/* =========================
+   BOXES
+========================= */
+
+.highlight-box,
+.note-box,
+.method-box,
+.warning-box,
+.analysis-box,
+.methodology-box{
+  background:linear-gradient(135deg,#FDFCF8 0%,#F5F0E8 100%);
+  border:1px solid var(--gold-light);
+  border-left:5px solid var(--gold);
+  padding:.14in .16in;
+  margin:.16in 0;
+  border-radius:2px;
+  break-inside:avoid;
+}
+
+.analysis-box{
+  border-left-color:var(--green);
+  background:#FBFCFA;
+}
+
+.method-box,
+.methodology-box{
+  border-left-color:var(--green);
+  background:var(--green-soft);
+}
+
+.warning-box{
+  border-left-color:var(--red);
+  background:#FBF1EF;
+}
+
+/* =========================
+   GRIDS AND CARDS
+========================= */
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.14in;
+  margin:.15in 0;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.14in;
+  margin:.15in 0;
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.14in;
+  margin:.15in 0;
+}
+
+.metric-card,
+.source-card,
+.gap-card,
+.partner-card{
+  border:1px solid var(--line);
+  background:#fff;
+  padding:.13in;
+  border-top:4px solid var(--gold);
+  break-inside:avoid;
+}
+
+.metric-number{
+  font-size:22pt;
+  color:var(--green);
+  font-weight:700;
+  line-height:1;
+}
+
+.metric-label{
+  font-size:9.5pt;
+  color:#555;
+  line-height:1.45;
+  margin-top:.06in;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+.table-wrapper{
+  overflow-x:auto;
+  margin:.16in 0;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8.8pt;
+  background:#fff;
+  break-inside:auto;
+}
+
+th{
+  background:var(--gold-pale);
+  border-bottom:2px solid var(--gold);
+  padding:.06in;
+  text-align:left;
+  vertical-align:top;
+  color:var(--ink);
+}
+
+td{
+  border-bottom:1px solid #eee;
+  padding:.06in;
+  vertical-align:top;
+}
+
+tr{
+  break-inside:avoid;
+}
+
+caption{
+  caption-side:top;
+  text-align:left;
+  font-family:var(--font-display);
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  margin-bottom:.08in;
+}
+
+/* =========================
+   FIGURES
+========================= */
+
+.figure-box{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:.15in;
+  margin:.2in 0;
+  break-inside:avoid;
+  overflow-x:auto;
+}
+
+.figure-title{
+  font-family:var(--font-display);
+  color:var(--gold-dark);
+  font-size:9.5pt;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  margin-bottom:.1in;
+  border-bottom:1px solid var(--gold-light);
+  padding-bottom:.05in;
+}
+
+.figure-subtitle{
+  font-size:9pt;
+  color:#666;
+  font-style:italic;
+  margin:-.04in 0 .1in;
+  text-align:center;
+}
+
+.inline-figure,
+.visual-figure-section,
+.visual-table-section{
+  width:100%;
+  max-width:100%;
+  margin:.18in auto;
+  break-inside:avoid;
+}
+
+.inline-figure{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:.12in;
+  text-align:center;
+  overflow:hidden;
+}
+
+.inline-figure img{
+  width:auto;
+  max-width:100%;
+  max-height:6.6in;
+  height:auto;
+  display:block;
+  margin:.1in auto .04in;
+  border:1px solid #eee;
+  background:#fff;
+  cursor:zoom-in;
+  object-fit:contain;
+}
+
+.figure-source,
+.table-source,
+.source-note{
+  font-size:8.5pt;
+  color:#666;
+  font-style:italic;
+  margin-top:.08in;
+}
+
+/* =========================
+   LISTS
+========================= */
+
+ul{
+  margin:.08in 0 .14in .22in;
+}
+
+li{
+  margin-bottom:.04in;
+}
+
+/* =========================
+   FLOW DIAGRAMS
+========================= */
+
+.flow{
+  display:flex;
+  align-items:stretch;
+  justify-content:space-between;
+  gap:.08in;
+  margin:.15in 0;
+}
+
+.flow-node{
+  flex:1;
+  border:1px solid var(--line);
+  background:#fff;
+  padding:.08in;
+  text-align:center;
+  font-size:8.8pt;
+  min-height:.55in;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.flow-arrow{
+  display:flex;
+  align-items:center;
+  color:var(--gold-dark);
+  font-size:14pt;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+  border-left:3px solid var(--gold);
+  margin:.16in 0 .16in .1in;
+  padding-left:.16in;
+}
+
+.timeline-item{
+  position:relative;
+  margin-bottom:.14in;
+  padding:.1in .12in;
+  background:#fff;
+  border:1px solid var(--line);
+}
+
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  left:-.235in;
+  top:.18in;
+  width:.09in;
+  height:.09in;
+  border-radius:50%;
+  background:var(--gold);
+  border:2px solid white;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer{
+  width:100%;
+  max-width:900px;
+  margin:8px auto 0;
+  padding:6px 12px;
+  border-top:.6px solid rgba(201,162,39,.45);
+  font-family:var(--font-main);
+  font-size:9pt;
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:.02em;
+  text-align:center;
+  color:#666;
+}
+
+/* =========================
+   IMAGE MODAL
+========================= */
+
+#img-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.86);
+  z-index:99999;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  cursor:zoom-out;
+}
+
+#img-modal.active{
+  display:flex;
+}
+
+#img-modal img{
+  max-width:96vw;
+  max-height:94vh;
+  width:auto;
+  height:auto;
+  background:white;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  cursor:zoom-out;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+  body{
+    font-size:12pt;
+  }
+
+  .page{
+    width:100%;
+    min-height:auto;
+    margin:0;
+    padding:0 .35in .55in;
+  }
+
+  .page::before,
+  .page::after{
+    display:none;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+
+  .flow{
+    flex-direction:column;
+  }
+
+  .flow-arrow{
+    justify-content:center;
+    transform:rotate(90deg);
+  }
+
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:normal;
+  }
+
+  .print-bar{
+    position:static;
+  }
+}
+
+@media(max-width:768px){
+  .letterhead{
+    padding:.28in .24in .16in;
+  }
+
+  .seal{
+    width:.92in;
+    height:.92in;
+    margin:0 auto .14in;
+  }
+
+  .org-name{
+    font-size:14pt;
+    line-height:1.35;
+    letter-spacing:.075em;
+    max-width:100%;
+    margin:0 auto;
+  }
+
+  .doc-title h1{
+    font-size:16pt;
+  }
+
+  .nav-tab{
+    font-size:7.8pt;
+    padding:.08in .12in;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+  body{
+    background:white;
+    padding-bottom:0;
+  }
+
+  .nav-tabs,
+  .print-bar{
+    display:none !important;
+  }
+
+  .tab-content{
+    display:block !important;
+  }
+
+  .page{
+    width:8.5in;
+    min-height:11in;
+    margin:0;
+    box-shadow:none;
+    page-break-after:always;
+  }
+
+  .highlight-box,
+  .note-box,
+  .method-box,
+  .warning-box,
+  .figure-box,
+  .metric-card,
+  .source-card,
+  .gap-card,
+  .partner-card{
+    break-inside:avoid;
+  }
+}
+
+  /* =====================================================
+   c-ECO HIRING PLAN / PHASE ZERO CSS
+===================================================== */
+
+.phase-title{
+  text-align:center;
+  margin:.25in 0 .18in;
+  padding:.12in 0;
+}
+
+.phase-label{
+  font-family:var(--font-display);
+  font-size:9pt;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-weight:600;
+}
+
+.phase-name{
+  font-family:var(--font-display);
+  font-size:22pt;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  line-height:1.25;
+  margin:.04in 0;
+}
+
+.phase-note{
+  font-size:10pt;
+  color:#666;
+  font-style:italic;
+}
+
+.budget-box{
+  border:2px solid var(--gold);
+  background:#FBFAF5;
+  padding:.16in .18in;
+  margin:.2in 0 .25in;
+  text-align:center;
+  break-inside:avoid;
+}
+
+.budget-total{
+  font-family:var(--font-display);
+  font-size:17pt;
+  color:var(--gold-dark);
+  font-weight:700;
+  letter-spacing:.03em;
+  margin-bottom:.05in;
+}
+
+.summary-box{
+  border:1px solid var(--gold-light);
+  background:#FDFCF8;
+  padding:.16in .18in;
+  margin:.2in 0 .3in;
+  break-inside:avoid;
+}
+
+.summary-title{
+  font-family:var(--font-display);
+  font-size:10pt;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  text-align:center;
+  font-weight:600;
+  margin-bottom:.12in;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.12in;
+}
+
+.summary-item{
+  text-align:center;
+  border-top:1px solid rgba(201,162,39,.45);
+  padding:.12in .08in .04in;
+}
+
+.summary-number{
+  font-family:var(--font-display);
+  font-size:18pt;
+  color:var(--gold-dark);
+  font-weight:700;
+  line-height:1;
+}
+
+.summary-label{
+  font-size:8.5pt;
+  color:#777;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-top:.05in;
+}
+
+.org-unit{
+  margin:.28in 0;
+  padding-top:.08in;
+  border-top:2px solid var(--gold);
+  break-inside:avoid;
+}
+
+.org-unit-header{
+  display:flex;
+  align-items:center;
+  gap:.12in;
+  margin-bottom:.06in;
+}
+
+.org-unit-icon{
+  width:.32in;
+  height:.32in;
+  border:1.5px solid var(--gold);
+  border-radius:50%;
+  color:var(--gold-dark);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11pt;
+  line-height:1;
+  flex:0 0 auto;
+}
+
+.org-unit-title{
+  font-family:var(--font-display);
+  font-size:11.5pt;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:600;
+}
+
+.org-unit-subtitle{
+  font-size:9pt;
+  color:#777;
+  font-style:italic;
+  margin:.02in 0 .14in .45in;
+}
+
+.roles-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.12in;
+  margin:.12in 0;
+}
+
+.role-card{
+  position:relative;
+  border:1px solid var(--line);
+  background:#FDFCF8;
+  padding:.14in .16in .13in;
+  border-left:5px solid var(--gold-dark);
+  break-inside:avoid;
+  min-height:1.05in;
+}
+
+.role-card.presidency{
+  border-left-color:var(--blue);
+}
+
+.role-card.treasury{
+  border-left-color:var(--green);
+}
+
+.role-card.governance{
+  border-left-color:var(--gold-dark);
+}
+
+.role-card.gih{
+  border-left-color:#9B2F2F;
+}
+
+.role-card.grants{
+  border-left-color:#C9A227;
+}
+
+.role-card.fellowship{
+  border-left-color:#6F4E8A;
+}
+
+.role-card.tech{
+  border-left-color:#2F5F3A;
+}
+
+.role-title{
+  font-family:var(--font-display);
+  font-size:10.5pt;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:700;
+  padding-right:1.55in;
+  margin-bottom:.06in;
+}
+
+.role-function{
+  font-size:9.5pt;
+  color:#444;
+  font-style:italic;
+  line-height:1.45;
+  margin-bottom:.08in;
+}
+
+.role-cost{
+  font-size:9.5pt;
+  color:var(--red);
+  font-weight:700;
+  margin-bottom:.03in;
+}
+
+.role-reports-to{
+  font-size:8.2pt;
+  color:#777;
+  font-style:italic;
+}
+
+.role-badge,
+.layer-badge{
+  display:inline-block;
+  font-family:var(--font-display);
+  font-size:7.2pt;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:.045in .075in;
+  border-radius:2px;
+  font-weight:700;
+}
+
+.role-badge{
+  position:absolute;
+  top:.12in;
+  right:.14in;
+  max-width:1.45in;
+  text-align:center;
+}
+
+.layer-badge{
+  margin-right:.06in;
+  margin-bottom:.06in;
+}
+
+.role-badge.founder{
+  background:#F5F0E8;
+  color:var(--gold-dark);
+}
+
+.role-badge.volunteer{
+  background:#F1F1F1;
+  color:#777;
+}
+
+.role-badge.advisory{
+  background:#F7EFEF;
+  color:#8A5A5A;
+}
+
+.role-badge.w2{
+  background:#EAF7EF;
+  color:#2F6B44;
+}
+
+.role-badge.contract{
+  background:#EAF1F8;
+  color:#315C7C;
+}
+
+.layer-gih{
+  background:#9B2F2F;
+  color:white;
+}
+
+.layer-l0{
+  background:#555;
+  color:white;
+}
+
+.footer{
+  text-align:center;
+  color:#777;
+  font-size:8.5pt;
+  font-style:italic;
+  border-top:1px solid var(--gold-light);
+  margin:.28in 0 0;
+  padding-top:.12in;
+}
+
+/* Make hiring plan tables blend with memorandum style */
+.org-unit table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8.8pt;
+  background:#fff;
+  margin:.14in 0;
+}
+
+.org-unit table th{
+  background:var(--gold-pale);
+  color:var(--gold-dark);
+  border-bottom:2px solid var(--gold);
+  padding:.07in;
+  text-align:left;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.org-unit table td{
+  padding:.07in;
+  border-bottom:1px solid #eee;
+  vertical-align:top;
+}
+
+/* Compatibility with hiring plan letterhead */
+.letterhead .subtitle{
+  font-size:10pt;
+  color:#666;
+  font-style:italic;
+  margin-top:.04in;
+}
+
+.letterhead .motto{
+  font-size:8pt;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  margin-top:.05in;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+
+  .org-unit-title{
+    font-size:10pt;
+    line-height:1.35;
+  }
+
+  .org-unit-subtitle{
+    margin-left:0;
+  }
+
+  .role-title{
+    padding-right:0;
+    margin-top:.16in;
+  }
+
+  .role-badge{
+    position:static;
+    margin-bottom:.08in;
+    max-width:none;
+  }
+}
+
+/* Print */
+@media print{
+  .budget-box,
+  .summary-box,
+  .org-unit,
+  .role-card{
+    break-inside:avoid;
+  }
+}
+
+/* =====================================================
+   FUNDING PLAN SPECIFIC
+===================================================== */
+.funding-total{font-family:var(--font-display);font-size:24pt;color:var(--green);font-weight:700;line-height:1;}
+.priority-tag{display:inline-block;padding:.035in .07in;border:1px solid var(--gold);background:var(--gold-pale);color:var(--gold-dark);font-size:7.6pt;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin:.02in .04in .02in 0;}
+.status-high{border-left-color:var(--green)!important}.status-medium{border-left-color:var(--gold)!important}.status-low{border-left-color:var(--red)!important}.center{text-align:center;text-indent:0!important}.no-indent{text-indent:0!important}.small-note{font-size:8.8pt;color:#666;font-style:italic}.action-list{margin-left:.18in}.compact-table td,.compact-table th{font-size:8.4pt}.opportunity-card{border:1px solid var(--line);background:#fff;padding:.14in .16in;margin:.13in 0;border-left:5px solid var(--gold);break-inside:avoid}.opportunity-title{font-family:var(--font-display);font-size:11pt;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:.06in}.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.12in;margin:.15in 0}@media(max-width:900px){.kpi-row{grid-template-columns:1fr}.nav-tabs{position:static}.print-bar{display:none}.page{padding:0 .22in .45in}.content{padding-top:.22in}}
+</style>
+</head>
+<body>
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab(event,'executive-summary')">Executive Summary</button>
+  <button class="nav-tab" onclick="showTab(event,'positioning')">Positioning</button>
+  <button class="nav-tab" onclick="showTab(event,'direct-grants')">Direct Grants</button>
+  <button class="nav-tab" onclick="showTab(event,'research')">Research</button>
+  <button class="nav-tab" onclick="showTab(event,'international')">International</button>
+  <button class="nav-tab" onclick="showTab(event,'matrix')">Matrix</button>
+  <button class="nav-tab" onclick="showTab(event,'execution')">Execution</button>
+  <button class="nav-tab" onclick="showTab(event,'compliance')">Compliance</button>
+  <button class="nav-tab" onclick="showTab(event,'risks')">Risks</button>
+</div>
+<div class="print-bar"><button class="btn" onclick="window.print()">Print All</button><button class="btn btn-primary" onclick="printCurrent()">Print Current</button></div>
+
+<section id="executive-summary" class="tab-content active"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div><div class="org-address">Funding Plan 001-2026</div><div class="org-motto">Governance Before Collapse</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Integrated Funding Strategy</div><h1>C-ECO Amazon Lab Funding Plan</h1><div class="subtitle">Corrected Production Version · June 2026</div></div><div class="body-text"><div class="lead-text">The Hasse Foundation’s strongest funding position is not as another conservation applicant. It is the governance, traceability, and threshold-analysis partner that helps conservation, research, and resilience projects prove why action is needed before collapse — and how funders can verify that action occurred.</div><div class="warning-box"><p><strong>Audit Note.</strong> This plan preserves the core strategy but corrects eligibility, timing, and probability assumptions. Hasse should avoid presenting itself as a local implementation NGO and instead position itself as a U.S. 501(c)(3) technical, scientific, governance, and verification partner.</p></div><div class="section-header">Realistic Funding Targets</div><div class="grid-3"><div class="metric-card"><div class="funding-total">$75K–$250K</div><div class="metric-label"><strong>2026–2027</strong><br>Near-term realistic range.</div></div><div class="metric-card"><div class="funding-total">$300K–$1.5M</div><div class="metric-label"><strong>2027–2029</strong><br>Structured partnership range.</div></div><div class="metric-card"><div class="funding-total">$5M+</div><div class="metric-label"><strong>2028–2030</strong><br>Major climate-finance pathway through accredited or government-linked entities.</div></div></div><div class="section-header">Three Funding Pillars</div><div class="flow"><div class="flow-node">Direct U.S. Philanthropy</div><div class="flow-arrow">→</div><div class="flow-node">Brazilian Research Co-Funding</div><div class="flow-arrow">→</div><div class="flow-node">International Climate & Forest Finance</div></div><div class="highlight-box"><p><strong>Central proposition:</strong> Brazilian implementation partner + Hasse Foundation technical governance methodology + C-ECO scientific verification = stronger proposals for conservation, resilience, and climate-governance funding.</p></div></div></div></div></section>
+
+<section id="positioning" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Strategic Positioning</div><h1>Technical Bridge for Systemic Governance</h1><div class="subtitle">Scientific Verification · Risk Methodology · Traceable Reporting</div></div><div class="body-text"><p>The Hasse Foundation should not compete with Brazilian NGOs, universities, public institutes, or protected-area organizations. It should complement them.</p><div class="grid-2"><div class="metric-card"><div class="metric-number">01</div><div class="metric-label"><strong>Technical governance architect</strong><br>Designs governance structures that connect evidence to action.</div></div><div class="metric-card"><div class="metric-number">02</div><div class="metric-label"><strong>Scientific verification partner</strong><br>Supports synthesis, validation, publication, and credibility.</div></div><div class="metric-card"><div class="metric-number">03</div><div class="metric-label"><strong>Methodology provider</strong><br>Applies TFP and TDR to threshold-risk analysis.</div></div><div class="metric-card"><div class="metric-number">04</div><div class="metric-label"><strong>Reporting partner</strong><br>Builds traceability between funds, actions, outputs, and outcomes.</div></div></div><div class="section-header">External Language</div><div class="analysis-box"><p>“The Hasse Foundation supports Brazilian-led environmental and resilience initiatives by contributing systemic governance methodology, scientific verification, risk-analysis frameworks, traceability-driven reporting, and international research capacity.”</p></div><div class="section-header">C-ECO / Amazon Lab Value Proposition</div><ul><li>What risk is visible before institutional failure occurs?</li><li>Which ecological, infrastructure, or social thresholds are approaching irreversibility?</li><li>Which governance actors have authority to act before the threshold is crossed?</li><li>How can monitoring data be translated into accountable decisions?</li><li>How can funders verify measurable, auditable outcomes?</li></ul><div class="method-box"><p><strong>TFP — Threshold Function Protocol:</strong> maps systemic position, velocity, uncertainty, and reversibility liquidity to identify movement from manageable risk toward irreversible failure.</p><p><strong>TDR — Traceability-Driven Reporting:</strong> links funding, activities, outputs, outcomes, and governance decisions into an auditable chain.</p></div></div></div></div></section>
+
+<section id="direct-grants" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Pillar 1</div><h1>Direct U.S. Philanthropic Grants</h1><div class="subtitle">Near-Term Direct or Relationship-Based Opportunities</div></div><div class="body-text"><div class="opportunity-card status-high"><div class="opportunity-title">Mitsubishi Corporation Foundation for the Americas</div><span class="priority-tag">High for 2027</span><span class="priority-tag">Direct inquiry possible</span><p><strong>Planning request:</strong> USD 50,000 to USD 75,000. <strong>Timing:</strong> Q1 2027 inquiry/proposal window, not a confirmed March 31 hard deadline unless MCFA confirms it directly.</p><p><strong>Concept:</strong> Amazon Lab: Governance Before Collapse — Community Resilience and Scientific Verification in the Brazilian Amazon.</p><ul><li>Partner-led field and community engagement;</li><li>C-ECO methodology and governance analysis;</li><li>Bilingual workshops and dissemination;</li><li>Policy briefs, public case note, and working paper.</li></ul><p><strong>Probability:</strong> 35% to 50%, depending on staff receptivity.</p></div><div class="opportunity-card status-medium"><div class="opportunity-title">Rainforest Trust</div><span class="priority-tag">Brazilian implementer required</span><span class="priority-tag">Protected-area focus</span><p><strong>Hasse role:</strong> technical/scientific partner inside a Brazilian NGO-led project. Hasse should not apply alone for Brazil-based implementation unless legal authorization and operational capacity are confirmed.</p><p><strong>Eligible framing:</strong> protected-area creation or expansion, feasibility, governance pathway, FPIC support, monitoring for protection outcomes, and scientific verification.</p><p><strong>Avoid:</strong> long-term ecological monitoring alone, general Amazon research, or a C-ECO documentation project without a protected-area outcome.</p></div><div class="opportunity-card status-low"><div class="opportunity-title">Doris Duke Foundation</div><span class="priority-tag">Monitoring only</span><p>Keep as a monitoring-only opportunity. Most grants are invitation-based, competitive, or through specific open calls, and very few result from unsolicited letters of inquiry.</p></div></div></div></div></section>
+
+<section id="research" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Pillar 2</div><h1>Brazilian Research Co-Funding</h1><div class="subtitle">Accessed Through Brazilian Academic and Institutional Partners</div></div><div class="body-text"><div class="opportunity-card status-medium"><div class="opportunity-title">FAPESP-NERC Global Partnerships Seedcorn Fund — Call 30/2026</div><span class="priority-tag">Deadline July 16, 2026</span><span class="priority-tag">Indirect only</span><p>This is not a direct Hasse or Amazon implementation grant. It supports short-term collaboration between São Paulo and United Kingdom research groups. Hasse can participate only if a São Paulo PI and UK partner include it as a technical or in-kind collaborator.</p><p><strong>Best C-ECO angle:</strong> Earth observation and governance thresholds, monitoring-to-decision gaps, traceability-driven reporting, and governance of early-warning systems.</p></div><div class="opportunity-card status-high"><div class="opportunity-title">FAPESP / FAPEAM or Similar 2027 Pathway</div><span class="priority-tag">Prepare now</span><p><strong>Lead structure:</strong> São Paulo PI + Amazon co-PI + Hasse Foundation as international technical and dissemination partner.</p><p><strong>Recommended concept:</strong> Threshold Governance and Traceability for Amazon Bioeconomy and Climate Resilience.</p><ul><li>Build relationships before the call opens;</li><li>Prepare a two-page concept note by September 2026;</li><li>Secure one São Paulo and one Amazon research partner by December 2026.</li></ul></div></div></div></div></section>
+
+<section id="international" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Pillar 3</div><h1>International Funds Through Partners</h1><div class="subtitle">Indirect Access Through Brazilian or Accredited Entities</div></div><div class="body-text"><div class="lead-text">International funder → Brazilian lead organization or accredited entity → project consortium → Hasse Foundation as technical partner, sub-grantee, consultant, or in-kind collaborator.</div><div class="table-wrapper"><table class="compact-table"><thead><tr><th>Pathway</th><th>Status</th><th>Hasse Role</th><th>Action</th></tr></thead><tbody><tr><td>UK PACT</td><td>Monitor for new calls</td><td>Governance, MEL, traceability, policy synthesis</td><td>Prepare capability statement; do not draft until live call exists.</td></tr><tr><td>JICA / JAXA</td><td>Strategic pathway</td><td>Governance layer for satellite-based monitoring</td><td>Develop one-page early-warning systems concept.</td></tr><tr><td>IKI / GIZ</td><td>Strategic pathway</td><td>Monitoring, traceability, institutional-risk methodology</td><td>Map IKI-funded Brazil/Amazon projects.</td></tr><tr><td>Amazon Fund / BNDES</td><td>Indirect Brazil pathway</td><td>Technical annex, reporting, verification</td><td>Identify Brazilian-led proposals needing C-ECO support.</td></tr><tr><td>Green Climate Fund</td><td>Long-term only</td><td>Technical assistance, M&E, governance verification</td><td>Defer until track record exists; reassess 2027/2028.</td></tr><tr><td>NICFI / LEAF</td><td>Not direct grant pathways</td><td>Possible advisory support only</td><td>Exclude from active funding projections.</td></tr></tbody></table></div><div class="warning-box"><p><strong>Operating rule:</strong> treat these funds as partnership architecture, not immediate direct grant targets.</p></div></div></div></div></section>
+
+<section id="matrix" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Integrated Viability Matrix</div><h1>Priority, Access, Timeline, and Action</h1></div><div class="body-text"><div class="table-wrapper"><table class="compact-table"><thead><tr><th>Opportunity</th><th>Access</th><th>Estimated Hasse Budget</th><th>Timeline</th><th>Probability</th><th>Immediate Action</th></tr></thead><tbody><tr><td>MCFA</td><td>Direct inquiry/application possible</td><td>$50K–$75K</td><td>Q1 2027</td><td>35%–50%</td><td>Confirm process and prepare concept note.</td></tr><tr><td>Rainforest Trust</td><td>Brazilian implementer + Hasse technical partner</td><td>$25K–$100K embedded</td><td>When site/partner ready</td><td>25%–50%</td><td>Identify lead implementer and site.</td></tr><tr><td>FAPESP-NERC 30/2026</td><td>São Paulo PI + UK partner</td><td>Modest or in-kind</td><td>July 16, 2026</td><td>Low direct / medium partnership</td><td>Identify eligible leads immediately.</td></tr><tr><td>FAPESP/FAPEAM 2027</td><td>Brazilian academic lead</td><td>Possible technical budget</td><td>2027</td><td>Medium</td><td>Build partner group by Dec 2026.</td></tr><tr><td>UK PACT</td><td>Consortium if new call opens</td><td>Unknown</td><td>Monitor 2026–2027</td><td>Unknown</td><td>Prepare capability statement.</td></tr><tr><td>JICA / IKI / GIZ</td><td>Through institutional implementers</td><td>Technical services</td><td>2027+</td><td>Low-to-medium</td><td>Map aligned projects and contacts.</td></tr><tr><td>Amazon Fund</td><td>Brazilian lead organization</td><td>Technical partner budget</td><td>2027+</td><td>Medium through partner</td><td>Offer technical annex.</td></tr><tr><td>GCF</td><td>Funbio, BNDES, Caixa, or international accredited entity</td><td>TA component</td><td>2028+</td><td>Low near-term</td><td>Defer until track record exists.</td></tr></tbody></table></div></div></div></div></section>
+
+<section id="execution" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Execution Plan</div><h1>June 2026 to 2029</h1></div><div class="body-text"><div class="timeline"><div class="timeline-item"><strong>Phase 1 — June to July 2026:</strong> correct the narrative, prepare capability statement, check Rainforest Trust eligibility, screen FAPESP-NERC, and contact serious partners.</div><div class="timeline-item"><strong>Phase 2 — August to December 2026:</strong> secure one Brazilian partner, prepare MCFA concept note, build a real pilot concept, monitor calls, and create grant compliance templates.</div><div class="timeline-item"><strong>Phase 3 — January to March 2027:</strong> submit/inquire with MCFA, prepare for Brazilian calls, finalize first MOU, build funder-facing pilot package, and prepare Rainforest Trust concept only if partner/site criteria are met.</div><div class="timeline-item"><strong>Phase 4 — 2027 to 2029:</strong> implement first pilot, publish findings, build track record, expand into UK PACT, IKI/GIZ, JICA, and Amazon Fund pathways, then reassess GCF.</div></div><div class="section-header">Priority Outreach</div><div class="grid-3"><div class="metric-card"><div class="metric-label">IPAM · ISA · INPA · Mamirauá</div></div><div class="metric-card"><div class="metric-label">Imazon · UFAM · UFPA · USP-linked researchers</div></div><div class="metric-card"><div class="metric-label">Fundação Guamá, if institutional hub remains part of the strategy</div></div></div></div></div></div></section>
+
+<section id="compliance" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Legal, Fiscal, IP, and Compliance</div><h1>Readiness Before Funding</h1></div><div class="body-text"><div class="section-header">Recommended Structure</div><div class="grid-3"><div class="metric-card"><div class="metric-number">1</div><div class="metric-label"><strong>Near term</strong><br>In-kind and technical collaboration through MOU, data-sharing, publication policy, and no-cost collaboration agreements where appropriate.</div></div><div class="metric-card"><div class="metric-number">2</div><div class="metric-label"><strong>Medium term</strong><br>Technical services or sub-award with scope, deliverables, payment schedule, reporting, IP/data terms, and tax review.</div></div><div class="metric-card"><div class="metric-number">3</div><div class="metric-label"><strong>Long term</strong><br>Brazilian institutional structure only if funding volume, operations, or funder rules justify it.</div></div></div><div class="section-header">Policies Needed Before Restricted Funds</div><div class="table-wrapper"><table><tbody><tr><td>Grant acceptance policy</td><td>Conflict-of-interest policy</td></tr><tr><td>Gift acceptance policy</td><td>Fiscal sponsorship/sub-award policy</td></tr><tr><td>Data governance policy</td><td>Publication and authorship policy</td></tr><tr><td>Partner due diligence checklist</td><td>Anti-corruption and sanctions screening</td></tr><tr><td>Budget template</td><td>Document retention and reporting system</td></tr></tbody></table></div><div class="method-box"><p><strong>IP baseline:</strong> TFP and TDR should be owned by Hasse Foundation and licensed to the project for agreed purposes. Community and Indigenous knowledge must be governed by consent, attribution, benefit-sharing, and applicable Brazilian law.</p></div></div></div></div></section>
+
+<section id="risks" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="/assets/img/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Risks and Final Recommendation</div><h1>Disciplined Role, Stronger Funding Position</h1></div><div class="body-text"><div class="table-wrapper"><table><thead><tr><th>Risk</th><th>Mitigation</th></tr></thead><tbody><tr><td>Overstating eligibility</td><td>Use partner-led structures and verify every funder rule before outreach.</td></tr><tr><td>Project sounds too theoretical</td><td>Attach C-ECO methodology to concrete sites, partners, decisions, and outputs.</td></tr><tr><td>Rainforest Trust rejects research-heavy framing</td><td>Make protected-area creation or expansion the center.</td></tr><tr><td>FAPESP does not allow meaningful participation</td><td>Treat FAPESP as relationship-building unless a lead PI formally invites Hasse.</td></tr><tr><td>Lack of Brazilian partner</td><td>Prioritize partner cultivation before proposal drafting.</td></tr><tr><td>Governance/compliance immaturity</td><td>Complete policies and board approvals before restricted funds.</td></tr><tr><td>Unrealistic projections</td><td>Use conservative targets and separate direct from partner-embedded funding.</td></tr></tbody></table></div><div class="highlight-box"><p><strong>Final recommendation:</strong> do not lead what must be locally implemented; do not chase every climate fund directly; do not frame C-ECO as abstract theory; and do not claim deadlines or eligibility funders have not confirmed.</p></div><div class="analysis-box"><p><strong>Corrected priority order:</strong> build Brazilian partner architecture; prepare MCFA Q1 2027 concept/proposal; use Rainforest Trust only with a qualifying protected-area partner and site; use FAPESP-NERC only if a credible São Paulo + UK team exists; prepare for 2027 calls; treat GCF, NICFI, and LEAF as long-term or indirect pathways.</p></div></div></div></div></section>
+
+<footer class="site-footer">Johann Christian Hasse Foundation · C-ECO Amazon Lab · Funding Plan 001-2026</footer>
+<div id="img-modal" onclick="closeImageModal()"><img alt="Expanded figure"></div>
+<script>
+function showTab(event, tabId){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));document.getElementById(tabId).classList.add('active');if(event&&event.currentTarget)event.currentTarget.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function printCurrent(){const active=document.querySelector('.tab-content.active');document.querySelectorAll('.tab-content').forEach(t=>{if(t!==active)t.dataset.wasHidden='true',t.style.display='none';});window.print();document.querySelectorAll('.tab-content').forEach(t=>{t.style.display='';delete t.dataset.wasHidden;})}
+function openImageModal(src){const modal=document.getElementById('img-modal');modal.querySelector('img').src=src;modal.classList.add('active')}
+function closeImageModal(){document.getElementById('img-modal').classList.remove('active')}
+document.querySelectorAll('.inline-figure img').forEach(img=>img.addEventListener('click',()=>openImageModal(img.src)));
+</script>
+</body>
+</html>
