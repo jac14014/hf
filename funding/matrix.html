@@ -720,7 +720,6 @@ tbody tr:nth-child(even){
     section reference.
   </p>
 </div>
-
       <div class="section-header">Score Legend</div>
 
       <table>
@@ -737,6 +736,108 @@ tbody tr:nth-child(even){
             <td>Absent</td>
             <td>The function is not treated or is outside the scope of the work.</td>
           </tr>
+          <tr>
+            <td class="score score-1">1</td>
+            <td>Conceptual</td>
+            <td>The function is mentioned, but without an actionable mechanism.</td>
+          </tr>
+          <tr>
+            <td class="score score-2">2</td>
+            <td>Partial</td>
+            <td>The function is developed, but remains incomplete, sector-specific, or non-actionable.</td>
+          </tr>
+          <tr>
+            <td class="score score-3">3</td>
+            <td>Complete / Actionable</td>
+            <td>The function is explicit, operationalized, and linked to implementation or action.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</section>
+
+<section id="matrix" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">Review Matrix</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Screening Corpus</div>
+        <h1>Review Matrix</h1>
+        <div class="subtitle">Preliminary scoring by functional criterion</div>
+      </div>
+
+      <div class="filters">
+        <div class="filter-field">
+          <label for="searchInput">Search</label>
+          <input id="searchInput" type="text" placeholder="Search article, type, mechanism..." oninput="filterMatrix()">
+        </div>
+
+        <div class="filter-field">
+          <label for="typeFilter">Type</label>
+          <select id="typeFilter" onchange="filterMatrix()">
+            <option value="">All Types</option>
+            <option value="Theory">Theory</option>
+            <option value="Review/Survey">Review/Survey</option>
+            <option value="Method">Method</option>
+            <option value="Framework">Framework</option>
+            <option value="Policy">Policy</option>
+            <option value="Standard">Standard</option>
+            <option value="Operational System">Operational System</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="statusFilter">Publication Status</label>
+          <select id="statusFilter" onchange="filterMatrix()">
+            <option value="">All Statuses</option>
+            <option value="peer-reviewed">Peer-reviewed</option>
+            <option value="preprint">Preprint</option>
+            <option value="working paper">Working Paper</option>
+            <option value="policy report">Policy Report</option>
+            <option value="standard">Standard</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="scopeFilter">Scope</label>
+          <select id="scopeFilter" onchange="filterMatrix()">
+            <option value="">All Scopes</option>
+            <option value="core">Core</option>
+            <option value="adjacent">Adjacent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="matrixTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Article / Framework</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>F1<br>Op.Arch</th>
+              <th>F2<br>Decision</th>
+              <th>F3<br>Cross-Sec</th>
+              <th>F4<br>Threshold</th>
+              <th>F5<br>Observ</th>
+              <th>F6<br>Ex-Ante</th>
+              <th>F7<br>Revers</th>
+              <th>Total</th>
+              <th>Preliminary Limitation</th>
+            </tr>
+          </thead>
+          <tbody>
           <tr data-type="Operational System" data-status="peer-reviewed" data-scope="core">
               <td>1</td>
               <td><strong>Macroprudential systemic-risk apparatus (ESRB/ECB) + IMF Growth-at-Risk</strong></td>
