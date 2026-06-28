@@ -156,6 +156,141 @@ html, body, .page, .content, table, thead, tbody, tr, th, td, div, p, span, stro
   font-family: var(--font-main) !important;
 }
 
+
+
+/* --- Final formatting corrections --- */
+html, body, button, input, select, textarea, table, th, td, .btn, .nav-tab, .details-btn {
+  font-family: var(--font-main) !important;
+}
+.nav-tabs{
+  justify-content:center !important;
+  align-items:center;
+  padding:0 12px;
+}
+.nav-tab{
+  text-align:center;
+}
+.sheet-section{
+  margin:.28in 0 .08in;
+  padding:.10in .12in;
+  border-left:4px solid var(--gold);
+  background:#FDFCF8;
+  color:var(--gold-dark);
+  font-weight:700;
+  font-size:13pt;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.sheet-note{
+  background:linear-gradient(135deg,#FDFCF8 0%,#F5F0E8 100%);
+  border:1px solid var(--gold-light);
+  border-left:5px solid var(--green);
+  padding:.12in .16in;
+  margin:.12in 0;
+  border-radius:4px;
+}
+.sheet-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11.2pt;
+}
+.sheet-table caption{
+  text-align:left;
+  color:var(--gold-dark);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  padding:10px 0;
+}
+.sheet-table thead th{
+  background:var(--gold-pale);
+  color:var(--ink);
+  border-bottom:2px solid var(--gold);
+  font-weight:700;
+}
+.sheet-table tbody td{
+  border-bottom:1px solid #eee;
+}
+.sheet-table tbody tr:nth-child(even){
+  background:#FDFCF8;
+}
+.h3-matrix th,
+.h3-matrix td{
+  text-align:center;
+}
+.h3-matrix th:first-child,
+.h3-matrix td:first-child{
+  text-align:left;
+  font-weight:700;
+  color:var(--green);
+}
+.h3-diagonal{
+  background:#EEF4EF;
+  color:var(--green);
+  font-weight:700;
+}
+.prob-high{background:#EEF4EF;color:var(--green);font-weight:700;}
+.prob-mid{background:#EEF3FA;color:var(--blue);font-weight:700;}
+.prob-low{background:#FBF1EF;color:var(--red);font-weight:700;}
+.analytical-block{
+  margin:.24in 0;
+  break-inside:avoid;
+}
+.analytical-block .table-wrapper{
+  margin-top:.10in;
+}
+@media(max-width:900px){
+  .nav-tabs{justify-content:flex-start !important;}
+  .sheet-table{min-width:900px;}
+}
+
+
+
+/* Analytical Results refinements */
+.analytical-block{
+  margin:.24in 0 .34in;
+  padding:.12in 0 .05in;
+  border-top:1px solid rgba(201,162,39,.35);
+}
+.analytical-block .section-header{
+  margin-top:.04in;
+}
+.analytical-table{
+  margin-top:.12in;
+}
+.analytical-list{
+  margin:.12in 0 .18in;
+  display:grid;
+  gap:8px;
+}
+.analytical-list-item{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:10px;
+  align-items:start;
+  padding:10px 12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--gold);
+  font-size:11.5pt;
+  line-height:1.45;
+}
+.analytical-list-item.emphasis{
+  background:#FDFCF8;
+  border-left-color:var(--green);
+}
+.analytical-index{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:var(--gold-pale);
+  color:var(--gold-dark);
+  font-weight:700;
+}
+
 </style>
 </head>
 <body>
@@ -339,15 +474,188 @@ function expandAllDetails(){ document.querySelectorAll('.details-row').forEach(r
 function collapseAllDetails(){ document.querySelectorAll('.details-row').forEach(r=>r.classList.remove('open')); }
 function showTab(event, tabId){ document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active')); document.getElementById(tabId).classList.add('active'); event.currentTarget.classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
 function printCurrent(){ const active=document.querySelector('.tab-content.active'); const original=document.body.innerHTML; document.body.innerHTML=active.outerHTML; window.print(); document.body.innerHTML=original; window.location.reload(); }
-function renderSheet(containerId, sheetName){
-  const data=SHEET_DATA[sheetName] || [];
+
+function cleanRows(data){
+  return (data||[]).map(row => (row||[]).map(v => (v===null || v===undefined) ? '' : String(v))).filter(row => row.some(v => v.trim() !== ''));
+}
+function rowNonEmpty(row){ return row.filter(v => String(v).trim() !== '').length; }
+function isSectionRow(row){
+  const non=rowNonEmpty(row);
+  const first=String(row[0]||'').trim();
+  return non===1 && (/^[A-Z]\.|^\d+\.|^[A-Z0-9][A-Z0-9\s\-–—:]+$/.test(first) || first.length>35);
+}
+function isHeaderRow(row, next){
+  const non=rowNonEmpty(row);
+  if(non < 2) return false;
+  if(!next || rowNonEmpty(next) < 2) return true;
+  return row.some(v => /Observation|Evidence|Interpretation|Confidence|Function|Score|Type|Status|Column|Change|Decision|Component|Stage|Relationship|Item|Required|Meaning|Count|Total|P\(/i.test(String(v)));
+}
+function trimEmptyColumns(rows){
+  const max=Math.max(...rows.map(r=>r.length),0);
+  const keep=[];
+  for(let c=0;c<max;c++){
+    if(rows.some(r => String(r[c]||'').trim() !== '')) keep.push(c);
+  }
+  return rows.map(r => keep.map(c => r[c] || ''));
+}
+function renderTableFromRows(rows, className='sheet-table'){
+  rows=trimEmptyColumns(rows);
+  if(!rows.length) return '';
+  const header = rows[0];
+  const body = rows.slice(1);
+  const thead = '<thead><tr>'+header.map(v=>`<th>${esc(v)}</th>`).join('')+'</tr></thead>';
+  const tbody = '<tbody>'+body.map(r=>'<tr>'+r.map(v=>`<td>${esc(v)}</td>`).join('')+'</tr>').join('')+'</tbody>';
+  return `<div class="table-wrapper"><table class="${className}">${thead}${tbody}</table></div>`;
+}
+function renderSmartSheet(containerId, sheetName){
+  const raw=SHEET_DATA[sheetName] || [];
   const el=document.getElementById(containerId); if(!el) return;
-  if(!data.length){ el.innerHTML='<p>No data available.</p>'; return; }
-  const title = data[0] && data[0][0] ? `<div class="method-box"><p><strong>${esc(data[0][0])}</strong></p></div>` : '';
-  const body=data.slice(1).filter(r=>r.some(v=>String(v).trim()));
-  let rows='';
-  for(const r of body) rows += '<tr>'+r.map(v=>`<td>${esc(v)}</td>`).join('')+'</tr>';
-  el.innerHTML = title + `<div class="table-wrapper"><table class="sheet-table"><tbody>${rows}</tbody></table></div>`;
+  const rows=cleanRows(raw);
+  if(!rows.length){ el.innerHTML='<p>No data available.</p>'; return; }
+  let html='';
+  let i=0;
+  // Opening title / subtitle rows
+  while(i<rows.length && rowNonEmpty(rows[i])===1 && i<3){
+    const text=rows[i][0].replace('METHODLOGICAL','METHODOLOGICAL');
+    html += i===0 ? `<div class="method-box"><p><strong>${esc(text)}</strong></p></div>` : `<div class="sheet-note"><p>${esc(text)}</p></div>`;
+    i++;
+  }
+  while(i<rows.length){
+    const row=rows[i];
+    if(rowNonEmpty(row)===1){
+      html += `<div class="sheet-section">${esc(row[0].replace('METHODLOGICAL','METHODOLOGICAL'))}</div>`;
+      i++;
+      continue;
+    }
+    // collect a table block until next section row
+    let block=[];
+    while(i<rows.length && rowNonEmpty(rows[i])>1){ block.push(rows[i]); i++; }
+    if(block.length){
+      if(!isHeaderRow(block[0], block[1])){
+        // render as notes if not table-like
+        html += block.map(r=>`<div class="sheet-note"><p>${esc(r.filter(Boolean).join(' — '))}</p></div>`).join('');
+      } else {
+        html += renderTableFromRows(block);
+      }
+    }
+  }
+  el.innerHTML=html;
+}
+function renderAnalyticalMixedRows(rows){
+  let html='';
+  let i=0;
+  while(i<rows.length){
+    const non=rowNonEmpty(rows[i]);
+    if(non===0){ i++; continue; }
+
+    // Consecutive one-cell rows become a readable bullet/card list.
+    if(non===1){
+      const singles=[];
+      while(i<rows.length && rowNonEmpty(rows[i])===1){
+        singles.push(rows[i][0]);
+        i++;
+      }
+      html += '<div class="analytical-list">' + singles.map((txt,idx)=>{
+        const value=String(txt||'');
+        const strong = /^F\d:/.test(value) || /^No single framework/.test(value) || /^This candidate architecture/.test(value);
+        return `<div class="analytical-list-item ${strong?'emphasis':''}"><span class="analytical-index">${idx+1}</span><span>${esc(value)}</span></div>`;
+      }).join('') + '</div>';
+      continue;
+    }
+
+    // Consecutive multi-cell rows become a proper table.
+    const tableRows=[];
+    while(i<rows.length && rowNonEmpty(rows[i])>1){
+      tableRows.push(rows[i]);
+      i++;
+    }
+    if(tableRows.length) html += renderTableFromRows(tableRows, 'sheet-table analytical-table');
+  }
+  return html;
+}
+
+function renderAnalytical(){
+  const el=document.getElementById('analyticalContent'); if(!el) return;
+  const rows=cleanRows(SHEET_DATA['Analytical Results']||[]);
+  let html='';
+  let i=0;
+  if(rows[0]) html += `<div class="method-box"><p><strong>${esc(rows[0][0])}</strong></p></div>`;
+  if(rows[1]) html += `<div class="warning-box"><p>${esc(rows[1][0])}</p></div>`;
+  i=2;
+  while(i<rows.length){
+    if(rowNonEmpty(rows[i])===1 && /^\d+\./.test(rows[i][0])){
+      const title=rows[i][0];
+      i++;
+      while(i<rows.length && rowNonEmpty(rows[i])===0) i++;
+      const block=[];
+      while(i<rows.length && !(rowNonEmpty(rows[i])===1 && /^\d+\./.test(rows[i][0]))){
+        if(rowNonEmpty(rows[i])>0) block.push(rows[i]);
+        i++;
+      }
+      html += `<div class="analytical-block"><div class="section-header">${esc(title)}</div>`;
+      html += renderAnalyticalMixedRows(block);
+      html += '</div>';
+    } else {
+      if(rowNonEmpty(rows[i])===1) html += `<div class="sheet-note"><p>${esc(rows[i][0])}</p></div>`;
+      i++;
+    }
+  }
+  el.innerHTML=html;
+}
+function formatProb(v, diagonal=false){
+  if(v==='' || v===null || v===undefined) return '';
+  const n=Number(v);
+  if(Number.isFinite(n)){
+    if(diagonal) return String(Math.round(n));
+    if(n<=1) return (n*100).toFixed(1)+'%';
+    return String(n);
+  }
+  return esc(v);
+}
+function probClass(v, diagonal=false){
+  if(diagonal) return 'h3-diagonal';
+  const n=Number(v);
+  if(!Number.isFinite(n)) return '';
+  if(n>=0.7) return 'prob-high';
+  if(n>=0.35) return 'prob-mid';
+  return 'prob-low';
+}
+function renderH3(){
+  const el=document.getElementById('h3Content'); if(!el) return;
+  const rows=cleanRows(SHEET_DATA['H3 Co-presence']||[]);
+  let html='';
+  const matrixIndex = rows.findIndex(r => String(r[0]||'').trim()==='P(row | col)');
+  const intro = matrixIndex>=0 ? rows.slice(0,matrixIndex) : rows;
+  const title = intro[0]?.[0] || 'H3 — Functional Co-presence matrix';
+  html += `<div class="method-box"><p><strong>${esc(title.replace('v1.2','v1.3.3'))}</strong></p></div>`;
+  intro.slice(1).forEach(r=>{
+    if(rowNonEmpty(r)===1){
+      const text=r[0].replace('METHODLOGICAL','METHODOLOGICAL');
+      if(/^RULE:|^CRITICAL NOTE|^To evaluate|^METHODOLOGICAL/.test(text)) html += `<div class="sheet-note"><p>${esc(text)}</p></div>`;
+      else if(text.trim().startsWith('•') || text.trim().startsWith('  •')) html += `<p style="margin-left:.22in;text-align:left;">${esc(text.trim())}</p>`;
+    }
+  });
+  if(matrixIndex>=0){
+    const block=[];
+    for(let i=matrixIndex;i<rows.length;i++){
+      if(rowNonEmpty(rows[i])>1) block.push(rows[i]);
+    }
+    const header=block[0];
+    const body=block.slice(1);
+    html += '<div class="section-header">Conditional Co-Presence Matrix</div>';
+    html += '<div class="table-wrapper"><table class="sheet-table h3-matrix"><thead><tr>'+header.map(v=>`<th>${esc(v)}</th>`).join('')+'</tr></thead><tbody>';
+    body.forEach((r,ri)=>{
+      html+='<tr>';
+      r.forEach((v,ci)=>{
+        const diagonal = ci>0 && ci-1===ri;
+        html += `<td class="${probClass(v,diagonal)}">${formatProb(v,diagonal)}</td>`;
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
+    html += '<div class="warning-box"><p><strong>Reading rule:</strong> cells show P(row function present | column function present), with presence defined as score ≥ 2. Diagonal cells show the base-rate count for each function.</p></div>';
+  }
+  el.innerHTML=html;
 }
 function init(){
   populateSelect('typeFilter','Type_v2','All Types');
@@ -355,14 +663,14 @@ function init(){
   populateSelect('scopeFilter','Construct scope','All Scopes');
   populateSelect('sectorFilter','Sector','All Sectors');
   renderMatrix();
-  renderSheet('corpusContent','Corpus Summary');
-  renderSheet('analyticalContent','Analytical Results');
-  renderSheet('h3Content','H3 Co-presence');
-  renderSheet('codebookContent','Codebook');
-  renderSheet('hypothesesContent','Hypotheses');
-  renderSheet('codingContent','Coding Manual');
-  renderSheet('decisionContent','Decision Log');
-  renderSheet('architectureContent','Functional Architecture');
+  renderSmartSheet('corpusContent','Corpus Summary');
+  renderAnalytical();
+  renderH3();
+  renderSmartSheet('codebookContent','Codebook');
+  renderSmartSheet('hypothesesContent','Hypotheses');
+  renderSmartSheet('codingContent','Coding Manual');
+  renderSmartSheet('decisionContent','Decision Log');
+  renderSmartSheet('architectureContent','Functional Architecture');
 }
 document.addEventListener('DOMContentLoaded', init);
 </script>
