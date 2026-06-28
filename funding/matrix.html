@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>c-ECO Review Matrix — Functional Architecture</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#C9A227;
+  --gold-light:#D4AF37;
+  --gold-dark:#8B6914;
+  --gold-pale:#F5F0E8;
+  --ink:#1A1A1A;
+  --cream:#FDFCF8;
+  --paper:#FFFFFF;
+  --soft:#F8F5EE;
+  --line:#D8C99A;
+  --green:#1E3A2F;
+  --green-soft:#EEF4EF;
+  --red:#7A2F2F;
+  --blue:#263F5F;
+  --shadow:0 0 30px rgba(0,0,0,.12);
+  --font-main:"Cormorant Garamond", Garamond, Georgia, serif;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:var(--font-main);
+  background:linear-gradient(135deg,#f5f0e8 0%,#ede6d8 100%);
+  color:var(--ink);
+  line-height:1.62;
+  font-size:11pt;
+  min-height:100vh;
+  padding-bottom:.75in;
+}
+
+.nav-tabs{
+  display:flex;
+  justify-content:center;
+  background:white;
+  border-bottom:1px solid var(--gold);
+  position:sticky;
+  top:0;
+  z-index:50;
+  flex-wrap:wrap;
+}
+
+.nav-tab{
+  padding:.1in .18in;
+  border:none;
+  background:transparent;
+  font-family:var(--font-main);
+  font-size:8.5pt;
+  font-weight:600;
+  color:#777;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  border-bottom:2px solid transparent;
+  transition:all .25s ease;
+}
+
+.nav-tab:hover,
+.nav-tab.active{
+  color:var(--gold-dark);
+  border-bottom-color:var(--gold);
+  background:#fffaf0;
+}
+
+.print-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:2px solid var(--gold);
+  padding:.12in;
+  display:flex;
+  justify-content:center;
+  gap:.15in;
+  box-shadow:0 -4px 15px rgba(0,0,0,.1);
+  z-index:100;
+}
+
+.btn{
+  padding:.08in .25in;
+  border:1px solid var(--gold);
+  background:white;
+  color:var(--gold-dark);
+  font-family:var(--font-main);
+  font-size:9pt;
+  font-weight:600;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.btn:hover,
+.btn-primary{
+  background:var(--gold);
+  color:white;
+}
+
+.tab-content{
+  display:none;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+.page{
+  width:8.5in;
+  min-height:11in;
+  margin:0 auto .35in;
+  background:white;
+  position:relative;
+  box-shadow:var(--shadow);
+  padding:0 .75in .75in;
+  overflow:hidden;
+}
+
+.page::before{
+  content:'';
+  position:absolute;
+  top:.3in;
+  left:.3in;
+  right:.3in;
+  bottom:.3in;
+  border:1.5px solid var(--gold);
+  pointer-events:none;
+  z-index:1;
+}
+
+.page::after{
+  content:'';
+  position:absolute;
+  top:.4in;
+  left:.4in;
+  right:.4in;
+  bottom:.4in;
+  border:.5px solid var(--gold-light);
+  pointer-events:none;
+  opacity:.55;
+  z-index:1;
+}
+
+.letterhead{
+  text-align:center;
+  padding:.4in .75in .2in;
+  border-bottom:1px solid var(--gold);
+  background:white;
+  position:relative;
+  z-index:2;
+}
+
+.seal{
+  width:1.05in;
+  height:1.05in;
+  margin:0 auto .1in;
+  border-radius:50%;
+}
+
+.seal img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.org-name{
+  font-size:15pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.org-motto{
+  font-size:8pt;
+  color:var(--gold);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-top:.05in;
+}
+
+.content{
+  padding-top:.3in;
+  position:relative;
+  z-index:2;
+}
+
+.doc-title{
+  text-align:center;
+  margin-bottom:.28in;
+}
+
+.chapter-kicker{
+  font-size:8.5pt;
+  font-weight:600;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  margin-bottom:.08in;
+}
+
+.doc-title h1{
+  font-size:20pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  line-height:1.25;
+}
+
+.subtitle{
+  font-size:10.5pt;
+  color:#666;
+  font-style:italic;
+  margin-top:.08in;
+}
+
+.section-header{
+  font-size:11.5pt;
+  font-weight:600;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:.25in 0 .12in;
+  border-left:3px solid var(--gold);
+  padding-left:.1in;
+}
+
+.subsection-header{
+  font-size:10pt;
+  font-weight:600;
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin:.18in 0 .08in;
+}
+
+p{
+  margin-bottom:.12in;
+  text-align:justify;
+}
+
+.highlight-box,
+.method-box,
+.warning-box,
+.analysis-box{
+  background:linear-gradient(135deg,#FDFCF8 0%,#F5F0E8 100%);
+  border:1px solid var(--gold-light);
+  border-left:5px solid var(--gold);
+  padding:.14in .16in;
+  margin:.16in 0;
+  border-radius:2px;
+  break-inside:avoid;
+}
+
+.method-box{
+  border-left-color:var(--green);
+  background:var(--green-soft);
+}
+
+.warning-box{
+  border-left-color:var(--red);
+  background:#FBF1EF;
+}
+
+.analysis-box{
+  border-left-color:var(--green);
+  background:#F7F9F6;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.14in;
+  margin:.15in 0;
+}
+
+.metric-card{
+  border:1px solid var(--line);
+  background:#fff;
+  padding:.13in;
+  border-top:4px solid var(--gold);
+}
+
+.metric-number{
+  font-size:22pt;
+  color:var(--green);
+  font-weight:700;
+  line-height:1;
+}
+
+.metric-label{
+  font-size:9.5pt;
+  color:#555;
+  line-height:1.45;
+  margin-top:.06in;
+}
+
+.table-wrapper{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  background:#fff;
+  margin:.18in 0;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8.4pt;
+  background:#fff;
+}
+
+th{
+  background:var(--gold-pale);
+  border-bottom:2px solid var(--gold);
+  padding:.06in;
+  text-align:left;
+  vertical-align:top;
+  color:var(--ink);
+  white-space:nowrap;
+}
+
+td{
+  border-bottom:1px solid #eee;
+  padding:.06in;
+  vertical-align:top;
+}
+
+tbody tr:nth-child(even){
+  background:#FDFCF8;
+}
+
+.score{
+  text-align:center;
+  font-weight:700;
+  border-radius:2px;
+}
+
+.score-0{ color:#777; background:#f4f4f4; }
+.score-1{ color:#8B6914; background:#F5F0E8; }
+.score-2{ color:#263F5F; background:#EEF3FA; }
+.score-3{ color:#1E3A2F; background:#EEF4EF; }
+
+.badge{
+  display:inline-block;
+  padding:.02in .06in;
+  border:1px solid var(--line);
+  border-radius:10px;
+  font-size:8pt;
+  background:#fff;
+  white-space:nowrap;
+}
+
+.badge-peer{ border-color:var(--green); color:var(--green); }
+.badge-preprint{ border-color:var(--red); color:var(--red); }
+.badge-policy{ border-color:var(--blue); color:var(--blue); }
+
+.filters{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.12in;
+  margin:.18in 0;
+}
+
+.filter-field label{
+  display:block;
+  font-size:8pt;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#777;
+  margin-bottom:.04in;
+}
+
+.filter-field input,
+.filter-field select{
+  width:100%;
+  padding:.07in;
+  border:1px solid var(--line);
+  font-family:var(--font-main);
+  font-size:10pt;
+  background:#fff;
+}
+
+.site-footer{
+  width:100%;
+  max-width:900px;
+  margin:8px auto 0;
+  padding:6px 12px;
+  border-top:.6px solid rgba(201,162,39,.45);
+  font-size:9pt;
+  line-height:1.2;
+  letter-spacing:.02em;
+  text-align:center;
+  color:#666;
+}
+
+@media(max-width:900px){
+  body{
+    font-size:12pt;
+  }
+
+  .page{
+    width:100%;
+    min-height:auto;
+    margin:0;
+    padding:0 .30in .55in;
+  }
+
+  .page::before,
+  .page::after{
+    display:none;
+  }
+
+  .grid-3,
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .print-bar{
+    position:static;
+  }
+
+  .org-name{
+    font-size:13pt;
+    line-height:1.35;
+  }
+}
+
+@media print{
+  body{
+    background:white;
+    padding-bottom:0;
+  }
+
+  .nav-tabs,
+  .print-bar{
+    display:none !important;
+  }
+
+  .tab-content{
+    display:block !important;
+  }
+
+  .page{
+    width:8.5in;
+    min-height:11in;
+    margin:0;
+    box-shadow:none;
+    page-break-after:always;
+  }
+}
+</style>
+</head>
+
+  <body>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab(event,'overview')">Overview</button>
+  <button class="nav-tab" onclick="showTab(event,'matrix')">Review Matrix</button>
+  <button class="nav-tab" onclick="showTab(event,'codebook')">Codebook</button>
+  <button class="nav-tab" onclick="showTab(event,'h3')">H3 Co-Presence</button>
+  <button class="nav-tab" onclick="showTab(event,'architecture')">Functional Architecture</button>
+</div>
+
+<div class="print-bar">
+  <button class="btn" onclick="window.print()">Print All</button>
+  <button class="btn btn-primary" onclick="printCurrent()">Print Current</button>
+</div>
+
+<section id="overview" class="tab-content active">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">Governance Before Collapse</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Preliminary Screening Matrix</div>
+        <h1>c-ECO Review Matrix</h1>
+        <div class="subtitle">
+          Functional Architecture of Operational Governance for Threshold Dynamics
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <p><strong>Status:</strong> This page operationalizes the screening stage of the review protocol. It is not yet a formal gap analysis.</p>
+        <p><strong>Protocol status:</strong> The review protocol is frozen as of Version 1.3. Subsequent changes are restricted to data corrections, source verification, and corpus expansion.</p>
+      </div>
+
+      <div class="section-header">Research Purpose</div>
+
+      <p>
+        This review matrix is designed to test whether existing literature provides an operational,
+        cross-sectoral governance framework capable of observing, interpreting, and acting upon
+        threshold dynamics before systemic conditions become materially irreversible.
+      </p>
+
+      <div class="highlight-box">
+        <p><strong>RQ1:</strong> What functions must an operational, cross-sectoral governance framework perform in order to act on threshold dynamics before irreversibility, according to the existing literature?</p>
+        <p><strong>RQ2:</strong> To what extent do existing frameworks individually satisfy those functions?</p>
+      </div>
+
+      <div class="section-header">Corpus Summary</div>
+
+      <div class="grid-3">
+        <div class="metric-card">
+          <div class="metric-number">60</div>
+          <div class="metric-label">
+            <strong>Preliminary Entries</strong><br>
+            Screening-stage corpus, pending full PRISMA-ScR expansion.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-number">7</div>
+          <div class="metric-label">
+            <strong>Functional Criteria</strong><br>
+            Operational architecture, decision protocol, cross-sector integration, threshold dynamics, observability, ex-ante governance, reversibility.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-number">0/60</div>
+          <div class="metric-label">
+            <strong>All Functions ≥ 2</strong><br>
+            Preliminary pattern only; claims must be reported within type classes.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header">Preliminary Interpretation</div>
+
+      <div class="analysis-box">
+        <p>
+          The preliminary screening suggests a fragmentation pattern: financial macroprudential
+          frameworks are operational but sector-specific, while cross-sectoral and threshold-oriented
+          frameworks remain weaker on executable decision protocols and reversibility.
+        </p>
+
+        <p>
+          Among the corpus, only one entry is classified as an operational system. Coverage claims
+          should therefore be reported within type classes rather than across the full set.
+        </p>
+      </div>
+
+      <div class="section-header">Score Legend</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Meaning</th>
+            <th>Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="score score-0">0</td>
+            <td>Absent</td>
+            <td>The function is not treated or is outside the scope of the work.</td>
+          </tr>
+          <tr>
+            <td class="score score-1">1</td>
+            <td>Conceptual</td>
+            <td>The function is mentioned, but without an actionable mechanism.</td>
+          </tr>
+          <tr>
+            <td class="score score-2">2</td>
+            <td>Partial</td>
+            <td>The function is developed, but remains incomplete, sector-specific, or non-actionable.</td>
+          </tr>
+          <tr>
+            <td class="score score-3">3</td>
+            <td>Complete / Actionable</td>
+            <td>The function is explicit, operationalized, and linked to implementation or action.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</section>
+
+<section id="matrix" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">Review Matrix</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Screening Corpus</div>
+        <h1>Review Matrix</h1>
+        <div class="subtitle">Preliminary scoring by functional criterion</div>
+      </div>
+
+      <div class="filters">
+        <div class="filter-field">
+          <label for="searchInput">Search</label>
+          <input id="searchInput" type="text" placeholder="Search article, type, mechanism..." oninput="filterMatrix()">
+        </div>
+
+        <div class="filter-field">
+          <label for="typeFilter">Type</label>
+          <select id="typeFilter" onchange="filterMatrix()">
+            <option value="">All Types</option>
+            <option value="Theory">Theory</option>
+            <option value="Review/Survey">Review/Survey</option>
+            <option value="Method">Method</option>
+            <option value="Framework">Framework</option>
+            <option value="Policy">Policy</option>
+            <option value="Standard">Standard</option>
+            <option value="Operational System">Operational System</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="statusFilter">Publication Status</label>
+          <select id="statusFilter" onchange="filterMatrix()">
+            <option value="">All Statuses</option>
+            <option value="peer-reviewed">Peer-reviewed</option>
+            <option value="preprint">Preprint</option>
+            <option value="working paper">Working Paper</option>
+            <option value="policy report">Policy Report</option>
+            <option value="standard">Standard</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="scopeFilter">Scope</label>
+          <select id="scopeFilter" onchange="filterMatrix()">
+            <option value="">All Scopes</option>
+            <option value="core">Core</option>
+            <option value="adjacent">Adjacent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="matrixTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Article / Framework</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>F1<br>Op.Arch</th>
+              <th>F2<br>Decision</th>
+              <th>F3<br>Cross-Sec</th>
+              <th>F4<br>Threshold</th>
+              <th>F5<br>Observ</th>
+              <th>F6<br>Ex-Ante</th>
+              <th>F7<br>Revers</th>
+              <th>Total</th>
+              <th>Preliminary Limitation</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr data-type="Framework" data-status="peer-reviewed" data-scope="core">
+              <td>1</td>
+              <td><strong>ESRB/ECB Macroprudential Framework</strong></td>
+              <td>Framework</td>
+              <td><span class="badge badge-peer">peer-reviewed / institutional</span></td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-1">1</td>
+              <td class="score score-2">2</td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-1">1</td>
+              <td><strong>16</strong></td>
+              <td>Operational and mature, but sector-specific to financial stability.</td>
+            </tr>
+
+            <tr data-type="Framework" data-status="peer-reviewed" data-scope="core">
+              <td>2</td>
+              <td><strong>Planetary Boundaries / Safe Operating Space</strong></td>
+              <td>Framework</td>
+              <td><span class="badge badge-peer">peer-reviewed</span></td>
+              <td class="score score-1">1</td>
+              <td class="score score-0">0</td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td><strong>13</strong></td>
+              <td>Strong threshold and cross-sector framing; weak executable governance protocol.</td>
+            </tr>
+
+            <tr data-type="Theory" data-status="peer-reviewed" data-scope="core">
+              <td>3</td>
+              <td><strong>Buldyrev / Interdependent Networks</strong></td>
+              <td>Theory</td>
+              <td><span class="badge badge-peer">peer-reviewed</span></td>
+              <td class="score score-0">0</td>
+              <td class="score score-0">0</td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-1">1</td>
+              <td class="score score-0">0</td>
+              <td class="score score-1">1</td>
+              <td><strong>8</strong></td>
+              <td>Models cascade dynamics, but does not provide governance activation.</td>
+            </tr>
+
+            <tr data-type="Method" data-status="peer-reviewed" data-scope="core">
+              <td>5</td>
+              <td><strong>Scheffer / Dakos Critical Slowing Down</strong></td>
+              <td>Method</td>
+              <td><span class="badge badge-peer">peer-reviewed</span></td>
+              <td class="score score-1">1</td>
+              <td class="score score-1">1</td>
+              <td class="score score-2">2</td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td><strong>13</strong></td>
+              <td>Excellent early-warning logic; limited institutional decision protocol.</td>
+            </tr>
+
+            <tr data-type="Policy" data-status="policy report" data-scope="core">
+              <td>7</td>
+              <td><strong>Sendai Framework / UNDRR Disaster Risk Governance</strong></td>
+              <td>Policy</td>
+              <td><span class="badge badge-policy">policy report</span></td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-3">3</td>
+              <td class="score score-1">1</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td><strong>13</strong></td>
+              <td>Strong cross-sector policy architecture; weak threshold dynamics and reversibility.</td>
+            </tr>
+
+            <tr data-type="Review/Survey" data-status="peer-reviewed" data-scope="core">
+              <td>10</td>
+              <td><strong>Caccioli, Barucca & Kobayashi — Financial Systemic Risk Networks</strong></td>
+              <td>Review/Survey</td>
+              <td><span class="badge badge-peer">peer-reviewed</span></td>
+              <td class="score score-1">1</td>
+              <td class="score score-0">0</td>
+              <td class="score score-1">1</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td class="score score-0">0</td>
+              <td><strong>7</strong></td>
+              <td>Strong modeling review; not an operational governance framework.</td>
+            </tr>
+
+            <tr data-type="Method" data-status="peer-reviewed" data-scope="core">
+              <td>39</td>
+              <td><strong>Lund-Jensen Dynamic Thresholds</strong></td>
+              <td>Method</td>
+              <td><span class="badge">unknown / verify</span></td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td class="score score-3">3</td>
+              <td class="score score-3">3</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td><strong>14</strong></td>
+              <td>Strong threshold and observability logic; sector-specific and weak reversibility.</td>
+            </tr>
+
+            <tr data-type="Framework" data-status="unknown" data-scope="core">
+              <td>32</td>
+              <td><strong>Gambhir et al. Polycrisis Framework</strong></td>
+              <td>Framework</td>
+              <td><span class="badge">unknown / verify</span></td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td class="score score-3">3</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td><strong>13</strong></td>
+              <td>Cross-sector and systemic, but limited executable activation and reversibility.</td>
+            </tr>
+
+            <tr data-type="Framework" data-status="preprint" data-scope="adjacent">
+              <td>45</td>
+              <td><strong>Duseja — AI Threshold Irreversibility</strong></td>
+              <td>Framework</td>
+              <td><span class="badge badge-preprint">preprint</span></td>
+              <td class="score score-1">1</td>
+              <td class="score score-1">1</td>
+              <td class="score score-0">0</td>
+              <td class="score score-2">2</td>
+              <td class="score score-1">1</td>
+              <td class="score score-2">2</td>
+              <td class="score score-3">3</td>
+              <td><strong>10</strong></td>
+              <td>Only F7=3 entry; adjacent AI-domain preprint, not infrastructure governance.</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="method-box">
+        <p><strong>Note:</strong> This web version shows selected representative entries. For the full working matrix, use the maintained research workbook.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="codebook" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">Codebook</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Seven Functional Criteria</div>
+        <h1>Codebook</h1>
+        <div class="subtitle">Scoring rubric for the preliminary screening matrix</div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Definition</th>
+              <th>Score 3 Standard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>F1 — Operational Architecture</strong></td>
+              <td>Design of indicators, roles, processes, and institutional architecture.</td>
+              <td>Indicators, roles, workflow, and governance process are explicitly defined.</td>
+            </tr>
+            <tr>
+              <td><strong>F2 — Decision Protocol</strong></td>
+              <td>Executable trigger logic: who acts, when, and under what criterion.</td>
+              <td>Decision triggers, actors, thresholds, and actions are operationally specified.</td>
+            </tr>
+            <tr>
+              <td><strong>F3 — Cross-Sector Integration</strong></td>
+              <td>Ability to operate across three or more interdependent sectors.</td>
+              <td>Framework applies to multiple interacting sectors simultaneously.</td>
+            </tr>
+            <tr>
+              <td><strong>F4 — Threshold Dynamics</strong></td>
+              <td>Dynamic treatment of proximity, velocity, uncertainty, or transition risk.</td>
+              <td>Threshold movement or approach is modeled dynamically, not statically.</td>
+            </tr>
+            <tr>
+              <td><strong>F5 — Observability</strong></td>
+              <td>Leading indicators and pre-event detection capacity.</td>
+              <td>Indicators detect meaningful pre-event signals before failure materializes.</td>
+            </tr>
+            <tr>
+              <td><strong>F6 — Ex-Ante Governance</strong></td>
+              <td>Governance action before the critical point or irreversible transition.</td>
+              <td>Framework defines preventive action before collapse or irreversible damage.</td>
+            </tr>
+            <tr>
+              <td><strong>F7 — Reversibility</strong></td>
+              <td>Treatment of reversibility window as an explicit decision variable.</td>
+              <td>Framework explicitly governs action while conditions remain reversible.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analysis-box">
+        <p>
+          The seven functions are treated as provisional outputs of the screening protocol.
+          They are not presented as c-ECO assumptions. Their final status depends on RQ1
+          coding, full-text verification, and synthesis across the expanded corpus.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="h3" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">H3 Co-Presence</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Hypothesis 3</div>
+        <h1>Functional Co-Presence</h1>
+        <div class="subtitle">Preliminary association analysis, not causal dependency proof</div>
+      </div>
+
+      <div class="warning-box">
+        <p>
+          Co-presence measures association only. It does not establish direction, causality,
+          logical necessity, or a derived dependency structure.
+        </p>
+      </div>
+
+      <div class="section-header">Selected Co-Presence Findings</div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Relationship</th>
+              <th>Preliminary Value</th>
+              <th>Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>P(F7 | F2)</strong></td>
+              <td>9.1%</td>
+              <td>Frameworks with decision protocols rarely also treat reversibility as a decision variable.</td>
+            </tr>
+            <tr>
+              <td><strong>P(F5 | F4)</strong></td>
+              <td>60.6%</td>
+              <td>Frameworks with threshold dynamics often include observability, but not consistently.</td>
+            </tr>
+            <tr>
+              <td><strong>P(F4 | F5)</strong></td>
+              <td>74.1%</td>
+              <td>Frameworks with observability frequently also include threshold dynamics.</td>
+            </tr>
+            <tr>
+              <td><strong>F2 Base Rate</strong></td>
+              <td>11/60</td>
+              <td>Executable decision protocols are among the least common functions.</td>
+            </tr>
+            <tr>
+              <td><strong>F7 Base Rate</strong></td>
+              <td>6/60</td>
+              <td>Reversibility is the most fragmented function in the preliminary corpus.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="method-box">
+        <p>
+          H3 must be evaluated through three converging forms of evidence:
+          logical necessity, empirical co-presence, and derivation from normative statements in the literature.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="seal">
+        <img src="/assets/img/seal.png" alt="Johann Christian Hasse Foundation Seal">
+      </div>
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-motto">Functional Architecture</div>
+    </div>
+
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Candidate Functional Architecture</div>
+        <h1>Operational Governance for Threshold Dynamics</h1>
+        <div class="subtitle">
+          Candidate functional architecture derived from the highest-performing functional implementations identified during preliminary screening
+        </div>
+      </div>
+
+      <div class="section-header">Control-Loop Structure</div>
+
+      <div class="highlight-box">
+        <p>
+          The architecture is best understood as a control loop rather than a linear sequence.
+          Observability, threshold assessment, decision activation, governance response, and
+          reversibility feedback interact continuously under uncertainty.
+        </p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Control Loop Stage</th>
+              <th>Functional Criterion</th>
+              <th>Representative Literature Strength</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monitor</td>
+              <td>F5 — Observability</td>
+              <td>Scheffer / Dakos; macroprudential monitoring; early-warning systems.</td>
+            </tr>
+            <tr>
+              <td>Estimate</td>
+              <td>F4 — Threshold Dynamics</td>
+              <td>Planetary Boundaries; Buldyrev; critical transition literature.</td>
+            </tr>
+            <tr>
+              <td>Decide</td>
+              <td>F2 — Decision Protocol</td>
+              <td>ESRB/ECB macroprudential frameworks; Sendai policy activation.</td>
+            </tr>
+            <tr>
+              <td>Act</td>
+              <td>F1 — Operational Architecture</td>
+              <td>Macroprudential institutional design; disaster-risk governance.</td>
+            </tr>
+            <tr>
+              <td>Integrate</td>
+              <td>F3 — Cross-Sector Integration</td>
+              <td>Planetary Boundaries; interdependent networks; polycrisis literature.</td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td>F6 — Ex-Ante Governance</td>
+              <td>Anticipatory governance; resilience governance; macroprudential prevention.</td>
+            </tr>
+            <tr>
+              <td>Feedback</td>
+              <td>F7 — Reversibility</td>
+              <td>Fragmented; limited explicit treatment in infrastructure-governance literature.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analysis-box">
+        <p>
+          This provides the analytical reference model against which frameworks,
+          including c-ECO (TFP/TDR), may be compared in Paper 2.
+        </p>
+      </div>
+
+      <div class="section-header">Preliminary Fragmentation Pattern</div>
+
+      <div class="grid-3">
+        <div class="metric-card">
+          <div class="metric-number">F2</div>
+          <div class="metric-label">
+            <strong>Decision Protocol Deficit</strong><br>
+            Few frameworks define executable trigger activation.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-number">F7</div>
+          <div class="metric-label">
+            <strong>Reversibility Deficit</strong><br>
+            Few frameworks treat reversibility as an explicit decision variable.
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-number">H3</div>
+          <div class="metric-label">
+            <strong>Dependency Structure Pending</strong><br>
+            Co-presence suggests patterns but does not prove functional dependency.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  Johann Christian Hasse Foundation · c-ECO Review Matrix · Preliminary Screening Stage
+</footer>
+
+<script>
+function showTab(event, tabId){
+  const tabs = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.nav-tab');
+
+  tabs.forEach(tab => tab.classList.remove('active'));
+  buttons.forEach(button => button.classList.remove('active'));
+
+  document.getElementById(tabId).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function printCurrent(){
+  const active = document.querySelector('.tab-content.active');
+  const original = document.body.innerHTML;
+
+  document.body.innerHTML = active.outerHTML;
+  window.print();
+  document.body.innerHTML = original;
+  window.location.reload();
+}
+
+function filterMatrix(){
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const type = document.getElementById('typeFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const scope = document.getElementById('scopeFilter').value;
+
+  const rows = document.querySelectorAll('#matrixTable tbody tr');
+
+  rows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+    const rowType = row.getAttribute('data-type');
+    const rowStatus = row.getAttribute('data-status');
+    const rowScope = row.getAttribute('data-scope');
+
+    const matchesSearch = !search || text.includes(search);
+    const matchesType = !type || rowType === type;
+    const matchesStatus = !status || rowStatus === status;
+    const matchesScope = !scope || rowScope === scope;
+
+    row.style.display = (matchesSearch && matchesType && matchesStatus && matchesScope) ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
