@@ -378,6 +378,20 @@ th{ background:var(--gold-pale) !important; border-bottom:2px solid var(--gold) 
 .prob-low{background:#FBF1EF !important;color:var(--red) !important;font-weight:700 !important;}
 @media(max-width:900px){ .nav-tabs{justify-content:flex-start !important; overflow-x:auto !important; flex-wrap:nowrap !important;} }
 
+
+.architecture-table th{
+  text-align:left;
+}
+.architecture-table td{
+  vertical-align:top;
+}
+.architecture-hypothesis{
+  border-left:4px solid var(--gold);
+  padding-left:12px;
+  background:#FDFCF8;
+  font-weight:600;
+}
+
 </style>
 </head>
 <body>
@@ -487,7 +501,7 @@ th{ background:var(--gold-pale) !important; border-bottom:2px solid var(--gold) 
 <section id="decision" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="https://hasse.foundation/images/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div><div class="org-motto">Decision Log</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Audit Trail</div><h1>Decision Log</h1><div class="subtitle">Documented changes and rationale</div></div><div id="decisionContent"></div></div></div></section>
 <section id="architecture" class="tab-content"><div class="page"><div class="letterhead"><div class="seal"><img src="https://hasse.foundation/images/seal.png" alt="Seal"></div><div class="org-name">Johann Christian Hasse Foundation</div><div class="org-motto">Functional Architecture</div></div><div class="content"><div class="doc-title"><div class="chapter-kicker">Analytical Reference Model</div><h1>Functional Architecture Model (FAM)</h1><div class="subtitle">Derived inductively from the literature and used as an analytical reference model for comparing operational governance frameworks, including c-ECO</div></div><div id="architectureContent"></div></div></div></section>
 
-<footer class="site-footer">Functional Evidence Matrix (FEM) · Johann Christian Hasse Foundation</footer>
+<footer class="site-footer">Functional Evidence Matrix (FEM) · Version 1.3.3 · Frozen Review Protocol · Johann Christian Hasse Foundation</footer>
 
 
 <script>
@@ -764,6 +778,91 @@ function renderH3(){
   el.innerHTML=html;
 }
 
+
+function isSeparatorText(text){ return /^═{5,}/.test(String(text||'').trim()); }
+function cleanArchitectureTitle(text){ return String(text||'').replace(/^\s*[A-D]\.\s*/, '').trim(); }
+function renderArchitecture(){
+  const el=document.getElementById('architectureContent'); if(!el) return;
+  const rows=cleanRows(SHEET_DATA['Functional Architecture']||[]);
+  if(!rows.length){ el.innerHTML='<p>No data available.</p>'; return; }
+
+  let html='';
+  const intro=[];
+  for(let i=0;i<6 && i<rows.length;i++){
+    const t=String(rows[i][0]||'').trim();
+    if(t && !isSeparatorText(t)) intro.push(t);
+  }
+  if(intro.length){
+    html += '<div class="method-box">' + intro.map((t,i)=> i===0 ? `<p><strong>${esc(t)}</strong></p>` : `<p>${esc(t)}</p>`).join('') + '</div>';
+  }
+
+  // Section A table: starts at row with Function / Strongest Score
+  const aHeaderIndex = rows.findIndex(r => String(r[0]||'').trim()==='Function' && String(r[1]||'').trim()==='Strongest Score');
+  if(aHeaderIndex >= 0){
+    const aRows=[];
+    for(let i=aHeaderIndex;i<rows.length;i++){
+      if(String(rows[i][0]||'').trim()==='B. ARCHITECTURE GAP ANALYSIS (composite vs. unitary)') break;
+      if(rowNonEmpty(rows[i])>1) aRows.push(rows[i]);
+    }
+    html += '<div class="section-header">A. Candidate Functional Architecture</div>';
+    html += '<div class="sheet-note"><p>Derived from the highest-performing functional implementations identified during preliminary screening.</p></div>';
+    html += renderTableFromRows(aRows, 'sheet-table architecture-table');
+  }
+
+  // Section B: Observation / Implication table
+  const bIndex = rows.findIndex(r => String(r[0]||'').trim()==='B. ARCHITECTURE GAP ANALYSIS (composite vs. unitary)');
+  if(bIndex >= 0){
+    const bHeaderIndex = rows.findIndex((r,idx) => idx>bIndex && String(r[0]||'').trim()==='Observation' && String(r[1]||'').trim()==='Implication');
+    if(bHeaderIndex >= 0){
+      const bRows=[];
+      for(let i=bHeaderIndex;i<rows.length;i++){
+        if(String(rows[i][0]||'').trim().startsWith('C. RESEARCH QUESTION 2')) break;
+        if(rowNonEmpty(rows[i])>1) bRows.push(rows[i].slice(0,2));
+      }
+      html += '<div class="section-header">B. Architecture Gap Analysis</div>';
+      html += renderTableFromRows(bRows, 'sheet-table architecture-table');
+    }
+  }
+
+  // Section C: RQ2, structured text
+  const cIndex = rows.findIndex(r => String(r[0]||'').trim().startsWith('C. RESEARCH QUESTION 2'));
+  const dIndex = rows.findIndex(r => String(r[0]||'').trim()==='D. METHODOLOGICAL NOTES');
+  if(cIndex >= 0){
+    const cRows = rows.slice(cIndex+1, dIndex>cIndex ? dIndex : rows.length)
+      .map(r => String(r[0]||'').trim())
+      .filter(t => t && !isSeparatorText(t));
+    html += '<div class="section-header">C. Research Question 2</div>';
+    html += '<div class="analysis-box">';
+    let inHyp=false;
+    cRows.forEach(t=>{
+      if(t==='Hypothesis for RQ2 (to be tested):'){
+        html += '<p><strong>Hypothesis for RQ2 (to be tested):</strong></p>';
+        inHyp=true;
+      } else if(inHyp && t.startsWith('c-ECO')){
+        html += `<p class="architecture-hypothesis">${esc(t)}</p>`;
+      } else if(inHyp && t.startsWith('requires')){
+        html += `<p class="architecture-hypothesis">${esc(t)}</p>`;
+      } else {
+        html += `<p>${esc(t)}</p>`;
+      }
+    });
+    html += '</div>';
+  }
+
+  // Section D: methodological notes as a numbered list
+  if(dIndex >= 0){
+    const dRows = rows.slice(dIndex+1)
+      .map(r => String(r[0]||'').trim())
+      .filter(t => t && !isSeparatorText(t));
+    html += '<div class="section-header">D. Methodological Notes</div>';
+    html += '<div class="analytical-list">' + dRows.map((t,idx)=>{
+      const clean=t.replace(/^\d+\.\s*/, '');
+      return `<div class="analytical-list-item"><span class="analytical-index">${idx+1}</span><span>${esc(clean)}</span></div>`;
+    }).join('') + '</div>';
+  }
+  el.innerHTML=html;
+}
+
 function init(){
   populateSelect('typeFilter','Type_v2','All Types');
   populateSelect('statusFilter','Publication status','All Statuses');
@@ -777,7 +876,7 @@ function init(){
   renderSmartSheet('hypothesesContent','Hypotheses');
   renderSmartSheet('codingContent','Coding Manual');
   renderSmartSheet('decisionContent','Decision Log');
-  renderSmartSheet('architectureContent','Functional Architecture');
+  renderArchitecture();
 }
 document.addEventListener('DOMContentLoaded', init);
 </script>
