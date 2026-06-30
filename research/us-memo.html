@@ -373,6 +373,243 @@
   .bib-entry { padding: .04in 0; grid-template-columns: .38in 1fr; }
 }
 
+
+
+/* ==========================================================
+   FINAL MOBILE + PRINT CARD FIX
+   Prevents cards from being cut across pages and improves
+   grant/investor PDF formatting without changing content.
+   ========================================================== */
+@media screen and (max-width: 900px) {
+  body {
+    background: #fff !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+  .page, .page.wide {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px 16px 48px !important;
+    box-shadow: none !important;
+    min-height: auto !important;
+  }
+  .page::before, .page::after { display: none !important; }
+  .letterhead { padding: 20px 8px 14px !important; }
+  .seal { width: 72px !important; height: 72px !important; }
+  .org-name { font-size: 16px !important; line-height: 1.3 !important; }
+  .doc-title h1 { font-size: 24px !important; line-height: 1.15 !important; }
+  .body-text { font-size: 16px !important; }
+  .body-text p { text-indent: 0 !important; text-align: left !important; }
+  .rc-grid, .sector-grid, .sector-grid.compact {
+    display: block !important;
+    margin: 16px 0 !important;
+  }
+  .rc-card, .sector-card {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 16px !important;
+    padding: 16px !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+  .table-wrapper { overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+  .data-table { min-width: 720px !important; }
+  .inline-figure img { max-width: 100% !important; height: auto !important; }
+  .reference-block, .bibliography-list { overflow-wrap: anywhere !important; word-break: break-word !important; }
+}
+
+@media print {
+  /* More conservative print scale for grant/investor PDF */
+  @page { size: Letter; margin: 0.62in 0.62in 0.68in 0.62in; }
+
+  html, body {
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .body-text,
+  .body-text p,
+  .body-text li {
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .body-text p {
+    margin-bottom: 0.085in !important;
+    text-align: justify !important;
+    text-indent: 0.16in !important;
+  }
+
+  /* Critical fix: CSS grid can split cards across pages in Chromium/WebKit print.
+     Use block layout in print so each card is handled independently. */
+  .rc-grid,
+  .sector-grid,
+  .sector-grid.compact {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+    margin: 0.12in 0 0.16in !important;
+  }
+
+  .rc-card,
+  .sector-card,
+  .sector-grid.compact .sector-card {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0.095in 0.11in !important;
+    margin: 0 0 0.115in !important;
+    border: 1px solid #D8C99A !important;
+    border-top: 3px solid #C9A227 !important;
+    background: #fff !important;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .sector-grid.compact .sector-card { border-top-color: #1E3A2F !important; }
+
+  .rc-card h4,
+  .sector-card h4 {
+    font-size: 9.4pt !important;
+    line-height: 1.18 !important;
+    margin: 0 0 0.04in !important;
+  }
+
+  .rc-code {
+    font-size: 11pt !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0.025in !important;
+  }
+
+  .rc-card p,
+  .sector-card p,
+  .sector-card li,
+  .proxy,
+  .source-note,
+  .evidence-note {
+    font-size: 9.1pt !important;
+    line-height: 1.26 !important;
+    text-indent: 0 !important;
+  }
+
+  .sector-card ul {
+    margin: 0.04in 0 0.06in 0.18in !important;
+  }
+  .sector-card li {
+    margin-bottom: 0.028in !important;
+  }
+
+  /* Keep headings with the first lines that follow, but don't create huge blanks. */
+  h2, h3, h4, .figure-title, .data-table caption {
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Tables are allowed to paginate cleanly instead of forcing a large blank page. */
+  .table-wrapper {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+  .data-table {
+    font-size: 8.1pt !important;
+    line-height: 1.2 !important;
+    table-layout: fixed !important;
+  }
+  .data-table th, .data-table td {
+    padding: 0.038in 0.044in !important;
+  }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid-page; page-break-inside: avoid; }
+
+  .inline-figure {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    margin: 0.14in 0 0.16in !important;
+  }
+  .inline-figure img,
+  .page.wide .inline-figure img {
+    max-height: 5.8in !important;
+  }
+
+  .reference-block,
+  .bibliography-list,
+  .bibliography-list li {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+}
+
+
+/* ==========================================================
+   FINAL FIGURE PRINT FIX
+   Forces all memorandum figures to load and remain visible in PDF/print.
+   Also prevents empty figure boxes when the HTML is opened from a local file.
+   ========================================================== */
+@media print {
+  .inline-figure,
+  figure.inline-figure {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    border: 1px solid #D8C99A !important;
+    padding: 0.10in !important;
+    margin: 0.14in 0 0.18in !important;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+  }
+
+  .inline-figure img,
+  figure.inline-figure img,
+  .content img,
+  .body-text img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 6.35in !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    margin: 0.08in auto 0 !important;
+    border: 1px solid #eee !important;
+    background: #fff !important;
+    image-rendering: auto !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .figure-title {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 0.06in !important;
+    padding-bottom: 0.045in !important;
+    border-bottom: 1px solid #D4AF37 !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+  }
+
+  .inline-figure.missing-image::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .inline-figure.missing-image img {
+    display: block !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -484,7 +721,7 @@
 <div class="figure-title">
         FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)
        </div>
-<img alt="FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es1.png"/>
+<img alt="FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es1.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -660,7 +897,7 @@
 <div class="figure-title">
         FIGURE ES-2 — One Governance Failure in Many Systems
        </div>
-<img alt="FIGURE ES-2 — One Governance Failure in Many Systems" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es2.png"/>
+<img alt="FIGURE ES-2 — One Governance Failure in Many Systems" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es2.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1036,7 +1273,7 @@
 <div class="figure-title">
         FIGURE ES-3 — Loss &amp; Protection Landscape (2025)
        </div>
-<img alt="FIGURE ES-3 — Loss &amp; Protection Landscape (2025)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es3.png"/>
+<img alt="FIGURE ES-3 — Loss &amp; Protection Landscape (2025)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es3.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1048,7 +1285,7 @@
 <div class="figure-title">
         FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)
        </div>
-<img alt="FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es4.png"/>
+<img alt="FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es4.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1086,7 +1323,7 @@
 <div class="figure-title">
         FIGURE ES-6 — National Resilience Dashboard — Architecture Overview
        </div>
-<img alt="FIGURE ES-6 — National Resilience Dashboard — Architecture Overview" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es6.png"/>
+<img alt="FIGURE ES-6 — National Resilience Dashboard — Architecture Overview" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es6.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1151,7 +1388,7 @@
 <div class="figure-title">
         FIGURE ES-7 — 180-Day Implementation Roadmap
        </div>
-<img alt="FIGURE ES-7 — 180-Day Implementation Roadmap" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es7.png"/>
+<img alt="FIGURE ES-7 — 180-Day Implementation Roadmap" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es7.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1184,7 +1421,7 @@
 <div class="figure-title">
         FIGURE ES-5 — Insurance-Capital Procyclicality
        </div>
-<img alt="FIGURE ES-5 — Insurance-Capital Procyclicality" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es5.png"/>
+<img alt="FIGURE ES-5 — Insurance-Capital Procyclicality" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es5.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1220,7 +1457,7 @@
 <div class="figure-title">
         TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons
        </div>
-<img alt="TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es8.png"/>
+<img alt="TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es8.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1504,7 +1741,7 @@
 <div class="figure-title">
         FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)
        </div>
-<img alt="FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es1.png"/>
+<img alt="FIGURE ES-1 — Institutional Lock-in Duration vs. Political Decision Horizon (2025)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es1.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1513,7 +1750,7 @@
 <div class="figure-title">
         FIGURE ES-2 — One Governance Failure in Many Systems
        </div>
-<img alt="FIGURE ES-2 — One Governance Failure in Many Systems" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es2.png"/>
+<img alt="FIGURE ES-2 — One Governance Failure in Many Systems" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es2.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1522,7 +1759,7 @@
 <div class="figure-title">
         FIGURE ES-3 — Loss &amp; Protection Landscape (2025)
        </div>
-<img alt="FIGURE ES-3 — Loss &amp; Protection Landscape (2025)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es3.png"/>
+<img alt="FIGURE ES-3 — Loss &amp; Protection Landscape (2025)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es3.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1531,7 +1768,7 @@
 <div class="figure-title">
         FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)
        </div>
-<img alt="FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es4.png"/>
+<img alt="FIGURE ES-4 — Reversibility Thresholds Converging (2027–2030)" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es4.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1540,7 +1777,7 @@
 <div class="figure-title">
         FIGURE ES-5 — Insurance-Capital Procyclicality
        </div>
-<img alt="FIGURE ES-5 — Insurance-Capital Procyclicality" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es5.png"/>
+<img alt="FIGURE ES-5 — Insurance-Capital Procyclicality" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es5.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1549,7 +1786,7 @@
 <div class="figure-title">
         FIGURE ES-6 — National Resilience Dashboard — Architecture Overview
        </div>
-<img alt="FIGURE ES-6 — National Resilience Dashboard — Architecture Overview" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es6.png"/>
+<img alt="FIGURE ES-6 — National Resilience Dashboard — Architecture Overview" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es6.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1558,7 +1795,7 @@
 <div class="figure-title">
         FIGURE ES-7 — 180-Day Implementation Roadmap
        </div>
-<img alt="FIGURE ES-7 — 180-Day Implementation Roadmap" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es7.png"/>
+<img alt="FIGURE ES-7 — 180-Day Implementation Roadmap" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es7.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1567,7 +1804,7 @@
 <div class="figure-title">
         TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons
        </div>
-<img alt="TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons" loading="lazy" onclick="openModal(this.src)" src="/images/memo-us/es8.png"/>
+<img alt="TABLE ES-2 — Executive Recommendations — 12 Actions Across 3 Time Horizons" onclick="openModal(this.src)" src="https://hasse.foundation/images/memo-us/es8.png"/>
 <p class="zoom-hint">
         Click image to enlarge.
        </p>
@@ -1992,7 +2229,7 @@
    Johann Christian Hasse Foundation · U.S. Memorandum II · The American Resilience · June 2026
   </div>
 <div id="img-modal" onclick="closeModal()">
-<img alt="Expanded figure" loading="lazy"/>
+<img alt="Expanded figure"/>
 </div>
 <script>
    function showTab(event, id) {
@@ -2050,6 +2287,35 @@ function closeModal() {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closeModal();
 });
+
+function normalizeMemoImageSources() {
+  document.querySelectorAll('img').forEach(img => {
+    const src = img.getAttribute('src') || '';
+    if (src.startsWith('/images/')) {
+      img.setAttribute('src', 'https://hasse.foundation' + src);
+    }
+    img.loading = 'eager';
+    img.decoding = 'sync';
+    img.style.visibility = 'visible';
+    img.style.opacity = '1';
+    img.style.display = 'block';
+  });
+}
+
+function preloadMemoFigures() {
+  normalizeMemoImageSources();
+  const images = Array.from(document.querySelectorAll('.inline-figure img, .seal img'));
+  images.forEach(img => {
+    if (!img.complete && img.src) {
+      const preload = new Image();
+      preload.src = img.src;
+    }
+  });
+}
+
+window.addEventListener('load', preloadMemoFigures);
+window.addEventListener('beforeprint', preloadMemoFigures);
+
   </script>
 </body>
 </html>
