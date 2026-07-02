@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grant Prospect Review Form — Johann Christian Hasse Foundation</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #C9A227;
+      --gold-dark: #8B6914;
+      --gold-pale: #F5F0E8;
+      --ink: #1A1A1A;
+      --muted: #666;
+      --paper: #FFFFFF;
+      --cream: #FDFCF8;
+      --line: #D8D2C4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      background: linear-gradient(135deg, #f5f0e8 0%, #ede6d8 100%);
+      color: var(--ink);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+
+    .nav-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #fff;
+      border-bottom: 1px solid var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .nav-tab {
+      border: none;
+      background: transparent;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #777;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-tab:hover,
+    .nav-tab.active {
+      color: var(--gold-dark);
+      border-bottom-color: var(--gold);
+    }
+
+    .page {
+      width: min(8.5in, calc(100% - 24px));
+      min-height: 11in;
+      margin: 28px auto;
+      background: var(--paper);
+      padding: 0.55in 0.65in 0.65in;
+      box-shadow: 0 0 30px rgba(0,0,0,0.13);
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0.28in;
+      border: 1.5px solid var(--gold);
+      pointer-events: none;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0.38in;
+      border: 0.5px solid var(--gold);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .letterhead {
+      text-align: center;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 18px;
+      margin-bottom: 26px;
+    }
+
+    .seal {
+      width: 86px;
+      height: 86px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .org-name {
+      font-size: 25px;
+      line-height: 1.1;
+      color: var(--gold-dark);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .org-subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .title-block {
+      margin-bottom: 22px;
+      border-bottom: 3px double var(--ink);
+      padding-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .instruction {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .section {
+      margin: 26px 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .form-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .form-table th,
+    .form-table td {
+      border: 1px solid var(--line);
+      vertical-align: top;
+      padding: 9px 10px;
+    }
+
+    .form-table th {
+      width: 28%;
+      background: #EFEFEF;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #bbb;
+      background: #FAFAFA;
+      padding: 6px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+      border: 1px solid #ccc;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      background: #fff;
+      border-color: var(--gold);
+    }
+
+    .checkbox-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 4px 0;
+    }
+
+    .checkbox-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .checkbox-row input {
+      width: auto;
+    }
+
+    .note-box {
+      background: var(--gold-pale);
+      border-left: 4px solid var(--gold);
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-size: 15px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .print-bar {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--gold);
+      background: #fff;
+      color: var(--gold-dark);
+      padding: 9px 14px;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .nav-tabs,
+      .print-bar {
+        display: none !important;
+      }
+
+      .page {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+
+      .tab-content {
+        display: block !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        width: 100%;
+        margin: 0;
+        padding: 24px 18px 40px;
+        min-height: auto;
+      }
+
+      .page::before,
+      .page::after {
+        display: none;
+      }
+
+      .form-table th,
+      .form-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .checkbox-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+.doc-footer {
+  margin-top: 32px;
+  border-top: 1px solid var(--gold);
+  padding-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
+  </style>
+</head>
+
+<body>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+  <button class="nav-tab" onclick="showTab('overview')">Prospect Overview</button>
+  <button class="nav-tab" onclick="showTab('alignment')">Alignment & Opportunities</button>
+  <button class="nav-tab" onclick="showTab('background')">Financials & Contacts</button>
+  <button class="nav-tab" onclick="showTab('notes')">Notes & Documents</button>
+</div>
+
+  <div class="print-bar">
+  <button class="btn" onclick="window.print()">Print</button>
+</div>
+
+<!-- TAB 1: EXECUTIVE DASHBOARD -->
+<section id="dashboard" class="tab-content active">
+  <div class="page">
+    <div class="content">
+
+      <header class="letterhead">
+        <img class="seal" src="https://hasse.foundation/images/seal.png" alt="Johann Christian Hasse Foundation Seal">
+        <div class="org-name">Johann Christian Hasse Foundation</div>
+        <div class="org-subtitle">Grant Prospect Review Form</div>
+      </header>
+
+      <div class="title-block">
+        <h1>Executive Dashboard</h1>
+        <p class="instruction">Summary assessment for internal grant prospect review.</p>
+      </div>
+
+      <section class="section">
+        <div class="section-title">Grant Opportunity Score</div>
+
+        <table class="form-table">
+          <tr>
+            <th>Overall Compatibility</th>
+            <td>
+              <input type="range" min="0" max="100" value="50" id="overallScore" oninput="updateScore()">
+              <strong><span id="overallScoreText">50%</span></strong>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Status</th>
+            <td>
+              <select>
+                <option>Researching</option>
+                <option>Ready for Review</option>
+                <option>Ready for LOI</option>
+                <option>Submitted</option>
+                <option>Awarded</option>
+                <option>Declined</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Priority</th>
+            <td>
+              <select>
+                <option>★★★★★ High Priority</option>
+                <option>★★★★☆ Good Opportunity</option>
+                <option>★★★☆☆ Monitor</option>
+                <option>★★☆☆☆ Low Priority</option>
+                <option>★☆☆☆☆ Do Not Pursue</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Recommendation</th>
+            <td>
+              <select>
+                <option>Pursue</option>
+                <option>Monitor</option>
+                <option>Decline</option>
+                <option>TBD</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Reason</th>
+            <td><textarea placeholder="Brief reason for recommendation"></textarea></td>
+          </tr>
+        </table>
+      </section>
+<footer class="doc-footer">
+  The information contained in this document is confidential, privileged, and intended
+  solely for the use of the designated recipient and authorized representatives of the
+  Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+  published, distributed, or redistributed, in whole or in part, without the prior written
+  consent of the Johann Christian Hasse Foundation.
+</footer>
+    </div>
+  </div>
+</section>
+
+<!-- TAB 2: PROSPECT OVERVIEW -->
+<section id="overview" class="tab-content">
+  <div class="page">
+    <div class="content">
+
+      <header class="letterhead">
+        <img class="seal" src="https://hasse.foundation/images/seal.png" alt="Johann Christian Hasse Foundation Seal">
+        <div class="org-name">Johann Christian Hasse Foundation</div>
+        <div class="org-subtitle">Grant Prospect Review Form</div>
+      </header>
+
+      <div class="title-block">
+        <h1>Prospect Overview</h1>
+        <p class="instruction">
+          To be completed by the Grant Team prior to funder discussion.
+          Fields left blank should be marked TBD.
+        </p>
+      </div>
+
+      <section class="section">
+        <div class="section-title">1. Funder Overview</div>
+        <table class="form-table">
+          <tr><th>Funder Name</th><td><input type="text"></td></tr>
+          <tr><th>Headquarters Address</th><td><input type="text"></td></tr>
+          <tr><th>EIN #</th><td><input type="text"></td></tr>
+          <tr><th>Website</th><td><input type="url"></td></tr>
+          <tr><th>Primary Contact / Title</th><td><input type="text"></td></tr>
+          <tr><th>Contact Info</th><td><input type="text" placeholder="Email, phone"></td></tr>
+          <tr><th>Warm Introductions Available</th><td><input type="text"></td></tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-title">2. Research Scope</div>
+        <table class="form-table">
+          <tr>
+            <th>Type of Research</th>
+            <td>
+              <div class="checkbox-row">
+                <label><input type="checkbox"> Grant Research</label>
+                <label><input type="checkbox"> Sponsorship</label>
+                <label><input type="checkbox"> Both</label>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Type of Strategic Support</th>
+            <td>
+              <div class="checkbox-row">
+                <label><input type="checkbox"> Operations</label>
+                <label><input type="checkbox"> Capital</label>
+                <label><input type="checkbox"> Endowment</label>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-title">3. Brief Overview of Funder</div>
+        <textarea placeholder="Summary — first three sentences"></textarea>
+      </section>
+
+      <section class="section">
+        <div class="section-title">4. Funding Status & Application Process</div>
+        <table class="form-table">
+          <tr>
+            <th>Funding Status</th>
+            <td>
+              <div class="checkbox-row">
+                <label><input type="checkbox"> New Funder</label>
+                <label><input type="checkbox"> Lapsed Funder</label>
+                <label><input type="checkbox"> Current — Renewal</label>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Application Process</th>
+            <td>
+              <div class="checkbox-row">
+                <label><input type="checkbox"> Open Call</label>
+                <label><input type="checkbox"> Invite Only</label>
+                <label><input type="checkbox"> Invited to Apply</label>
+              </div>
+            </td>
+          </tr>
+
+          <tr><th>Other</th><td><input type="text" placeholder="Specify"></td></tr>
+        </table>
+      </section>
+<footer class="doc-footer">
+  The information contained in this document is confidential, privileged, and intended
+  solely for the use of the designated recipient and authorized representatives of the
+  Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+  published, distributed, or redistributed, in whole or in part, without the prior written
+  consent of the Johann Christian Hasse Foundation.
+</footer>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- TAB 3 - ALIGNMENT & OPPORTUNITIES -->
+<!-- ===================================================== -->
+
+<section id="alignment" class="tab-content">
+
+<div class="page">
+
+<div class="content">
+
+<header class="letterhead">
+<img class="seal" src="https://hasse.foundation/images/seal.png" alt="Johann Christian Hasse Foundation Seal">
+<div class="org-name">Johann Christian Hasse Foundation</div>
+<div class="org-subtitle">Grant Prospect Review Form</div>
+</header>
+
+<div class="title-block">
+<h1>Alignment & Opportunities</h1>
+<p class="instruction">
+Evaluate institutional alignment and available grant opportunities.
+</p>
+</div>
+
+<!-- ===================================================== -->
+<!-- 5. MISSION, VISION & VALUES ALIGNMENT -->
+<!-- ===================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+    5. Mission, Vision & Values Alignment
+  </div>
+
+  <p class="instruction">
+    Compare the prospective funder's mission, priorities, and institutional values against
+    the Johann Christian Hasse Foundation's official organizational profile.
+  </p>
+
+  <table class="form-table">
+
+    <tr>
+      <th style="width:18%"></th>
+      <th style="width:41%">Johann Christian Hasse Foundation (Reference)</th>
+      <th style="width:41%">Prospective Funder</th>
+    </tr>
+
+    <!-- Mission -->
+
+    <tr>
+
+      <th>Mission</th>
+
+      <td>
+
+        To enable institutions and communities to reduce the Recognition–Action Gap through
+        research, education, and the advancement of governance frameworks and legal tools;
+        developing, testing, and disseminating practical methodologies for high-consequence
+        systems.
+
+      </td>
+
+      <td>
+        <textarea placeholder="Summarize the funder's mission."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Vision -->
+
+    <tr>
+
+      <th>Vision</th>
+
+      <td>
+
+        Institutions and societies capable of acting with foresight, where recognition
+        reliably leads to timely action and legal architecture serves as an instrument of
+        prevention rather than remediation.
+
+      </td>
+
+      <td>
+        <textarea placeholder="Summarize the funder's vision."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Equity -->
+
+    <tr>
+
+      <th>Equity Statement</th>
+
+      <td>
+
+        Committed to equitable access to knowledge and institutional participation;
+        resilient governance built on transparency, scientific integrity, and the inclusion
+        of diverse perspectives across disciplines, sectors, and regions.
+
+      </td>
+
+      <td>
+        <textarea placeholder="Describe the funder's equity or DEI approach."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Population -->
+
+    <tr>
+
+      <th>Population Served</th>
+
+      <td>
+
+        General Public · Researchers & Scientists · Government Agencies ·
+        Nonprofit Organizations · Educational Institutions · Communities ·
+        Environmental Organizations · International Organizations
+
+      </td>
+
+      <td>
+        <textarea placeholder="Describe populations served by the funder."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Geographic -->
+
+    <tr>
+
+      <th>Geographic Focus</th>
+
+      <td>
+
+        Global · United States · Amazon Region
+
+      </td>
+
+      <td>
+        <textarea placeholder="Countries, regions or communities supported by the funder."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Priorities -->
+
+    <tr>
+
+      <th>Funding Priorities</th>
+
+      <td>
+
+        Governance Innovation · Recognition–Action Gap Research ·
+        High-Consequence Systems · Legal & Regulatory Frameworks ·
+        Institutional Capacity Building · Public Policy ·
+        Education & Executive Training · Environmental Governance ·
+        Biodiversity & Amazon Conservation · Scientific Research ·
+        Artificial Intelligence Governance · International Cooperation ·
+        Prevention Science · Philanthropic Innovation
+
+      </td>
+
+      <td>
+        <textarea placeholder="List the funder's funding priorities."></textarea>
+      </td>
+
+    </tr>
+
+    <!-- Principles -->
+
+    <tr>
+
+      <th>Principles, Values & Beliefs</th>
+
+      <td>
+
+        <strong>CORE VALUES</strong>
+
+        <br><br>
+
+        <strong>Scientific Rigor</strong><br>
+        We commit to precision in observation, transparent methodologies, and evidence that withstands independent scrutiny. We strive to document our research, encourage external review whenever appropriate, and promote transparency consistent with ethical, legal, and partnership obligations.
+
+        <br><br>
+
+        <strong>Independence</strong><br>
+        We maintain institutional autonomy to speak truth about governance failures and systemic risk, without political or financial constraint. We report findings regardless of stakeholder preferences.
+
+        <br><br>
+
+        <strong>Accountability</strong><br>
+        We document failure. We publish cases. We maintain auditable systems for all programs and findings. We hold ourselves and our partners responsible for both action and inaction.
+
+        <br><br>
+
+        <strong>Prevention Before Reaction</strong><br>
+        We invest in anticipatory capacity and early intervention rather than accepting disaster as inevitable. We pilot methodologies before scaling.
+
+        <br><br>
+
+        <strong>Equity & Co-Responsibility</strong><br>
+        Those who benefit from a system bear responsibility for its sustainability. Governance frameworks must distribute both burden and benefit fairly.
+
+        <br><br>
+
+        <strong>Selective Collaboration</strong><br>
+        We partner with credible institutions committed to measurable institutional change,
+        transparent reporting, and long-term accountability.
+
+      </td>
+
+      <td>
+
+        <textarea
+          style="min-height:420px;"
+          placeholder="Describe the funder's institutional principles, values and beliefs.">
+        </textarea>
+
+      </td>
+
+    </tr>
+
+  </table>
+
+</section>
+<!-- ===================================================== -->
+<!-- 6. FUNDER DETAILS -->
+<!-- ===================================================== -->
+
+<section class="section">
+  <div class="section-title">6. Funder Details</div>
+
+  <table class="form-table">
+    <tr>
+      <th>Funding Exclusions</th>
+      <td><textarea placeholder="List any exclusions, restrictions, or activities the funder does not support."></textarea></td>
+    </tr>
+
+    <tr>
+      <th>Support Strategies</th>
+      <td><textarea placeholder="Describe the funder's preferred support strategies, grant types, partnerships, or funding mechanisms."></textarea></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ===================================================== -->
+<!-- 7. CURRENT & UPCOMING GRANT OPPORTUNITIES -->
+<!-- ===================================================== -->
+
+<section class="section">
+  <div class="section-title">7. Current & Upcoming Grant Opportunities</div>
+
+  <table class="form-table">
+    <tr>
+      <th>Grant Program Details</th>
+      <td><textarea placeholder="Program name, description, funding area, expected award range, duration, and relevant notes."></textarea></td>
+    </tr>
+
+    <tr>
+      <th>Initial Approach</th>
+      <td><input type="text" placeholder="Invite only, LOI, online portal, email inquiry, direct contact, etc."></td>
+    </tr>
+
+    <tr>
+      <th>Upcoming Deadlines</th>
+      <td><input type="text" placeholder="Application dates, LOI deadlines, rolling deadlines, or TBD."></td>
+    </tr>
+
+    <tr>
+      <th>Eligibility</th>
+      <td><textarea placeholder="Eligibility rules, geographic limits, nonprofit status, project requirements, restrictions, etc."></textarea></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ===================================================== -->
+<!-- 8. REVIEWING ALIGNMENT -->
+<!-- ===================================================== -->
+
+<section class="section">
+  <div class="section-title">8. Reviewing Alignment</div>
+
+  <textarea
+    style="min-height:260px;"
+    placeholder="Explain why this funder or opportunity IS or IS NOT a good fit for the Johann Christian Hasse Foundation. Include strengths, concerns, and any information that should guide the final recommendation."></textarea>
+</section>
+<footer class="doc-footer">
+  The information contained in this document is confidential, privileged, and intended
+  solely for the use of the designated recipient and authorized representatives of the
+  Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+  published, distributed, or redistributed, in whole or in part, without the prior written
+  consent of the Johann Christian Hasse Foundation.
+</footer>
+</div>
+</div>
+</section>
+
+<!-- ===================================================== -->
+<!-- TAB 4 - BACKGROUND, FINANCIALS & CONTACTS -->
+<!-- ===================================================== -->
+
+<section id="background" class="tab-content">
+  <div class="page">
+    <div class="content">
+
+      <header class="letterhead">
+        <img class="seal" src="https://hasse.foundation/images/seal.png" alt="Johann Christian Hasse Foundation Seal">
+        <div class="org-name">Johann Christian Hasse Foundation</div>
+        <div class="org-subtitle">Grant Prospect Review Form</div>
+      </header>
+
+      <div class="title-block">
+        <h1>Background, Financials & Contacts</h1>
+        <p class="instruction">
+          Background research, financial profile, key staff, board contacts, and institutional relationship notes.
+        </p>
+      </div>
+
+      <section class="section">
+        <div class="section-title">9. Funder Background & Financials</div>
+
+        <table class="form-table">
+          <tr>
+            <th>Grantmaking & Investing In</th>
+            <td><textarea placeholder="Describe the funder's main grantmaking areas, investment themes, program interests, or strategic priorities."></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Financial Assets</th>
+            <td><textarea placeholder="Date / Assets / Most Recent Form 990 / Source"></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Most Common Grant Amount</th>
+            <td><input type="text" placeholder="Typical or median grant amount"></td>
+          </tr>
+
+          <tr>
+            <th>Largest Grant on Record</th>
+            <td><input type="text" placeholder="Largest known grant amount and recipient, if available"></td>
+          </tr>
+
+          <tr>
+            <th>Sample Giving History</th>
+            <td>
+              <textarea placeholder="Organizations similar to Hasse Foundation funded in recent years, including gift amount, year, and source if available."></textarea>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="section">
+        <div class="section-title">10. Key Staff & Contacts</div>
+
+        <table class="form-table">
+          <tr>
+            <th>Key Staff</th>
+            <td><textarea placeholder="Names, titles, contact details, LinkedIn profiles, and relationship notes."></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Board of Directors</th>
+            <td><textarea placeholder="Board members, affiliations, possible connections, and governance notes."></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Memberships / Collaboratives</th>
+            <td><textarea placeholder="Source: FDO, Candid, website, annual report, or other research source."></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Media</th>
+            <td><textarea placeholder="Relevant or recent news, public statements, press releases, interviews, or reputational considerations."></textarea></td>
+          </tr>
+
+          <tr>
+            <th>Supports Endowments?</th>
+            <td>
+              <select>
+                <option>Unknown</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Possible / Requires Confirmation</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <footer class="doc-footer">
+        The information contained in this document is confidential, privileged, and intended
+        solely for the use of the designated recipient and authorized representatives of the
+        Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+        published, distributed, or redistributed, in whole or in part, without the prior written
+        consent of the Johann Christian Hasse Foundation.
+      </footer>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- TAB 5 - NOTES & DOCUMENTS -->
+<!-- ===================================================== -->
+
+<section id="notes" class="tab-content">
+  <div class="page">
+    <div class="content">
+
+      <header class="letterhead">
+        <img class="seal" src="https://hasse.foundation/images/seal.png" alt="Johann Christian Hasse Foundation Seal">
+        <div class="org-name">Johann Christian Hasse Foundation</div>
+        <div class="org-subtitle">Grant Prospect Review Form</div>
+      </header>
+
+      <div class="title-block">
+        <h1>Notes & Documents</h1>
+        <p class="instruction">
+          Internal discussion notes, follow-up items, research materials, and supporting documents.
+        </p>
+      </div>
+
+      <section class="section">
+        <div class="section-title">11. Notes for Jacqueline & the HF Grant Team</div>
+
+        <textarea
+          style="min-height:300px;"
+          placeholder="Discussion notes, internal observations, strategy ideas, follow-up actions, meeting notes, questions for Jacqueline, and grant team recommendations."></textarea>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Supporting Documents</div>
+
+        <table class="form-table">
+          <tr>
+            <th>Grant Guidelines</th>
+            <td><input type="file"></td>
+          </tr>
+
+          <tr>
+            <th>IRS Form 990</th>
+            <td><input type="file"></td>
+          </tr>
+
+          <tr>
+            <th>Annual Report</th>
+            <td><input type="file"></td>
+          </tr>
+
+          <tr>
+            <th>Research Notes</th>
+            <td><input type="file"></td>
+          </tr>
+
+          <tr>
+            <th>Screenshots / Portal Evidence</th>
+            <td><input type="file" multiple></td>
+          </tr>
+
+          <tr>
+            <th>Other Documents</th>
+            <td><input type="file" multiple></td>
+          </tr>
+        </table>
+      </section>
+<footer class="doc-footer">
+        The information contained in this document is confidential, privileged, and intended
+        solely for the use of the designated recipient and authorized representatives of the
+        Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+        published, distributed, or redistributed, in whole or in part, without the prior written
+        consent of the Johann Christian Hasse Foundation.
+      </footer>
+    </div>
+  </div>
+</section>
+
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+    document.querySelectorAll(".nav-tab").forEach(btn => btn.classList.remove("active"));
+
+    document.getElementById(tabId).classList.add("active");
+
+    const activeButton = document.querySelector(`.nav-tab[onclick="showTab('${tabId}')"]`);
+    if (activeButton) activeButton.classList.add("active");
+
+    window.scrollTo(0, 0);
+  }
+
+  function updateScore() {
+    const score = document.getElementById("overallScore");
+    const text = document.getElementById("overallScoreText");
+    if (score && text) text.textContent = score.value + "%";
+  }
+</script>
+
+</body>
+</html>
