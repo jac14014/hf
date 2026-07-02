@@ -251,7 +251,7 @@ select {
 
     .print-bar {
       position: fixed;
-      right: 18px;
+      center: 18px;
       bottom: 18px;
       z-index: 80;
       display: flex;
@@ -428,7 +428,7 @@ select {
   <div class="print-bar">
   <button class="btn" onclick="window.print()">Print / Save PDF</button>
   <button class="btn btn-primary" onclick="alert('To work offline, save this page as an HTML file or print it as a fillable working PDF.')">
-    Offline Instructions
+    Offline
   </button>
 </div>
 
@@ -449,91 +449,96 @@ select {
       </div>
 
       <section class="section">
-  <div class="section-title">Institutional Compatibility Dashboard</div>
+        <div class="section-title">Institutional Compatibility Dashboard</div>
 
-  <div class="dashboard-grid">
-    <div class="score-card">
-      <span>Strategic Fit</span>
-      <strong id="strategicFitText">0%</strong>
-      <div class="bar"><div id="strategicFitBar"></div></div>
-    </div>
+        <div class="dashboard-grid">
+          <div class="score-card">
+            <span>Strategic Fit</span>
+            <strong id="strategicFit">0%</strong>
+            <div class="bar"><div id="strategicBar"></div></div>
+          </div>
 
-    <div class="score-card">
-      <span>Funding Opportunity</span>
-      <strong id="fundingOpportunityText">0%</strong>
-      <div class="bar"><div id="fundingOpportunityBar"></div></div>
-    </div>
+          <div class="score-card">
+            <span>Funding Opportunity</span>
+            <strong id="fundingOpportunity">0%</strong>
+            <div class="bar"><div id="fundingBar"></div></div>
+          </div>
 
-    <div class="score-card main">
-      <span>Overall Assessment</span>
-      <strong id="overallAssessmentText">0%</strong>
-      <div class="bar"><div id="overallAssessmentBar"></div></div>
-      <div id="recommendationText" class="recommendation">Not Rated</div>
-    </div>
-  </div>
+          <div class="score-card main">
+            <span>Overall Assessment</span>
+            <strong id="overallAssessment">0%</strong>
+            <div class="bar"><div id="overallBar"></div></div>
+            <div id="recommendationText" class="recommendation">Not Rated</div>
+          </div>
+        </div>
 
-  <table class="form-table rating-table">
-    <tr>
-      <th>Mission Alignment</th>
-      <td><div class="stars" data-score="mission"></div></td>
-    </tr>
-    <tr>
-      <th>Geographic Fit</th>
-      <td><div class="stars" data-score="geographic"></div></td>
-    </tr>
-    <tr>
-      <th>Values Alignment</th>
-      <td><div class="stars" data-score="values"></div></td>
-    </tr>
-    <tr>
-      <th>Funding Priorities</th>
-      <td><div class="stars" data-score="priorities"></div></td>
-    </tr>
-    <tr>
-      <th>Eligibility</th>
-      <td><div class="stars" data-score="eligibility"></div></td>
-    </tr>
-    <tr>
-      <th>Funding Capacity</th>
-      <td><div class="stars" data-score="capacity"></div></td>
-    </tr>
-    <tr>
-      <th>Relationship Potential</th>
-      <td><div class="stars" data-score="relationship"></div></td>
-    </tr>
-    <tr>
-      <th>Support Strategies</th>
-      <td><div class="stars" data-score="support"></div></td>
-    </tr>
-  </table>
+        <table class="form-table rating-table">
+          <tr>
+            <th>Mission Alignment</th>
+            <td><div class="stars" data-score-key="mission"></div></td>
+          </tr>
+          <tr>
+            <th>Geographic Fit</th>
+            <td><div class="stars" data-score-key="geographic"></div></td>
+          </tr>
+          <tr>
+            <th>Values Alignment</th>
+            <td><div class="stars" data-score-key="values"></div></td>
+          </tr>
+          <tr>
+            <th>Funding Priorities</th>
+            <td><div class="stars" data-score-key="priorities"></div></td>
+          </tr>
+          <tr>
+            <th>Eligibility</th>
+            <td><div class="stars" data-score-key="eligibility"></div></td>
+          </tr>
+          <tr>
+            <th>Funding Capacity</th>
+            <td><div class="stars" data-score-key="capacity"></div></td>
+          </tr>
+          <tr>
+            <th>Relationship Potential</th>
+            <td><div class="stars" data-score-key="relationship"></div></td>
+          </tr>
+          <tr>
+            <th>Support Strategies</th>
+            <td><div class="stars" data-score-key="support"></div></td>
+          </tr>
+        </table>
 
-  <table class="form-table">
-    <tr>
-      <th>Status</th>
-      <td>
-        <select>
-          <option>Researching</option>
-          <option>Ready for Review</option>
-          <option>Ready for LOI</option>
-          <option>Submitted</option>
-          <option>Awarded</option>
-          <option>Declined</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <th>Executive Reason</th>
-      <td><textarea placeholder="Brief reason for the automatic assessment."></textarea></td>
-    </tr>
-  </table>
-</section>
-<footer class="doc-footer">
-  The information contained in this document is confidential, privileged, and intended
-  solely for the use of the designated recipient and authorized representatives of the
-  Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
-  published, distributed, or redistributed, in whole or in part, without the prior written
-  consent of the Johann Christian Hasse Foundation.
-</footer>
+        <table class="form-table">
+          <tr>
+            <th>Status</th>
+            <td>
+              <select>
+                <option>Researching</option>
+                <option>Ready for Review</option>
+                <option>Ready for LOI</option>
+                <option>Submitted</option>
+                <option>Awarded</option>
+                <option>Declined</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Executive Reason</th>
+            <td>
+              <textarea placeholder="Brief reason for the automatic assessment."></textarea>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <footer class="doc-footer">
+        The information contained in this document is confidential, privileged, and intended
+        solely for the use of the designated recipient and authorized representatives of the
+        Johann Christian Hasse Foundation. This document may not be used, disclosed, copied,
+        published, distributed, or redistributed, in whole or in part, without the prior written
+        consent of the Johann Christian Hasse Foundation.
+      </footer>
+
     </div>
   </div>
 </section>
