@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grant Prospect Review Form — Johann Christian Hasse Foundation</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #C9A227;
+      --gold-light: #D4AF37;
       --gold-dark: #8B6914;
       --gold-pale: #F5F0E8;
       --ink: #1A1A1A;
@@ -26,7 +26,7 @@
     }
 
     body {
-      font-family: "Cormorant Garamond", Georgia, serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       background: linear-gradient(135deg, #f5f0e8 0%, #ede6d8 100%);
       color: var(--ink);
       line-height: 1.55;
@@ -161,37 +161,43 @@
     }
 
     .form-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      border: 1px solid var(--line);
-    }
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  border: 1px solid var(--gold-light);
+  background: var(--cream);
+}
 
-    .form-table th,
-    .form-table td {
-      border: 1px solid var(--line);
-      vertical-align: top;
-      padding: 9px 10px;
-    }
+.form-table th,
+.form-table td {
+  border: 1px solid var(--gold-light);
+  vertical-align: top;
+  padding: 9px 10px;
+}
 
-    .form-table th {
-      width: 28%;
-      background: #EFEFEF;
-      text-align: left;
-      font-weight: 700;
-    }
+.form-table th {
+  width: 28%;
+  background: var(--gold-pale);
+  color: var(--gold-dark);
+  text-align: left;
+  font-weight: 700;
+}
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid #bbb;
-      background: #FAFAFA;
-      padding: 6px;
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 16px;
-    }
+.form-table td {
+  background: var(--cream);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gold-light);
+  background: #FDFCF8;
+  padding: 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 16px;
+}
 
     textarea {
       min-height: 90px;
