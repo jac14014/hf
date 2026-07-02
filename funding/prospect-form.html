@@ -273,6 +273,87 @@ select {
       color: #fff;
     }
 
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.metric-card {
+  border: 1px solid var(--gold-light);
+  background: var(--cream);
+  padding: 18px;
+  text-align: center;
+}
+
+.metric-card.highlight {
+  background: var(--gold-pale);
+  border: 2px solid var(--gold);
+}
+
+.metric-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+.metric-value {
+  font-size: 38px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.progress {
+  height: 10px;
+  background: #eee7d5;
+  border: 1px solid var(--line);
+  margin-top: 10px;
+}
+
+.progress div {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  transition: width 0.25s ease;
+}
+
+.recommendation {
+  margin-top: 12px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 6px;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star {
+  color: #d8c99a;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star.active {
+  color: var(--gold);
+}
+
+.star:hover {
+  transform: scale(1.12);
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
     @media print {
       body {
         background: #fff;
@@ -366,62 +447,84 @@ select {
       </div>
 
       <section class="section">
-        <div class="section-title">Grant Opportunity Score</div>
+  <div class="section-title">Institutional Compatibility Dashboard</div>
 
-        <table class="form-table">
-          <tr>
-            <th>Overall Compatibility</th>
-            <td>
-              <input type="range" min="0" max="100" value="50" id="overallScore" oninput="updateScore()">
-              <strong><span id="overallScoreText">50%</span></strong>
-            </td>
-          </tr>
+  <div class="dashboard-grid">
+    <div class="score-card">
+      <span>Strategic Fit</span>
+      <strong id="strategicFitText">0%</strong>
+      <div class="bar"><div id="strategicFitBar"></div></div>
+    </div>
 
-          <tr>
-            <th>Status</th>
-            <td>
-              <select>
-                <option>Researching</option>
-                <option>Ready for Review</option>
-                <option>Ready for LOI</option>
-                <option>Submitted</option>
-                <option>Awarded</option>
-                <option>Declined</option>
-              </select>
-            </td>
-          </tr>
+    <div class="score-card">
+      <span>Funding Opportunity</span>
+      <strong id="fundingOpportunityText">0%</strong>
+      <div class="bar"><div id="fundingOpportunityBar"></div></div>
+    </div>
 
-          <tr>
-            <th>Priority</th>
-            <td>
-              <select>
-                <option>★★★★★ High Priority</option>
-                <option>★★★★☆ Good Opportunity</option>
-                <option>★★★☆☆ Monitor</option>
-                <option>★★☆☆☆ Low Priority</option>
-                <option>★☆☆☆☆ Do Not Pursue</option>
-              </select>
-            </td>
-          </tr>
+    <div class="score-card main">
+      <span>Overall Assessment</span>
+      <strong id="overallAssessmentText">0%</strong>
+      <div class="bar"><div id="overallAssessmentBar"></div></div>
+      <div id="recommendationText" class="recommendation">Not Rated</div>
+    </div>
+  </div>
 
-          <tr>
-            <th>Recommendation</th>
-            <td>
-              <select>
-                <option>Pursue</option>
-                <option>Monitor</option>
-                <option>Decline</option>
-                <option>TBD</option>
-              </select>
-            </td>
-          </tr>
+  <table class="form-table rating-table">
+    <tr>
+      <th>Mission Alignment</th>
+      <td><div class="stars" data-score="mission"></div></td>
+    </tr>
+    <tr>
+      <th>Geographic Fit</th>
+      <td><div class="stars" data-score="geographic"></div></td>
+    </tr>
+    <tr>
+      <th>Values Alignment</th>
+      <td><div class="stars" data-score="values"></div></td>
+    </tr>
+    <tr>
+      <th>Funding Priorities</th>
+      <td><div class="stars" data-score="priorities"></div></td>
+    </tr>
+    <tr>
+      <th>Eligibility</th>
+      <td><div class="stars" data-score="eligibility"></div></td>
+    </tr>
+    <tr>
+      <th>Funding Capacity</th>
+      <td><div class="stars" data-score="capacity"></div></td>
+    </tr>
+    <tr>
+      <th>Relationship Potential</th>
+      <td><div class="stars" data-score="relationship"></div></td>
+    </tr>
+    <tr>
+      <th>Support Strategies</th>
+      <td><div class="stars" data-score="support"></div></td>
+    </tr>
+  </table>
 
-          <tr>
-            <th>Reason</th>
-            <td><textarea placeholder="Brief reason for recommendation"></textarea></td>
-          </tr>
-        </table>
-      </section>
+  <table class="form-table">
+    <tr>
+      <th>Status</th>
+      <td>
+        <select>
+          <option>Researching</option>
+          <option>Ready for Review</option>
+          <option>Ready for LOI</option>
+          <option>Submitted</option>
+          <option>Awarded</option>
+          <option>Declined</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Executive Reason</th>
+      <td><textarea placeholder="Brief reason for the automatic assessment."></textarea></td>
+    </tr>
+  </table>
+</section>
 <footer class="doc-footer">
   The information contained in this document is confidential, privileged, and intended
   solely for the use of the designated recipient and authorized representatives of the
@@ -1014,23 +1117,118 @@ Evaluate institutional alignment and available grant opportunities.
 </section>
 
 <script>
+  const scores = {
+    mission: 0,
+    geographic: 0,
+    values: 0,
+    priorities: 0,
+    eligibility: 0,
+    capacity: 0,
+    relationship: 0,
+    support: 0
+  };
+
   function showTab(tabId) {
-    document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-    document.querySelectorAll(".nav-tab").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(tab => {
+      tab.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-tab").forEach(btn => {
+      btn.classList.remove("active");
+    });
 
     document.getElementById(tabId).classList.add("active");
 
-    const activeButton = document.querySelector(`.nav-tab[onclick="showTab('${tabId}')"]`);
-    if (activeButton) activeButton.classList.add("active");
+    const activeButton = document.querySelector(
+      `.nav-tab[onclick="showTab('${tabId}')"]`
+    );
+
+    if (activeButton) {
+      activeButton.classList.add("active");
+    }
 
     window.scrollTo(0, 0);
   }
 
-  function updateScore() {
-    const score = document.getElementById("overallScore");
-    const text = document.getElementById("overallScoreText");
-    if (score && text) text.textContent = score.value + "%";
+  function buildStars() {
+    document.querySelectorAll(".stars").forEach(container => {
+      const key = container.dataset.scoreKey;
+
+      container.innerHTML = "";
+
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement("span");
+        star.className = "star";
+        star.textContent = "★";
+        star.dataset.value = i;
+
+        star.addEventListener("click", () => {
+          scores[key] = i;
+          updateStars(container, i);
+          updateDashboard();
+        });
+
+        container.appendChild(star);
+      }
+    });
   }
+
+  function updateStars(container, value) {
+    container.querySelectorAll(".star").forEach(star => {
+      const starValue = Number(star.dataset.value);
+      star.classList.toggle("active", starValue <= value);
+    });
+  }
+
+  function calculatePercentage(total, max) {
+    if (max === 0) return 0;
+    return Math.round((total / max) * 100);
+  }
+
+  function getRecommendation(score) {
+    if (score >= 90) return "Excellent Strategic Fit";
+    if (score >= 80) return "Strong Candidate";
+    if (score >= 70) return "Good Opportunity";
+    if (score >= 60) return "Requires Additional Review";
+    if (score >= 40) return "Limited Alignment";
+    return "Not Recommended";
+  }
+
+  function updateDashboard() {
+    const strategicTotal =
+      scores.mission +
+      scores.geographic +
+      scores.values +
+      scores.priorities;
+
+    const fundingTotal =
+      scores.eligibility +
+      scores.capacity +
+      scores.relationship +
+      scores.support;
+
+    const overallTotal = strategicTotal + fundingTotal;
+
+    const strategicPct = calculatePercentage(strategicTotal, 20);
+    const fundingPct = calculatePercentage(fundingTotal, 20);
+    const overallPct = calculatePercentage(overallTotal, 40);
+
+    document.getElementById("strategicFit").textContent = strategicPct + "%";
+    document.getElementById("fundingOpportunity").textContent = fundingPct + "%";
+    document.getElementById("overallAssessment").textContent = overallPct + "%";
+
+    document.getElementById("strategicBar").style.width = strategicPct + "%";
+    document.getElementById("fundingBar").style.width = fundingPct + "%";
+    document.getElementById("overallBar").style.width = overallPct + "%";
+
+    document.getElementById("recommendationText").textContent =
+      getRecommendation(overallPct);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    buildStars();
+    updateDashboard();
+  });
 </script>
 
 </body>
