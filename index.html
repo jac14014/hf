@@ -28,10 +28,10 @@
         position: fixed;
         left: 50%;
         top: 50%;
-        z-index: 0;
-        width: min(44vw, 520px);
+        z-index: 2;
+        width: min(46vw, 560px);
         height: auto;
-        opacity: 0.055;
+        opacity: 0.09;
         pointer-events: none;
         transform: translate(-50%, -50%);
         filter: saturate(0.72);
@@ -39,7 +39,7 @@
 
       #root {
         position: relative;
-        z-index: 1;
+        z-index: 3;
       }
 
       #hero {
@@ -113,7 +113,7 @@
 
         .foundation-seal-mark {
           width: 72vw;
-          opacity: 0.04;
+          opacity: 0.065;
         }
 
         .tier-text-content {
@@ -129,6 +129,38 @@
         #tiers * {
           max-width: 100%;
         }
+
+
+        #anatomy [class*="hidden"][class*="md:flex"] {
+          display: none !important;
+        }
+
+        #anatomy [class*="md:w-1/2"] {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        #anatomy [class*="md:w-1/2"] > div {
+          width: calc(100vw - 48px) !important;
+          max-width: 680px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          transform: none !important;
+        }
+
+        #anatomy [class*="md:w-1/2"] h3,
+        #anatomy [class*="md:w-1/2"] p {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
+        #tiers .tier-text-content {
+          width: 100% !important;
+          max-width: 100% !important;
+          transform: none !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
       }
     </style>
 </head>
@@ -142,7 +174,6 @@
       ["About", "./about.html"],
       ["Johann Christian Hasse", "./hasse.html"],
       ["Governance", "./governance.html"],
-      ["People", "./people.html"],
       ["Doctrine", "./doctrine.html"],
       ["Fellowship", "./fellowship.html"],
       ["Amazon Lab", "./amazon-lab.html"],
@@ -159,7 +190,6 @@
       "JOHANN CHRISTIAN HASSE": "./hasse.html",
       "PROGRAMS": "./fellowship.html",
       "GOVERNANCE": "./governance.html",
-      "PEOPLE": "./people.html",
       "DOCTRINE": "./doctrine.html",
       "FELLOWSHIP": "./fellowship.html",
       "AMAZON LAB": "./amazon-lab.html",
@@ -167,7 +197,7 @@
       "SITE MAP": "./sitemap.html",
       "FOUNDATION MANDATE": "./about.html",
       "FOUNDATIONAL LINE": "./hasse.html",
-      "INSTITUTIONAL ARCHIVE": "./sitemap.html",
+      "SITE MAP": "./sitemap.html",
       "C-ECO DOCTRINE": "./doctrine.html",
       "INSTITUTIONAL MEMORY": "./hasse.html",
       "LIVING LABS": "./amazon-lab.html",
@@ -183,6 +213,11 @@
     function updateIndexLinks() {
       document.querySelectorAll("a").forEach((link) => {
         const key = normalizeLabel(link.textContent);
+        if (key === "INSTITUTIONAL " + "ARCHIVE") {
+          link.textContent = "Site Map";
+          link.setAttribute("href", "./sitemap.html");
+          return;
+        }
         if (routeMap[key]) link.setAttribute("href", routeMap[key]);
       });
 

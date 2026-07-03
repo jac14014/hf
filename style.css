@@ -406,6 +406,49 @@ p { text-wrap: pretty; }
   border: 1px solid rgba(147, 137, 119, 0.24);
 }
 
+.governance-content {
+  max-width: 1120px;
+}
+
+.section-heading {
+  margin-bottom: 24px;
+}
+
+.section-heading h2 {
+  margin-bottom: 10px;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.officers-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.advisors-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.person-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+  margin-bottom: 18px;
+  border: 1px solid rgba(147, 137, 119, 0.24);
+  background: #f6f3ed;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 /* Person card */
 .person-card {
   padding: 28px 32px;
