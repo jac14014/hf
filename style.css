@@ -259,8 +259,236 @@ p { text-wrap: pretty; }
   letter-spacing: 0.5px;
 }
 
+.btn-donate {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 36px;
+  border: 1px solid #938977;
+  border-radius: 2px;
+  transition: all 0.6s ease;
+  cursor: pointer;
+  background: #938977;
+}
+
+.btn-donate:hover {
+  background-color: var(--charcoal);
+  color: var(--parchment);
+  border-color: var(--charcoal);
+}
+
+/* Footer links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.footer-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.footer-links a:hover {
+  color: var(--charcoal);
+}
+
+
+
+/* Candid transparency seal */
+.candid-feature,
+.candid-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px 32px;
+  border: 1px solid rgba(147, 137, 119, 0.28);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.candid-feature h2,
+.candid-strip h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+
+.candid-feature p,
+.candid-strip p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.candid-seal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.candid-seal-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.86;
+}
+
+.candid-seal {
+  display: block;
+  width: min(170px, 34vw);
+  height: auto;
+}
+
+.candid-seal.small {
+  width: min(128px, 28vw);
+}
+
+/* Historical portraits */
+.memory-portrait {
+  margin: 0 0 56px;
+  padding: 18px;
+  border: 1px solid rgba(147, 137, 119, 0.32);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.memory-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.memory-portrait figcaption {
+  margin-top: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--gold-muted);
+  text-align: center;
+}
+
+.primary-portrait {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.primary-portrait img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.lineage-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center top;
+  margin-bottom: 20px;
+  border: 1px solid rgba(147, 137, 119, 0.24);
+}
+
+/* Person card */
+.person-card {
+  padding: 28px 32px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: #fff;
+  text-align: center;
+}
+
+.person-card .role {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.person-card h3 {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.person-card .tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--gold-muted);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.person-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Sitemap */
+.sitemap-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sitemap-list li {
+  margin-bottom: 12px;
+}
+
+.sitemap-list a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sitemap-list a:hover {
+  color: var(--gold-muted);
+}
+
+.sitemap-category {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin: 32px 0 16px;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
+
+  .candid-feature,
+  .candid-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .candid-seal {
+    width: 150px;
+  }
   .nav-links { gap: 16px; }
   .nav-link { font-size: 10px; letter-spacing: 1px; }
   .nav-inner { padding: 12px 20px; }

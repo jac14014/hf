@@ -14,89 +14,240 @@
   <script type="module" crossorigin src="./assets/index-DB9sFV2e.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
     <style>
-  @media (max-width: 768px) {
-    .desktop-nav-links {
-      display: none !important;
-    }
+      .mobile-menu-button,
+      .mobile-menu-panel {
+        display: none !important;
+      }
 
-    .mobile-menu-toggle {
-      display: block !important;
-    }
+      html,
+      body {
+        overflow-x: hidden;
+      }
 
-    .mobile-menu-panel {
-      position: fixed;
-      top: 92px;
-      left: 18px;
-      right: 18px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      padding: 24px;
-      background: rgba(24, 12, 4, 0.72);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
+      .foundation-seal-mark {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 0;
+        width: min(44vw, 520px);
+        height: auto;
+        opacity: 0.055;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        filter: saturate(0.72);
+      }
 
-    .mobile-menu-panel a {
-      color: #fff;
-      text-decoration: none;
-      font-family: Inter, sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-  }
+      #root {
+        position: relative;
+        z-index: 1;
+      }
+
       #hero {
-  min-height: 100vh !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding-top: 90px !important;
-}
+        min-height: 100vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-top: 90px !important;
+      }
 
-#hero > div {
-  margin-top: 0 !important;
-  transform: translateY(-30px) !important;
-}
-</style>
+      #hero > div {
+        margin-top: 0 !important;
+        transform: translateY(-30px) !important;
+      }
+
+      @media (max-width: 768px) {
+        body > nav,
+        #root nav {
+          display: none !important;
+        }
+
+        .desktop-nav-links {
+          display: none !important;
+        }
+
+        .mobile-menu-button {
+          display: inline-flex !important;
+          position: fixed;
+          top: 30px;
+          right: 22px;
+          z-index: 10000;
+          width: 44px;
+          height: 44px;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(255, 255, 255, 0.24);
+          background: rgba(24, 12, 4, 0.62);
+          color: #fff;
+          font-size: 28px;
+          line-height: 1;
+          cursor: pointer;
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+        }
+
+        .mobile-menu-open .mobile-menu-panel {
+          display: flex !important;
+          position: fixed;
+          top: 86px;
+          left: 18px;
+          right: 18px;
+          z-index: 9999;
+          flex-direction: column;
+          gap: 16px;
+          padding: 24px;
+          background: rgba(24, 12, 4, 0.84);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .mobile-menu-panel a {
+          color: #fff;
+          text-decoration: none;
+          font-family: Inter, sans-serif;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        .foundation-seal-mark {
+          width: 72vw;
+          opacity: 0.04;
+        }
+
+        .tier-text-content {
+          width: calc(100vw - 48px) !important;
+          max-width: calc(100vw - 48px) !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          left: auto !important;
+          right: auto !important;
+        }
+
+        #tiers,
+        #tiers * {
+          max-width: 100%;
+        }
+      }
+    </style>
 </head>
   <body>
+  <img src="https://hasse.foundation/images/seal.png" alt="" class="foundation-seal-mark" aria-hidden="true" />
   <div id="root"></div>
 
   <script>
-  const menuButton = document.createElement("button");
-  menuButton.className = "mobile-menu-button";
-  menuButton.innerHTML = "☰";
-  menuButton.setAttribute("aria-label", "Open menu");
+    const siteLinks = [
+      ["Home", "./"],
+      ["About", "./about.html"],
+      ["Johann Christian Hasse", "./hasse.html"],
+      ["Governance", "./governance.html"],
+      ["People", "./people.html"],
+      ["Doctrine", "./doctrine.html"],
+      ["Fellowship", "./fellowship.html"],
+      ["Amazon Lab", "./amazon-lab.html"],
+      ["Donate", "./donate.html"],
+      ["Site Map", "./sitemap.html"]
+    ];
 
-  document.body.appendChild(menuButton);
-
-  menuButton.addEventListener("click", function () {
-    document.body.classList.toggle("mobile-menu-open");
-    menuButton.innerHTML = document.body.classList.contains("mobile-menu-open") ? "×" : "☰";
-  });
-
-  document.addEventListener("click", function (event) {
-    const text = event.target.textContent.trim().toUpperCase();
-
-    const links = {
+    const routeMap = {
+      "HASSE FOUNDATION": "./",
       "HOME": "./",
+      "MANDATE": "./about.html",
       "ABOUT": "./about.html",
-      "LINEAGE": "./lineage.html",
+      "ARCHIVE": "./hasse.html",
+      "JOHANN CHRISTIAN HASSE": "./hasse.html",
+      "PROGRAMS": "./fellowship.html",
       "GOVERNANCE": "./governance.html",
+      "PEOPLE": "./people.html",
       "DOCTRINE": "./doctrine.html",
       "FELLOWSHIP": "./fellowship.html",
-      "AMAZON LAB": "./amazon-lab.html"
+      "AMAZON LAB": "./amazon-lab.html",
+      "DONATE": "./donate.html",
+      "SITE MAP": "./sitemap.html",
+      "FOUNDATION MANDATE": "./about.html",
+      "FOUNDATIONAL LINE": "./hasse.html",
+      "INSTITUTIONAL ARCHIVE": "./sitemap.html",
+      "C-ECO DOCTRINE": "./doctrine.html",
+      "INSTITUTIONAL MEMORY": "./hasse.html",
+      "LIVING LABS": "./amazon-lab.html",
+      "ORG CHART": "./governance.html",
+      "MEMORANDUM": "./research/memo-us.html",
+      "LEGAL DOCUMENTS": "mailto:contact@c-eco.org?subject=Request for Legal Documents"
     };
 
-    if (links[text]) {
-      event.preventDefault();
-      window.location.href = links[text];
+    function normalizeLabel(text) {
+      return text.trim().replace(/\s+/g, " ").toUpperCase();
     }
-  }, true);
-</script>
+
+    function updateIndexLinks() {
+      document.querySelectorAll("a").forEach((link) => {
+        const key = normalizeLabel(link.textContent);
+        if (routeMap[key]) link.setAttribute("href", routeMap[key]);
+      });
+
+      const resourceLinks = [...document.querySelectorAll("a")]
+        .filter((link) => normalizeLabel(link.textContent) === "OPEN RESOURCE");
+      ["./doctrine.html", "./hasse.html", "./amazon-lab.html"].forEach((href, index) => {
+        if (resourceLinks[index]) resourceLinks[index].setAttribute("href", href);
+      });
+
+      const desktopLinks = [...document.querySelectorAll(".desktop-nav-links a, nav a")]
+        .filter((link) => link.offsetParent !== null)
+        .slice(0, 5);
+      const topLinks = [
+        ["Hasse Foundation", "./"],
+        ["About", "./about.html"],
+        ["Johann Christian Hasse", "./hasse.html"],
+        ["Governance", "./governance.html"],
+        ["Donate", "./donate.html"]
+      ];
+      desktopLinks.forEach((link, index) => {
+        if (!topLinks[index]) return;
+        link.textContent = topLinks[index][0];
+        link.setAttribute("href", topLinks[index][1]);
+      });
+    }
+
+    window.addEventListener("load", updateIndexLinks);
+    setTimeout(updateIndexLinks, 150);
+    setTimeout(updateIndexLinks, 800);
+
+    const menuButton = document.createElement("button");
+    menuButton.className = "mobile-menu-button";
+    menuButton.type = "button";
+    menuButton.innerHTML = "☰";
+    menuButton.setAttribute("aria-label", "Open menu");
+    menuButton.setAttribute("aria-expanded", "false");
+
+    const mobilePanel = document.createElement("nav");
+    mobilePanel.className = "mobile-menu-panel";
+    mobilePanel.setAttribute("aria-label", "Mobile navigation");
+    mobilePanel.innerHTML = siteLinks
+      .map(([label, href]) => `<a href="${href}">${label}</a>`)
+      .join("");
+
+    document.body.appendChild(menuButton);
+    document.body.appendChild(mobilePanel);
+
+    menuButton.addEventListener("click", function () {
+      const isOpen = document.body.classList.toggle("mobile-menu-open");
+      menuButton.innerHTML = isOpen ? "×" : "☰";
+      menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", function (event) {
+      const target = event.target.closest("a, button");
+      if (!target || target === menuButton) return;
+
+      const text = normalizeLabel(target.textContent);
+
+      if (routeMap[text]) {
+        event.preventDefault();
+        window.location.href = routeMap[text];
+      }
+    }, true);
+  </script>
 </body>
 </html>
