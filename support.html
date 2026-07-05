@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support the Mission — Johann Christian Hasse Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #fcfaee;
+            --charcoal: #180c04;
+            --gold: #938977;
+            --muted: #696969;
+            --line: rgba(24, 12, 4, 0.08);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--parchment);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .section-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 100px 40px 40px;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .monumental-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin: 0 0 36px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .editorial-p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+            text-align: justify;
+        }
+
+        .editorial-p ul {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .editorial-p li {
+            margin-bottom: 12px;
+        }
+
+        /* ACT II — THE QUESTION */
+        .question-zone {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 26px;
+            line-height: 1.4;
+            color: var(--gold);
+        }
+
+        /* ACT III — ALTERNATING SYSTEM MODULES */
+        .sector-block-alternating {
+            max-width: 1000px;
+            margin: 140px auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .sector-block-alternating.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .sector-photography {
+            flex: 0 0 50%;
+            height: 450px;
+            background-color: #f2ede0; 
+            border-radius: 2px;
+            border: 1px solid rgba(24, 12, 4, 0.08);
+        }
+
+        .sector-content {
+            flex: 0 0 50%;
+        }
+
+        .sector-num {
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 18px;
+        }
+
+        .sector-phrase {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 24px;
+            line-height: 1.35;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .sector-summary {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.65;
+            text-align: justify;
+            margin-bottom: 24px;
+        }
+
+        .hub-link {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border 0.3s ease;
+        }
+
+        .hub-link:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        /* WHY AN INDEPENDENT FOUNDATION */
+        .why-independent-container {
+            max-width: 850px;
+            margin: 120px auto;
+            padding: 40px;
+            border-top: 1px solid var(--line);
+        }
+
+        .why-independent-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--charcoal);
+        }
+
+        .why-independent-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .why-independent-list li {
+            font-size: 15.5px;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--muted);
+        }
+
+        .why-independent-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 20px;
+            top: -2px;
+        }
+
+        .why-independent-footer {
+            font-size: 15px;
+            font-weight: 300;
+            margin-top: 25px;
+            color: var(--charcoal);
+        }
+
+        /* THE SILENT PAUSE */
+        .macro-pause-view {
+            width: 100%;
+            height: 100vh;
+            background-color: #eae5d4; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .macro-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 34px;
+            color: var(--charcoal);
+            max-width: 750px;
+            line-height: 1.4;
+        }
+
+        /* ACT VI — FINALE ZONE */
+        .climax-dark-zone {
+            background-color: var(--charcoal);
+            color: var(--parchment);
+            padding: 140px 10%;
+            text-align: center;
+        }
+
+        .climax-head {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 400;
+            color: var(--parchment);
+            margin: 0 0 40px 0;
+        }
+
+        .agenda-grid {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: left;
+            border-top: 1px solid rgba(252, 250, 238, 0.15);
+            padding-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .agenda-unit strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .agenda-unit p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--parchment);
+            opacity: 0.75;
+        }
+
+        .pre-cta-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 24px;
+            color: var(--parchment);
+            margin-bottom: 35px;
+            opacity: 0.9;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-final-mission {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 18px 48px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-final-mission:hover {
+            background-color: #7a7162;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ACT I -->
+    <section class="section-container">
+        <div class="section-tag">Our Mission</div>
+        <h1 class="monumental-title">Building governance for an increasingly interconnected world.</h1>
+        <p class="editorial-p">
+            Modern civilization depends on systems that no longer operate independently. Energy affects artificial intelligence. Water affects agriculture. Climate affects finance. Biodiversity affects supply chains. Institutions designed for isolated problems increasingly face interconnected realities.
+        </p>
+    </section>
+
+    <!-- THE QUESTION -->
+    <section class="question-zone">
+        <div class="question-text">
+            "Can institutions designed for the twentieth century govern twenty-first century systemic risks?"
+        </div>
+    </section>
+
+    <!-- LOOKING FOR THE ANSWER -->
+    <section class="section-container" style="padding-top: 20px;">
+        <p class="editorial-p">
+            Answering that question required looking beyond individual sectors. Rather than studying water, energy, finance, artificial intelligence, or ecosystems independently, the research examined where these systems intersect—and how governance performs under increasing systemic complexity. This work became the foundation of the *U.S. Memorandum* series.
+        </p>
+        <p class="editorial-p">
+            Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond. We define this structural disconnect as the **Recognition-Action Gap**.
+        </p>
+    </section>
+
+    <!-- ACT II — WHY EXISTING FRAMEWORKS ARE NO LONGER ENOUGH -->
+    <section class="section-container" style="padding-top: 20px;">
+        <div class="section-tag">The Bottleneck</div>
+        <h2 class="monumental-title" style="font-size: 36px; margin-bottom: 24px;">The Limitations of Contemporary Governance</h2>
+        <div class="editorial-p">
+            Traditional response mechanisms fall short against interconnected risks for three observable reasons:
+            <ul>
+                <li><strong>Jurisdictional Silos:</strong> Agencies manage independent sectors, leaving cross-sector feedback loops and cascade dynamics unmonitored.</li>
+                <li><strong>Lagging Indicators:**</strong> Current frameworks measure damage after thresholds have been crossed, rather than forecasting the baseline velocity of stress.</li>
+                <li><strong>Reactive Posture:**</strong> Public and private structures mobilize capital post-hoc, attempting to restore systems after reversibility has been operationally lost.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ACT III — ALTERNATING CYCLES (EXAMPLE SYSTEM 1: IMAGE LEFT) -->
+    <section class="sector-block-alternating">
+        <div class="sector-photography"></div>
+        <div class="sector-content">
+            <div class="sector-num">01 // Water Security</div>
+            <div class="sector-phrase">"Every civilization has been shaped by water. The next century will be defined by how we govern it."</div>
+            <div class="sector-summary">Water systems no longer fail only because of drought or contamination. They collapse when governance, infrastructure, finance, cybersecurity, and public policy become disconnected.</div>
+            <a href="https://c-eco.org" class="hub-link">Continue reading: Water Governance Tracts →</a>
+        </div>
+    </section>
+
+    <!-- ALTERNATING CYCLES (EXAMPLE SYSTEM 2: IMAGE RIGHT / REVERSE) -->
+    <section class="sector-block-alternating reverse">
+        <div class="sector-photography"></div>
+        <div class="sector-content">
+            <div class="sector-num">02 // Energy Systems</div>
+            <div class="sector-phrase">"Electrification is accelerating. Governance must accelerate with it."</div>
+            <div class="sector-summary">Building more generation alone is not enough. As exponential technology and data loads outpace traditional transmission, governance frameworks must evolve alongside physical infrastructure to ensure long-term stability and investment.</div>
+            <a href="https://c-eco.org" class="hub-link">Continue reading: Grid Interconnection Blueprints →</a>
+        </div>
+    </section>
+
+    <!-- ACT IV — WHY AN INDEPENDENT FOUNDATION -->
+    <section class="why-independent-container">
+        <div class="why-independent-title">Why an Independent Foundation?</div>
+        <ul class="why-independent-list">
+            <li>Long-term questions rarely fit within election cycles.</li>
+            <li>Interdisciplinary research rarely fits within institutional boundaries.</li>
+            <li>Global systemic risks rarely fit within national jurisdictions.</li>
+        </ul>
+        <div class="why-independent-footer">
+            For these reasons, independent institutions play an essential role in developing long-term governance capacity. The Johann Christian Hasse Foundation was created to contribute to that mission.
+        </div>
+    </section>
+
+    <!-- THE SILENT PAUSE -->
+    <section class="macro-pause-view">
+        <div class="macro-text">"Every resilient future begins with institutions capable of seeing what others overlook."</div>
+    </section>
+
+    <!-- ACT V — THE AGENDA & FINAL CTA -->
+    <section class="climax-dark-zone">
+        <h2 class="climax-head">Governance Before Collapse</h2>
+        
+        <div class="agenda-grid">
+            <div class="agenda-unit">
+                <strong>Continue the Research</strong>
+                <p>The Memoranda are not an endpoint. They are the foundation of a broader research and institutional agenda that is only beginning.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Transform Knowledge into Institutions</strong>
+                <p>Driving legal innovation and structural frameworks for system-wide resilience.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Build the Living Labs Network</strong>
+                <p>Connecting long-term scientific research directly with real-world institutional capacity.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Prepare Future Leaders</strong>
+                <p>Equipping the next generation of civilizational governance through strategic international collaboration.</p>
+            </div>
+        </div>
+
+        <div class="pre-cta-quote">"Institutions cannot be built at the moment they are needed."</div>
+        <button class="btn-final-mission">Support the Mission</button>
+    </section>
+
+</body>
+</html>
