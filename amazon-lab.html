@@ -66,13 +66,13 @@
 <button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
 
 <div class="nav-links">
-        <a href="/" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="hasse.html" class="nav-link">Johann Christian Hasse</a>
-        <a href="governance.html" class="nav-link">Governance</a>
-        <a href="doctrine.html" class="nav-link">Doctrine</a>
-        <a href="fellowship.html" class="nav-link">Fellowship</a>
-        <a href="amazon-lab.html" class="nav-link">Amazon Lab</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/hasse.html" class="nav-link">Johann Christian Hasse</a>
+        <a href="/governance.html" class="nav-link">Governance</a>
+        <a href="/donate.html" class="nav-link">Donate</a>
+        <a href="/doctrine.html" class="nav-link">Doctrine</a>
+        <a href="/fellowship.html" class="nav-link">Fellowship</a>
+        <a href="/amazon-lab.html" class="nav-link">Living Labs</a>
       </div>
     </div>
   </nav>
@@ -84,6 +84,13 @@
   </header>
 
   <main class="page-content">
+    <section class="section blockquote">
+      <h2>From Amazon Core to a Living Labs Network</h2>
+      <p>The Amazon Living Lab is the proposed starting point for a broader c-ECO Living Labs Network: a phased research and validation architecture designed to test how law, science, finance, and public institutions can respond before systemic thresholds are crossed.</p>
+      <p>The broader model maps 22 living labs across three implementation phases. Phase Alpha begins with the Amazon Core Lab as a signal-detection environment, supported by other early validation nodes for climate, finance, and global integration. Later phases expand the network toward water security, energy transition, digital and AI risk, food systems, migration, insurance, vulnerable states, and subnational governance.</p>
+      <p>Within this architecture, the Amazon is not treated as a symbolic case study. It is the first operational terrain where ecological thresholds, hydrology, infrastructure, territorial governance, public law, and community resilience converge in real time. The Lab anchors the Foundation's applied research agenda by turning threshold dynamics into practical governance protocols.</p>
+    </section>
+
     <section class="section blockquote">
       <h2>Recognition Exists. Activation Does Not.</h2>
       <p>Ecological, economic, social, and infrastructural systems frequently exhibit detectable signals before the occurrence of tipping points, systemic failures, or irreversible degradation. Although monitoring capabilities have expanded dramatically over the last decade, governance systems remain predominantly reactive.</p>
@@ -127,13 +134,13 @@
   const panel = document.createElement("div");
   panel.className = "mobile-nav-panel";
   panel.innerHTML = `
-    <a href="/">Home</a>
-    <a href="about.html">About</a>
-    <a href="hasse.html">Johann Christian Hasse</a>
-    <a href="governance.html">Governance</a>
-    <a href="doctrine.html">Doctrine</a>
-    <a href="fellowship.html">Fellowship</a>
-    <a href="amazon-lab.html">Amazon Lab</a>
+    <a href="/about.html">About</a>
+    <a href="/hasse.html">Johann Christian Hasse</a>
+    <a href="/governance.html">Governance</a>
+    <a href="/donate.html">Donate</a>
+    <a href="/doctrine.html">Doctrine</a>
+    <a href="/fellowship.html">Fellowship</a>
+    <a href="/amazon-lab.html">Living Labs</a>
   `;
   document.body.appendChild(panel);
 

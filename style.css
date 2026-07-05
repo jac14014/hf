@@ -443,6 +443,12 @@ p { text-wrap: pretty; }
   background: #f6f3ed;
 }
 
+.barbara-photo {
+  object-fit: contain;
+  object-position: center center;
+  padding: 0;
+}
+
 .action-row {
   display: flex;
   flex-wrap: wrap;

@@ -170,15 +170,13 @@
 
   <script>
     const siteLinks = [
-      ["Home", "./"],
       ["About", "./about.html"],
       ["Johann Christian Hasse", "./hasse.html"],
       ["Governance", "./governance.html"],
+      ["Donate", "./donate.html"],
       ["Doctrine", "./doctrine.html"],
       ["Fellowship", "./fellowship.html"],
-      ["Amazon Lab", "./amazon-lab.html"],
-      ["Donate", "./donate.html"],
-      ["Site Map", "./sitemap.html"]
+      ["Living Labs", "./amazon-lab.html"]
     ];
 
     const routeMap = {
@@ -227,21 +225,34 @@
         if (resourceLinks[index]) resourceLinks[index].setAttribute("href", href);
       });
 
-      const desktopLinks = [...document.querySelectorAll(".desktop-nav-links a, nav a")]
-        .filter((link) => link.offsetParent !== null)
-        .slice(0, 5);
       const topLinks = [
-        ["Hasse Foundation", "./"],
         ["About", "./about.html"],
         ["Johann Christian Hasse", "./hasse.html"],
         ["Governance", "./governance.html"],
-        ["Donate", "./donate.html"]
+        ["Donate", "./donate.html"],
+        ["Doctrine", "./doctrine.html"],
+        ["Fellowship", "./fellowship.html"],
+        ["Living Labs", "./amazon-lab.html"]
       ];
-      desktopLinks.forEach((link, index) => {
-        if (!topLinks[index]) return;
-        link.textContent = topLinks[index][0];
-        link.setAttribute("href", topLinks[index][1]);
-      });
+      const desktopNav = document.querySelector(".desktop-nav-links")
+        || [...document.querySelectorAll("nav")]
+          .find((nav) => !nav.classList.contains("mobile-menu-panel") && nav.querySelectorAll("a").length >= 3);
+      if (desktopNav && desktopNav.dataset.hasseNavFixed !== "true") {
+        const existingLinks = [...desktopNav.querySelectorAll("a")];
+        const brandTemplate = existingLinks[0];
+        const navTemplate = existingLinks[1] || existingLinks[0];
+        if (brandTemplate && navTemplate) {
+          desktopNav.innerHTML = "";
+          topLinks.forEach(([label, href], index) => {
+            const link = (existingLinks[index] || (index === 0 ? brandTemplate : navTemplate)).cloneNode(false);
+            link.textContent = label;
+            link.setAttribute("href", href);
+            desktopNav.appendChild(link);
+          });
+          desktopNav.dataset.hasseNavFixed = "true";
+        }
+      }
+
     }
 
     window.addEventListener("load", updateIndexLinks);
