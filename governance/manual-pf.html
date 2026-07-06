@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Johann Christian Hasse Foundation — Governance Manual (Master Edition v1.0)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --primary: #1a4d2e;
+    --primary-light: #2d6a4f;
+    --accent: #d4a843;
+    --accent-light: #e8c96a;
+    --bg-cream: #faf8f3;
+    --bg-paper: #f5f0e8;
+    --text-dark: #1c1917;
+    --text-body: #44403c;
+    --text-muted: #78716c;
+    --border: #e7e5e4;
+    --sidebar-bg: #f7f5f0;
+    --sidebar-active: #1a4d2e;
+    --sidebar-active-bg: rgba(26,77,46,0.08);
+    --clause-bg: #ffffff;
+    --clause-border: #e7e5e4;
+    --header-gradient-start: #1a4d2e;
+    --header-gradient-end: #2d6a4f;
+  }
+  * { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-cream); color: var(--text-body); line-height: 1.7; }
+  h1, h2, h3, h4 { font-family: 'Libre Baskerville', serif; color: var(--text-dark); }
+  .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: var(--sidebar-bg); border-right: 1px solid var(--border); overflow-y: auto; z-index: 50; padding: 1.5rem 0; }
+  .sidebar-header { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+  .sidebar-logo { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; font-weight: 700; color: var(--primary); line-height: 1.3; }
+  .sidebar-sub { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 0.25rem; }
+  .nav-section { margin-bottom: 0.5rem; }
+  .nav-section-title { padding: 0.5rem 1.5rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; }
+  .nav-item { display: block; padding: 0.5rem 1.5rem; font-size: 0.8rem; color: var(--text-body); text-decoration: none; border-left: 3px solid transparent; transition: all 0.2s; cursor: pointer; }
+  .nav-item:hover { background: rgba(26,77,46,0.04); color: var(--primary); }
+  .nav-item.active { background: var(--sidebar-active-bg); color: var(--sidebar-active); border-left-color: var(--sidebar-active); font-weight: 600; }
+  .nav-item .num { display: inline-block; width: 1.5rem; font-variant-numeric: tabular-nums; color: var(--text-muted); font-size: 0.75rem; }
+  .nav-item.active .num { color: var(--primary); }
+  .main { margin-left: 280px; min-height: 100vh; }
+  .hero { background: linear-gradient(135deg, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%); color: white; padding: 4rem 3rem 3rem; position: relative; }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+  .hero h1 { font-family: 'Libre Baskerville', serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 0.5rem; color: white; }
+  .hero .subtitle { font-size: 1.05rem; opacity: 0.85; font-weight: 300; max-width: 700px; }
+  .hero .meta { margin-top: 1.5rem; display: flex; gap: 2rem; font-size: 0.8rem; opacity: 0.7; }
+  .content { padding: 2.5rem 3rem; max-width: 900px; }
+  .chapter { margin-bottom: 4rem; scroll-margin-top: 2rem; }
+  .chapter-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--primary); }
+  .chapter-num { font-family: 'Libre Baskerville', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; opacity: 0.3; }
+  .chapter-title { font-family: 'Libre Baskerville', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); }
+  .clause-box { background: var(--clause-bg); border: 1px solid var(--clause-border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .clause-box h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .clause-box h3 .icon { color: var(--accent); font-size: 0.9rem; }
+  .article-box { background: var(--bg-paper); border-left: 4px solid var(--accent); padding: 1.25rem 1.5rem; margin: 1rem 0; border-radius: 0 6px 6px 0; }
+  .article-box h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .definition { background: #f0f9f4; border: 1px solid #c8e6d5; border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .definition dt { font-weight: 600; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+  .definition dd { margin: 0; color: var(--text-body); font-size: 0.9rem; }
+  .toc-inline { background: var(--bg-paper); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .toc-inline h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 1rem; }
+  .toc-inline ul { list-style: none; padding: 0; margin: 0; columns: 2; }
+  .toc-inline li { padding: 0.35rem 0; font-size: 0.85rem; }
+  .toc-inline li a { color: var(--primary); text-decoration: none; }
+  .toc-inline li a:hover { text-decoration: underline; }
+  .print-btn { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; cursor: pointer; box-shadow: 0 4px 12px rgba(26,77,46,0.3); transition: all 0.2s; z-index: 40; display: flex; align-items: center; gap: 0.5rem; }
+  .print-btn:hover { background: var(--primary-light); transform: translateY(-2px); }
+  .note { background: #fffbeb; border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin: 1rem 0; font-size: 0.9rem; color: var(--text-body); border-radius: 0 6px 6px 0; }
+  .note strong { color: var(--text-dark); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: var(--bg-paper); }
+  ul.custom { list-style: none; padding-left: 0; }
+  ul.custom li { padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; }
+  ul.custom li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .mobile-toggle { display: none; position: fixed; top: 1rem; left: 1rem; z-index: 60; background: var(--primary); color: white; border: none; padding: 0.6rem; border-radius: 6px; cursor: pointer; }
+  .references { background: var(--bg-paper); border-top: 2px solid var(--primary); padding: 2rem 3rem; margin-top: 3rem; }
+  .references h3 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; margin-bottom: 1rem; }
+  .references ol { font-size: 0.85rem; color: var(--text-muted); padding-left: 1.5rem; }
+  .references li { margin-bottom: 0.5rem; }
+  .copyright { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border); }
+  @media (max-width: 1024px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .mobile-toggle { display: block; }
+    .content { padding: 2rem 1.5rem; }
+    .hero { padding: 3rem 1.5rem 2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .toc-inline ul { columns: 1; }
+  }
+  @media print {
+    .sidebar, .mobile-toggle, .print-btn { display: none !important; }
+    .main { margin-left: 0; }
+    .hero { background: white !important; color: black !important; padding: 1rem 0; }
+    .hero h1, .hero .subtitle, .hero .meta { color: black !important; }
+    .content { padding: 0; max-width: 100%; }
+    .chapter { page-break-before: always; }
+    .chapter:first-of-type { page-break-before: auto; }
+  }
+</style>
+</head>
+<body>
+<button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Johann Christian<br>Hasse Foundation</div>
+    <div class="sidebar-sub">Governance Manual — Master Edition v1.0</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Chapters</div>
+    <a class="nav-item active" href="#ch1" onclick="setActive(this)"><span class="num">01</span> Purpose</a>
+    <a class="nav-item" href="#ch2" onclick="setActive(this)"><span class="num">02</span> Governance Principles</a>
+    <a class="nav-item" href="#ch3" onclick="setActive(this)"><span class="num">03</span> Board Responsibilities</a>
+    <a class="nav-item" href="#ch4" onclick="setActive(this)"><span class="num">04</span> Officers</a>
+    <a class="nav-item" href="#ch5" onclick="setActive(this)"><span class="num">05</span> Executive Leadership</a>
+    <a class="nav-item" href="#ch6" onclick="setActive(this)"><span class="num">06</span> Committees</a>
+    <a class="nav-item" href="#ch7" onclick="setActive(this)"><span class="num">07</span> Advisors</a>
+    <a class="nav-item" href="#ch8" onclick="setActive(this)"><span class="num">08</span> Decision-Making</a>
+    <a class="nav-item" href="#ch9" onclick="setActive(this)"><span class="num">09</span> Meetings</a>
+    <a class="nav-item" href="#ch10" onclick="setActive(this)"><span class="num">10</span> Voting</a>
+    <a class="nav-item" href="#ch11" onclick="setActive(this)"><span class="num">11</span> Ethics</a>
+    <a class="nav-item" href="#ch12" onclick="setActive(this)"><span class="num">12</span> Conflict of Interest</a>
+    <a class="nav-item" href="#ch13" onclick="setActive(this)"><span class="num">13</span> Annual Planning</a>
+    <a class="nav-item" href="#ch14" onclick="setActive(this)"><span class="num">14</span> Strategic Planning</a>
+    <a class="nav-item" href="#ch15" onclick="setActive(this)"><span class="num">15</span> Performance Review</a>
+    <a class="nav-item" href="#ch16" onclick="setActive(this)"><span class="num">16</span> Continuous Improvement</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Appendix</div>
+    <a class="nav-item" href="#appendix-a" onclick="setActive(this)"><span class="num">A</span> Glossary</a>
+    <a class="nav-item" href="#appendix-b" onclick="setActive(this)"><span class="num">B</span> Document Control</a>
+  </div>
+</nav>
+
+<main class="main">
+  <section class="hero">
+    <h1>Governance Manual</h1>
+    <p class="subtitle">Master governance instrument of the Johann Christian Hasse Foundation — a Missouri nonprofit corporation recognized as a Section 501(c)(3) private foundation.</p>
+    <div class="meta">
+      <span><i class="fas fa-shield-alt" style="margin-right:0.4rem;"></i>Master Edition v1.0</span>
+      <span><i class="fas fa-calendar" style="margin-right:0.4rem;"></i>July 2026</span>
+      <span><i class="fas fa-language" style="margin-right:0.4rem;"></i>English (controlling version)</span>
+    </div>
+  </section>
+
+  <div class="content">
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-inline">
+      <h4><i class="fas fa-list-ul" style="margin-right:0.5rem;color:var(--primary);"></i>Table of Contents</h4>
+      <ul>
+        <li><a href="#ch1">01 — Purpose</a></li>
+        <li><a href="#ch2">02 — Governance Principles</a></li>
+        <li><a href="#ch3">03 — Board Responsibilities</a></li>
+        <li><a href="#ch4">04 — Officers</a></li>
+        <li><a href="#ch5">05 — Executive Leadership</a></li>
+        <li><a href="#ch6">06 — Committees</a></li>
+        <li><a href="#ch7">07 — Advisors</a></li>
+        <li><a href="#ch8">08 — Decision-Making</a></li>
+        <li><a href="#ch9">09 — Meetings</a></li>
+        <li><a href="#ch10">10 — Voting</a></li>
+        <li><a href="#ch11">11 — Ethics</a></li>
+        <li><a href="#ch12">12 — Conflict of Interest</a></li>
+        <li><a href="#ch13">13 — Annual Planning</a></li>
+        <li><a href="#ch14">14 — Strategic Planning</a></li>
+        <li><a href="#ch15">15 — Performance Review</a></li>
+        <li><a href="#ch16">16 — Continuous Improvement</a></li>
+        <li><a href="#appendix-a">Appendix A — Glossary</a></li>
+        <li><a href="#appendix-b">Appendix B — Document Control</a></li>
+      </ul>
+    </div>
+
+    <!-- CHAPTER 1: PURPOSE -->
+    <section class="chapter" id="ch1">
+      <div class="chapter-header">
+        <span class="chapter-num">01</span>
+        <h2 class="chapter-title">Purpose</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-bullseye icon"></i>Clause 1.1 — Statement of Purpose</h3>
+        <p>This Governance Manual (the "Manual") constitutes the master governance instrument of the <strong>Johann Christian Hasse Foundation</strong> (the "Foundation"), a Missouri nonprofit corporation recognized as a Section 501(c)(3) private foundation under the Internal Revenue Code. This Manual supplements the Foundation's Articles of Incorporation and Bylaws and provides the authoritative framework for Board governance, fiduciary oversight, and institutional conduct.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-layer-group icon"></i>Clause 1.2 — Scope and Hierarchy</h3>
+        <p>In the event of any conflict between this Manual and the Articles of Incorporation or Bylaws, the Articles of Incorporation and Bylaws shall control. In the event of any conflict between this Manual and any policy, resolution, or operational guideline, this Manual shall control unless the Board expressly provides otherwise by supermajority vote. All subordinate documents — including committee charters, policies, and protocols — shall be read consistently with this Manual.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-compass icon"></i>Clause 1.3 — Guiding Principle</h3>
+        <p>The Foundation operates under the overarching principle of <strong>Governance Before Collapse</strong>: the conviction that governance systems must be designed to detect, deliberate, and act upon early-warning signals before thresholds of irreversibility are crossed. This principle informs every provision of this Manual and every decision made under its authority.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-globe icon"></i>Clause 1.4 — Controlling Language</h3>
+        <p>The official and controlling version of this Manual is drafted in <strong>English</strong>, which is the Foundation's governing language for corporate records, Board governance, and U.S. regulatory compliance. Portuguese translations may be prepared for educational or collaborative purposes but shall not constitute the controlling version for any legal, fiduciary, or regulatory matter.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 2: GOVERNANCE PRINCIPLES -->
+    <section class="chapter" id="ch2">
+      <div class="chapter-header">
+        <span class="chapter-num">02</span>
+        <h2 class="chapter-title">Governance Principles</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-balance-scale icon"></i>Clause 2.1 — The Three Fiduciary Duties</h3>
+        <p>Every Director, Officer, and person exercising delegated authority on behalf of the Foundation shall discharge their duties in accordance with the following fiduciary duties, which are non-delegable and enforceable under Missouri law and IRS oversight:</p>
+        <div class="article-box">
+          <h4>Duty of Care</h4>
+          <p>Act with the care an ordinarily prudent person in a like position would exercise under similar circumstances. This includes attending meetings, reviewing materials in advance, asking informed questions, and seeking independent advice when necessary.</p>
+        </div>
+        <div class="article-box">
+          <h4>Duty of Loyalty</h4>
+          <p>Act in good faith in a manner the Director reasonably believes to be in the best interests of the Foundation. This requires placing the Foundation's interests above personal, familial, or business interests and avoiding self-dealing.</p>
+        </div>
+        <div class="article-box">
+          <h4>Duty of Obedience</h4>
+          <p>Act in furtherance of the Foundation's purpose and mission as stated in its Articles of Incorporation and tax-exemption application. This includes ensuring that organizational activities remain within the scope of 501(c)(3) charitable purposes and that assets are used exclusively for exempt purposes.</p>
+        </div>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-shield-alt icon"></i>Clause 2.2 — Governance Before Collapse</h3>
+        <p>The Foundation's governance architecture is designed to operate <em>before</em> systems fail. This means:</p>
+        <ul class="custom">
+          <li>Board deliberation prioritizes early detection over reactive response;</li>
+          <li>Scientific calibration (under the c-ECO Governance Framework) informs strategic thresholds;</li>
+          <li>Financial and operational reserves are maintained to absorb shocks without compromising mission;</li>
+          <li>Conflict-of-interest and ethics frameworks are preventive, not merely punitive;</li>
+          <li>Succession planning and institutional memory are treated as governance infrastructure, not afterthoughts.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-users icon"></i>Clause 2.3 — Separation of Powers</h3>
+        <p>The Foundation maintains a clear separation between:</p>
+        <ul class="custom">
+          <li><strong>Board Governance</strong> (fiduciary oversight, strategic direction, policy approval);</li>
+          <li><strong>Executive Management</strong> (day-to-day operations, program execution, resource deployment);</li>
+          <li><strong>Scientific Governance</strong> (methodological integrity, calibration, threshold validation — exercised by the Calibration Council under the c-ECO Governance Framework, independent from operational management).</li>
+        </ul>
+        <p style="margin-top:1rem;">No single individual shall simultaneously hold the offices of President and Treasurer. The offices of President and Treasurer shall remain separate to preserve sound fiduciary governance and internal controls.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-handshake icon"></i>Clause 2.4 — Transparency and Accountability</h3>
+        <p>The Foundation shall operate with transparency appropriate to its stage and capacity, including:</p>
+        <ul class="custom">
+          <li>Publication of this Governance Manual (in unredacted form, excluding confidential personnel or proprietary scientific matters) on the Foundation's website;</li>
+          <li>Annual filing of IRS Form 990-PF and Missouri charitable registration;</li>
+          <li>Annual reports to donors, partners, and the public summarizing programmatic and financial performance;</li>
+          <li>Contemporaneous documentation of all Board and committee meetings.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3: BOARD RESPONSIBILITIES -->
+    <section class="chapter" id="ch3">
+      <div class="chapter-header">
+        <span class="chapter-num">03</span>
+        <h2 class="chapter-title">Board Responsibilities</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-sitemap icon"></i>Clause 3.1 — Size and Composition</h3>
+        <p>The Board shall consist of <strong>seven (7) voting Directors</strong>. This size is selected to balance diverse perspectives with efficient decision-making. The Board shall be composed of persons committed to the Foundation's mission, with a mix of competencies including scientific expertise, financial literacy, legal acumen, fundraising capacity, and Amazonian or ecological domain knowledge.</p>
+        <p style="margin-top:1rem;">The Board shall include at least three (3) Independent Directors, as defined by IRS tests and applicable Missouri law. Independent Directors shall have no material financial, familial, or business relationships that could impair objective judgment.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-plus icon"></i>Clause 3.2 — Election and Terms</h3>
+        <p>Directors shall be elected by the Board for staggered terms of <strong>three (3) years</strong>, with no more than one-third (1/3) of the Board rotating in any given year. Directors may serve up to two (2) consecutive terms (six years total), after which they must rotate off for at least one (1) year before re-election. The Board may waive the term limit for a specific Director by two-thirds (2/3) supermajority vote, documented in the minutes with rationale.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-minus icon"></i>Clause 3.3 — Removal</h3>
+        <p>A Director may be removed by two-thirds (2/3) vote of the entire Board for Cause. "Cause" includes: (a) breach of fiduciary duty; (b) material violation of this Manual, the Bylaws, or the Code of Ethics; (c) prolonged absence from Board meetings (more than two consecutive unexcused absences); (d) conviction of a felony or crime involving moral turpitude; or (e) conduct that brings material reputational harm to the Foundation. The Director in question shall be given written notice and an opportunity to respond before the removal vote.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-crown icon"></i>Clause 3.4 — Board Leadership</h3>
+        <p>The Board shall elect a <strong>President</strong> (who may also hold the title Chair of the Board) to serve as the principal leader of the Board. The President shall:</p>
+        <ul class="custom">
+          <li>Organize the Board agenda with input from the President of the Foundation and management;</li>
+          <li>Lead Board discussions of executive performance and compensation in executive sessions without management present;</li>
+          <li>Encourage frank but collegial discussions at the Board level and between the Board and management;</li>
+          <li>Represent the Board in external communications, unless otherwise delegated.</li>
+        </ul>
+        <p style="margin-top:1rem;">No employee of the Foundation may serve as President or hold any other Board title with similar responsibilities, unless approved by a two-thirds (2/3) majority of the entire Board, documented in writing with rationale. At this stage, the President of the Foundation (Jacqueline Alves) is a Director and serves as President of the Board; this dual role is disclosed and shall be reviewed annually for continued appropriateness.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-graduation-cap icon"></i>Clause 3.5 — Onboarding and Continuing Education</h3>
+        <p>Each new Director shall complete a structured orientation within ninety (90) days of election, covering:</p>
+        <ul class="custom">
+          <li>The Foundation's mission, history, programs, and theory of change;</li>
+          <li>This Manual, the Bylaws, and the Articles of Incorporation;</li>
+          <li>Fiduciary duties under Missouri law and IRS requirements;</li>
+          <li>Financial statements, budget, and key risks;</li>
+          <li>The c-ECO Governance Framework, TFP, and TDR at a governance level (not technical depth);</li>
+          <li>Conflict of interest disclosure and ethics expectations.</li>
+        </ul>
+        <p style="margin-top:1rem;">The Board shall dedicate at least one meeting per year to continuing education on topics relevant to the Foundation's mission and governance obligations.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 4: OFFICERS -->
+    <section class="chapter" id="ch4">
+      <div class="chapter-header">
+        <span class="chapter-num">04</span>
+        <h2 class="chapter-title">Officers</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-id-card icon"></i>Clause 4.1 — Officer Positions</h3>
+        <p>The Officers of the Foundation, as required by Missouri law and this Manual, shall be:</p>
+        <table>
+          <tr><th>Officer</th><th>Mandatory</th><th>Key Constraint</th></tr>
+          <tr><td>President</td><td>Yes</td><td>Must be separate from Treasurer; may not hold both offices simultaneously</td></tr>
+          <tr><td>Vice President</td><td>Yes</td><td>Prepared to assume leadership if President is unavailable</td></tr>
+          <tr><td>Treasurer</td><td>Yes</td><td>Must be separate from President; responsible for fiduciary oversight of finances</td></tr>
+          <tr><td>Secretary</td><td>Yes</td><td>Responsible for minutes, records, and corporate filings</td></tr>
+        </table>
+        <p style="margin-top:1rem;">Additional officers (e.g., Assistant Secretary, Assistant Treasurer) may be appointed by the Board as needed.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-tie icon"></i>Clause 4.2 — President</h3>
+        <p>The President shall be the chief executive officer of the Foundation, responsible for:</p>
+        <ul class="custom">
+          <li>Setting the strategic and scientific direction of the Foundation, in alignment with Board-approved plans;</li>
+          <li>Overseeing all programs, operations, and personnel;</li>
+          <li>Representing the Foundation in external relations, partnerships, and public communications;</li>
+          <li>Preparing and presenting the Annual Operational Plan and budget to the Board;</li>
+          <li>Ensuring compliance with all applicable laws, regulations, and policies;</li>
+          <li>Appointing and supervising Executive Officers, subject to Board confirmation for senior roles;</li>
+          <li>Serving as the primary liaison between the Board and management.</li>
+        </ul>
+        <p style="margin-top:1rem;">The President may also hold the title of <strong>Scientific Director</strong> in the executive organogram, reflecting their scientific leadership role. For governance document purposes, the statutory title is <strong>President</strong>.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-coins icon"></i>Clause 4.3 — Treasurer</h3>
+        <p>The Treasurer shall have primary responsibility for the oversight of the Foundation's finances, including:</p>
+        <ul class="custom">
+          <li>Overseeing the preparation and accuracy of financial statements;</li>
+          <li>Monitoring cash flow, reserves, and investment performance;</li>
+          <li>Presenting financial reports to the Board and the Audit & Finance Committee;</li>
+          <li>Ensuring compliance with IRS, Missouri, and donor-imposed financial requirements;</li>
+          <li>Co-signing or authorizing financial transactions above delegated thresholds;</li>
+          <li>Serving as the principal liaison with the independent auditor (if any).</li>
+        </ul>
+        <p style="margin-top:1rem;">The Treasurer need not be a professional accountant but must be financially literate. The Board may engage an outside bookkeeper, accounting firm, or Chief Financial Officer to assist the Treasurer.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-file-signature icon"></i>Clause 4.4 — Secretary</h3>
+        <p>The Secretary shall be responsible for:</p>
+        <ul class="custom">
+          <li>Recording, maintaining, and distributing minutes of all Board and committee meetings;</li>
+          <li>Maintaining the Foundation's corporate records, including this Manual, Bylaws, Articles, and policies;</li>
+          <li>Ensuring timely filing of annual reports, charitable registrations, and other state and federal filings;</li>
+          <li>Maintaining the roster of Directors, Officers, and key persons;</li>
+          <li>Administering the document control system (Appendix B).</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-clock icon"></i>Clause 4.5 — Terms and Succession</h3>
+        <p>Officers shall serve one-year terms, renewable annually by Board vote. The Governance & Nominations Committee shall maintain a succession plan for each officer position, identifying potential successors 12–18 months before terms expire.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 5: EXECUTIVE LEADERSHIP -->
+    <section class="chapter" id="ch5">
+      <div class="chapter-header">
+        <span class="chapter-num">05</span>
+        <h2 class="chapter-title">Executive Leadership</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-rocket icon"></i>Clause 5.1 — Founder-Led Structure</h3>
+        <p>The Foundation is currently <strong>founder-led</strong>. Jacqueline Alves serves as <strong>President</strong> and, in the executive organogram, as <strong>Scientific Director</strong>, supported by Executive Officers appointed by the Board. There is no separate CEO or Executive Director at this stage. The Board retains fiduciary oversight while day-to-day management is delegated to the President and Executive Officers.</p>
+        <div class="note"><strong>Note:</strong> The founder-led structure is appropriate for the Foundation's current stage but shall be reviewed at each Strategic Planning cycle. The Board shall develop a transition plan to a non-founder-led executive structure when the Foundation's scale, funding, or governance maturity warrants it.</div>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-users-cog icon"></i>Clause 5.2 — Executive Officers</h3>
+        <p>The President may appoint Executive Officers to manage specific functions, subject to Board confirmation for roles with material budgetary or personnel authority. Executive Officers may include:</p>
+        <ul class="custom">
+          <li>Chief Operating Officer (or equivalent);</li>
+          <li>Chief Financial Officer (or equivalent);</li>
+          <li>Program Directors (Fellowship, Living Labs, Observatory, Research & Publications, Executive Education, Policy & Institutional Transformation);</li>
+          <li>Head of Development and Partnerships;</li>
+          <li>Head of Communications and Public Affairs.</li>
+        </ul>
+        <p style="margin-top:1rem;">Executive Officers serve at the pleasure of the President, subject to any contractual terms. Their performance shall be reviewed annually by the President, with input from the Compensation Committee.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-project-diagram icon"></i>Clause 5.3 — Delegation of Authority</h3>
+        <p>The Board delegates day-to-day operational authority to the President, who may further delegate to Executive Officers. The scope of delegation shall be documented in the <strong>Delegation of Authority Policy</strong> and <strong>Signature Authority Policy</strong>, which specify:</p>
+        <ul class="custom">
+          <li>Monetary thresholds for individual, dual, and Board approval;</li>
+          <li>Categories of transactions requiring Board or committee approval;</li>
+          <li>Signing authority for contracts, grants, and financial instruments;</li>
+          <li>Emergency authority and its limits.</li>
+        </ul>
+        <p style="margin-top:1rem;">Delegation does not relieve the Board of fiduciary oversight. The Board shall review delegation policies annually.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 6: COMMITTEES -->
+    <section class="chapter" id="ch6">
+      <div class="chapter-header">
+        <span class="chapter-num">06</span>
+        <h2 class="chapter-title">Committees</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-sitemap icon"></i>Clause 6.1 — Standing Committees</h3>
+        <p>The Board shall maintain the following standing committees, each with a written charter approved by the Board:</p>
+        <table>
+          <tr><th>Committee</th><th>Primary Function</th><th>Composition</th></tr>
+          <tr><td>Audit & Finance Committee</td><td>Financial oversight, audit, internal controls, risk management, investment policy</td><td>Minimum 3 Directors; majority independent; Chair must be independent</td></tr>
+          <tr><td>Governance & Nominations Committee</td><td>Board composition, governance policies, Director recruitment, succession planning</td><td>Minimum 3 Directors; majority independent</td></tr>
+          <tr><td>Compensation Committee</td><td>Executive compensation, performance evaluation, benefits</td><td>Minimum 3 Directors; entirely independent</td></tr>
+          <tr><td>Development Committee</td><td>Fundraising strategy, donor relations, grant pipeline</td><td>Minimum 3 Directors; may include non-Director advisors</td></tr>
+        </table>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-file-alt icon"></i>Clause 6.2 — Committee Charters</h3>
+        <p>Each standing committee shall operate under a written charter specifying:</p>
+        <ul class="custom">
+          <li>Purpose and scope of authority;</li>
+          <li>Membership requirements (including independence standards);</li>
+          <li>Meeting frequency and quorum;</li>
+          <li>Reporting obligations to the Board;</li>
+          <li>Decision-making authority (recommendatory vs. delegated).</li>
+        </ul>
+        <p style="margin-top:1rem;">Committee charters shall be reviewed every two (2) years by the Governance & Nominations Committee and approved by the Board.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-microscope icon"></i>Clause 6.3 — Special Committees</h3>
+        <p>The Board may establish special (ad hoc) committees for specific purposes (e.g., strategic planning, merger evaluation, crisis response). Special committees shall have a defined mandate, timeline, and sunset clause. They shall not exercise delegated decision-making authority unless expressly authorized by Board resolution.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-ban icon"></i>Clause 6.4 — Limitations</h3>
+        <p>No committee shall have authority to: (a) amend the Articles of Incorporation or Bylaws; (b) elect or remove Directors; (c) approve a merger, dissolution, or sale of substantially all assets; (d) approve the Foundation's annual budget or Strategic Plan; or (e) take any action reserved to the full Board by Missouri law or this Manual.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 7: ADVISORS -->
+    <section class="chapter" id="ch7">
+      <div class="chapter-header">
+        <span class="chapter-num">07</span>
+        <h2 class="chapter-title">Advisors</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-friends icon"></i>Clause 7.1 — Categories of Advisors</h3>
+        <p>The Foundation may engage advisors in the following categories:</p>
+        <table>
+          <tr><th>Category</th><th>Role</th><th>Appointment</th></tr>
+          <tr><td>Scientific Advisory Board</td><td>Independent scientific counsel on c-ECO, TFP, and TDR methodology; peer review of major publications</td><td>By Board resolution, on recommendation of the President and Calibration Council</td></tr>
+          <tr><td>Technical Advisors</td><td>Domain expertise in specific fields (e.g., hydrology, data science, Indigenous governance, public policy)</td><td>By President, with Board notification</td></tr>
+          <tr><td>Institutional Advisors</td><td>Strategic guidance on organizational development, fundraising, legal, or financial matters</td><td>By Board or Governance & Nominations Committee</td></tr>
+          <tr><td>Ethics Advisors</td><td>Guidance on research ethics, community engagement, and responsible innovation</td><td>By Board, on recommendation of the Governance & Nominations Committee</td></tr>
+        </table>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-handshake icon"></i>Clause 7.2 — Terms and Expectations</h3>
+        <p>Advisors shall serve for fixed terms (typically one to three years), renewable by mutual agreement. Advisors have no voting authority and no fiduciary duty to the Foundation, but are expected to act in good faith and maintain confidentiality. Advisors shall disclose conflicts of interest annually and recuse themselves from matters where they have a personal or professional interest.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-dollar-sign icon"></i>Clause 7.3 — Compensation</h3>
+        <p>Advisors may serve on a pro bono, honorarium, or contractual basis. Compensation arrangements shall be approved by the Board or Compensation Committee and documented in writing. Advisors receiving more than $10,000 in annual compensation shall be disclosed on IRS Form 990-PF.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 8: DECISION-MAKING -->
+    <section class="chapter" id="ch8">
+      <div class="chapter-header">
+        <span class="chapter-num">08</span>
+        <h2 class="chapter-title">Decision-Making</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-gavel icon"></i>Clause 8.1 — Standard of Decision-Making</h3>
+        <p>All Board decisions shall be made with the care, loyalty, and obedience required by Clause 2.1. Directors shall come to each decision informed by relevant materials, independent advice when necessary, and collegial deliberation. Decisions shall be documented in the minutes, including the basis for the decision and any dissenting views.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-layer-group icon"></i>Clause 8.2 — Levels of Authority</h3>
+        <p>The Foundation recognizes three levels of decision-making authority:</p>
+        <div class="article-box">
+          <h4>Board-Reserved Decisions</h4>
+          <p>Strategic direction, budget approval, executive compensation, major transactions, governance amendments, and matters reserved by law. Require Board vote.</p>
+        </div>
+        <div class="article-box">
+          <h4>Committee-Delegated Decisions</h4>
+          <p>Matters within a committee's charter (e.g., audit scope, compensation levels within policy, governance policy drafts). Require committee vote; reported to Board.</p>
+        </div>
+        <div class="article-box">
+          <h4>Management-Delegated Decisions</h4>
+          <p>Operational matters within approved budgets and policies. Delegated to the President and Executive Officers; reported to Board through regular updates.</p>
+        </div>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-exclamation-circle icon"></i>Clause 8.3 — Emergency Decisions</h3>
+        <p>In emergencies where Board action is required but a quorum cannot be assembled, the President may take necessary action to protect the Foundation's assets, reputation, or mission, provided that:</p>
+        <ul class="custom">
+          <li>The emergency is documented in writing within 48 hours;</li>
+          <li>The action is reported to the Board at its next meeting (or by special meeting if warranted);</li>
+          <li>The action does not exceed $25,000 in financial commitment without subsequent Board ratification;</li>
+          <li>The action is consistent with the Foundation's mission and existing policies.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CHAPTER 9: MEETINGS -->
+    <section class="chapter" id="ch9">
+      <div class="chapter-header">
+        <span class="chapter-num">09</span>
+        <h2 class="chapter-title">Meetings</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-calendar-check icon"></i>Clause 9.1 — Regular Meetings</h3>
+        <p>The Board shall hold at least <strong>four (4) regular meetings</strong> per fiscal year, scheduled in advance via an annualized calendar. Regular meetings shall address strategic direction, financial oversight, program review, and governance matters. Meeting dates shall be set at least six (6) months in advance.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-bolt icon"></i>Clause 9.2 — Special Meetings</h3>
+        <p>Special meetings may be called by the President, the President of the Board, or any two (2) Directors. Notice of a special meeting shall be given at least forty-eight (48) hours in advance, specifying the purpose. No business other than the stated purpose shall be transacted at a special meeting unless all Directors present consent.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-video icon"></i>Clause 9.3 — Remote Participation</h3>
+        <p>Directors may participate in meetings by video conference, telephone, or other real-time electronic means, provided that all participants can hear and be heard. Remote participation counts toward quorum and voting. The Secretary shall document the remote attendance method in the minutes.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-lock icon"></i>Clause 9.4 — Executive Sessions</h3>
+        <p>The Board shall conduct executive sessions (meetings without management present) at least twice per year, and as needed for sensitive matters. Executive sessions may be held by the full Board or by individual committees. Minutes of executive sessions shall be kept confidential and distributed only to Directors, unless the Board determines otherwise.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-file-alt icon"></i>Clause 9.5 — Minutes</h3>
+        <p>Minutes shall be contemporaneously documented for all Board and committee meetings. Minutes shall include:</p>
+        <ul class="custom">
+          <li>Date, time, location, and attendance (including remote participants);</li>
+          <li>Matters discussed, with sufficient detail to demonstrate fiduciary deliberation;</li>
+          <li>Decisions made, including vote tallies and recusals;</li>
+          <li>Action items with responsible parties and deadlines.</li>
+        </ul>
+        <p style="margin-top:1rem;">Draft minutes shall be circulated within fourteen (14) days of the meeting and approved at the next meeting. Minutes shall be maintained permanently in the corporate records.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 10: VOTING -->
+    <section class="chapter" id="ch10">
+      <div class="chapter-header">
+        <span class="chapter-num">10</span>
+        <h2 class="chapter-title">Voting</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-check-double icon"></i>Clause 10.1 — Quorum</h3>
+        <p>A quorum for Board meetings shall consist of a majority of the Directors then in office. For a seven-member Board, a quorum is four (4) Directors. No action may be taken without a quorum, except to adjourn to a later time. A Director who recuses themselves from a matter shall still count toward quorum for that meeting.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-balance-scale icon"></i>Clause 10.2 — Majority Vote</h3>
+        <p>Routine Board actions require approval by a majority of the Directors present at a meeting with quorum. A majority means more than 50% of the votes cast by Directors entitled to vote on the matter.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-star icon"></i>Clause 10.3 — Supermajority Vote</h3>
+        <p>The following actions require approval by a <strong>two-thirds (2/3) supermajority</strong> of the Directors then in office:</p>
+        <ul class="custom">
+          <li>Amendment of the Articles of Incorporation or Bylaws;</li>
+          <li>Dissolution, merger, or sale of substantially all assets;</li>
+          <li>Removal of a Director or Officer for Cause;</li>
+          <li>Approval of a related-party transaction above a material threshold;</li>
+          <li>Adoption or material amendment of this Governance Manual;</li>
+          <li>Approval of the five-year Strategic Plan;</li>
+          <li>Any other matter designated as "fundamental" by the Board.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-hand-paper icon"></i>Clause 10.4 — Recusal</h3>
+        <p>A Director with a conflict of interest (actual or apparent) on a matter before the Board shall disclose the conflict, abstain from deliberation and voting, and leave the meeting during discussion of the matter, unless invited to provide background information before deliberations begin. The recusal shall be documented in the minutes.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-dollar-sign icon"></i>Clause 10.5 — Financial Delegation Thresholds</h3>
+        <p>Specific monetary thresholds for financial approvals (e.g., contracts, grants, expenditures) shall be established in the separate <strong>Delegation of Authority Policy</strong> and <strong>Signature Authority Policy</strong>, not in this Manual. Those policies shall be reviewed annually by the Audit & Finance Committee and approved by the Board.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 11: ETHICS -->
+    <section class="chapter" id="ch11">
+      <div class="chapter-header">
+        <span class="chapter-num">11</span>
+        <h2 class="chapter-title">Ethics</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-heart icon"></i>Clause 11.1 — Code of Business Conduct and Ethics</h3>
+        <p>The Foundation adopts a <strong>Code of Business Conduct and Ethics</strong> applicable to all Directors, Officers, Executive Officers, employees, volunteers, and advisors. The Code shall require fulfillment of responsibilities in a manner that furthers the Foundation's purpose and mission and complies with law, regulations, ethical standards, and policies adopted by the Foundation.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-bullhorn icon"></i>Clause 11.2 — Whistleblower Policy</h3>
+        <p>The Foundation shall maintain a Whistleblower Policy containing procedures to receive, investigate, and take appropriate action regarding fraud or non-compliance with law or organizational policy, and to protect whistleblowers against retaliation. The policy shall:</p>
+        <ul class="custom">
+          <li>Encourage officers, Directors, employees, and volunteers to come forward with credible information regarding illegal practices or violations of organizational policies, law, regulations, and/or ethical standards;</li>
+          <li>Specify that the organization will protect the individual from retaliation;</li>
+          <li>Identify those staff, Board members, or outside parties to whom such information can be reported, including an anonymous reporting mechanism;</li>
+          <li>Require investigation within a reasonable timeframe and documentation of findings.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-shield-alt icon"></i>Clause 11.3 — Document Retention and Destruction</h3>
+        <p>The Foundation shall maintain a Document Retention and Destruction Policy promoting the responsible stewardship of information by ensuring that documents are retained for appropriate periods, sensitive information is protected, and unnecessary records are disposed of in a consistent manner. The policy shall identify record retention responsibilities of staff, volunteers, and Board members and comply with applicable provisions of the Sarbanes-Oxley Act regarding obstruction of justice.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-robot icon"></i>Clause 11.4 — AI Governance</h3>
+        <p>The Foundation may use artificial intelligence tools for internal productivity, communications, development, and research. AI use shall be governed by internal guidelines specifying:</p>
+        <ul class="custom">
+          <li>Permitted use cases and prohibited applications;</li>
+          <li>Data input restrictions and confidentiality protections;</li>
+          <li>Requirements for human oversight of AI-generated work;</li>
+          <li>Procedures for evaluating and approving new AI tools;</li>
+          <li>Accountability for errors or misinformation produced by AI systems.</li>
+        </ul>
+      </div>
+    </section>
+
+<!-- CHAPTER 12: CONFLICT OF INTEREST -->
+    <section class="chapter" id="ch12">
+      <div class="chapter-header">
+        <span class="chapter-num">12</span>
+        <h2 class="chapter-title">Conflict of Interest</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-exclamation-triangle icon"></i>Clause 12.1 — Definition</h3>
+        <p>A <strong>conflict of interest</strong> arises when a Director, Officer, or other decision-maker has an outside interest or relationship that conflicts or may conflict with their ability to act strictly in the best interests of the Foundation. Conflicts may be financial, familial, relational, or reputational.</p>
+        <p style="margin-top:1rem;">A conflict is <em>actual</em> when the outside interest directly interferes with fiduciary duty. It is <em>apparent</em> when a reasonable observer could perceive that the outside interest might interfere, even if the fiduciary believes otherwise. Both actual and apparent conflicts shall be disclosed and managed.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-clipboard-list icon"></i>Clause 12.2 — Annual Disclosure</h3>
+        <p>All Directors, Officers, key persons, and advisors shall complete an annual conflict-of-interest questionnaire disclosing:</p>
+        <ul class="custom">
+          <li>All business entities in which the person or a family member has a substantial financial interest (generally defined as ownership of 5% or more, or a board or executive role);</li>
+          <li>All transactions or proposed transactions between the Foundation and such entities, regardless of amount;</li>
+          <li>All compensation, loans, or benefits received from the Foundation or related organizations in the prior fiscal year;</li>
+          <li>Any other relationship — including advisory roles, consultancies, or family employment — that could impair independence or objectivity.</li>
+        </ul>
+        <p style="margin-top:1rem;">Disclosures shall be reviewed by the Audit & Finance Committee (or the full Board if no Audit & Finance Committee exists) and maintained in secure corporate records for the duration of service plus seven (7) years.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-gavel icon"></i>Clause 12.3 — Transaction Review Procedures</h3>
+        <p>When a potential or actual conflict is identified, the following procedure shall apply:</p>
+        <ol style="padding-left:1.5rem;">
+          <li><strong>Disclosure.</strong> The interested person shall disclose the conflict to the Board or relevant committee before deliberation begins, verbally and in writing.</li>
+          <li><strong>Recusal.</strong> The interested person shall leave the meeting during deliberation and voting, unless invited to answer questions before deliberations commence. They may not vote or lobby.</li>
+          <li><strong>Independent Review.</strong> The remaining Directors shall determine whether a conflict exists and whether the transaction is fair, reasonable, and in the Foundation's best interests.</li>
+          <li><strong>Comparability Data.</strong> For transactions above a material threshold (to be defined in the Conflict of Interest Policy), the Board shall obtain comparability data and document the basis for approval.</li>
+          <li><strong>Documentation.</strong> The decision, rationale, and recusal shall be documented in the minutes. The minutes shall state that the transaction was approved by disinterested Directors.</li>
+        </ol>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-ban icon"></i>Clause 12.4 — Prohibited Transactions</h3>
+        <p>The following are prohibited without prior Board approval and full disclosure:</p>
+        <ul class="custom">
+          <li>Loans to Directors, Officers, or their family members, directly or indirectly;</li>
+          <li>Excess benefit transactions as defined by IRS Section 4958 (intermediate sanctions);</li>
+          <li>Business transactions with entities in which a Director or Officer has a substantial interest, unless at arm's-length terms demonstrably favorable to the Foundation;</li>
+          <li>Use of Foundation assets, personnel, or reputation for personal benefit or private inurement;</li>
+          <li>Compensation arrangements that are not set using the IRS rebuttable presumption procedure.</li>
+        </ul>
+        <div class="note"><strong>IRS Safe Harbor:</strong> The Foundation shall follow the IRS rebuttable presumption procedure for setting compensation of disqualified persons, including: (a) comparability data; (b) approval by an independent body (Compensation Committee or full Board without the interested person present); and (c) contemporaneous documentation of the deliberation and basis for approval.</div>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-eye icon"></i>Clause 12.5 — Related-Party Transactions</h3>
+        <p>A <strong>related-party transaction</strong> is any transaction in which a Director, Officer, key person, or their family member has a direct or indirect financial interest. All related-party transactions, regardless of amount, shall be:</p>
+        <ul class="custom">
+          <li>Disclosed in advance to the Audit & Finance Committee;</li>
+          <li>Reviewed for fairness and mission alignment;</li>
+          <li>Approved only by disinterested Directors;</li>
+          <li>Reported on Schedule L of IRS Form 990-PF when required.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CHAPTER 13: ANNUAL PLANNING -->
+    <section class="chapter" id="ch13">
+      <div class="chapter-header">
+        <span class="chapter-num">13</span>
+        <h2 class="chapter-title">Annual Planning</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-calendar-alt icon"></i>Clause 13.1 — Annual Operational Planning Cycle</h3>
+        <p>The Foundation shall maintain an <strong>Annual Operational Planning (AOP)</strong> cycle with a one-year horizon, aligned with the fiscal year (July 1 – June 30). The AOP translates the five-year Strategic Plan into concrete objectives, budgets, and milestones for the upcoming year.</p>
+        <p style="margin-top:1rem;">The AOP cycle shall follow this calendar:</p>
+        <table>
+          <tr><th>Month</th><th>Activity</th><th>Responsible</th></tr>
+          <tr><td>March</td><td>Program Directors submit draft operational plans and budget requests</td><td>President / Executive Officers</td></tr>
+          <tr><td>April</td><td>Audit & Finance Committee reviews consolidated budget; Calibration Council reviews scientific milestones</td><td>Audit & Finance Committee / Calibration Council</td></tr>
+          <tr><td>May</td><td>Board reviews and approves annual budget and operational plan</td><td>Full Board</td></tr>
+          <tr><td>June</td><td>Final adjustments; communication of approved plan to all staff and partners</td><td>President</td></tr>
+          <tr><td>July</td><td>Fiscal year begins; quarterly review schedule activated</td><td>All</td></tr>
+        </table>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-bullseye icon"></i>Clause 13.2 — Components of the Annual Plan</h3>
+        <p>Each Annual Operational Plan shall include, at minimum:</p>
+        <ul class="custom">
+          <li><strong>Program Objectives:</strong> Specific, measurable outcomes for each institutional program, including the Fellowship Program, Living Labs, Observatory Program, Research & Publications Program, Executive Education & Training, and Policy & Institutional Transformation, aligned with the Foundation's Strategic Plan;</li>
+          <li><strong>Financial Budget:</strong> Line-item budget for revenue and expenses, including restricted and unrestricted funds, with variance thresholds;</li>
+          <li><strong>Fundraising Targets:</strong> Goals for grants, individual donations, institutional partnerships, and earned revenue;</li>
+          <li><strong>Scientific Milestones:</strong> Threshold calibrations, publication targets, data collection schedules, and Living Lab deployment plans;</li>
+          <li><strong>Human Resources Plan:</strong> Headcount, hiring timeline, professional development, and succession readiness;</li>
+          <li><strong>Risk Register:</strong> Updated assessment of operational, financial, reputational, and scientific risks with mitigation strategies;</li>
+          <li><strong>Compliance Calendar:</strong> Deadlines for IRS filings, state registrations, audit schedules, and policy reviews.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-chart-bar icon"></i>Clause 13.3 — Quarterly Review and Variance Reporting</h3>
+        <p>The Board shall receive quarterly variance reports comparing actual performance against the Annual Plan. Reports shall include:</p>
+        <ul class="custom">
+          <li>Financial performance (revenue vs. budget, expense vs. budget, reserve levels);</li>
+          <li>Programmatic progress (milestones achieved, delays, and corrective actions);</li>
+          <li>Fundraising progress (pipeline, closed gifts, pending applications);</li>
+          <li>Risk updates (new risks, escalated risks, mitigated risks);</li>
+          <li>Compliance status (upcoming deadlines, completed filings, policy reviews).</li>
+        </ul>
+        <p style="margin-top:1rem;">Material variances (generally defined as >10% of budget line or >$5,000, whichever is lower) shall trigger a written explanation and, if necessary, a Board vote on a revised plan or budget transfer.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-sync-alt icon"></i>Clause 13.4 — Mid-Year Adjustment</h3>
+        <p>The Board may approve a mid-year adjustment to the Annual Plan if material changes in funding, programmatic context, or risk environment warrant it. Mid-year adjustments require the same review and approval process as the original Annual Plan. The President shall present a written justification, including impact on the Strategic Plan, budget reallocation, and risk implications.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 14: STRATEGIC PLANNING -->
+    <section class="chapter" id="ch14">
+      <div class="chapter-header">
+        <span class="chapter-num">14</span>
+        <h2 class="chapter-title">Strategic Planning</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-compass icon"></i>Clause 14.1 — Five-Year Strategic Plan</h3>
+        <p>The Foundation shall maintain a <strong>five-year Strategic Plan</strong> that articulates the Foundation's long-term vision, theory of change, programmatic priorities, and resource strategy. The Strategic Plan is the Board's principal instrument for setting direction and evaluating executive performance. It shall be reviewed annually and comprehensively revised every five (5) years.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-sitemap icon"></i>Clause 14.2 — Strategic Plan Contents</h3>
+        <p>The Strategic Plan shall include, at minimum:</p>
+        <ul class="custom">
+          <li><strong>Mission & Vision Statement:</strong> A clear, compelling articulation of the Foundation's purpose and aspirational future state, grounded in the <em>Governance Before Collapse</em> principle;</li>
+          <li><strong>Theory of Change:</strong> The causal logic linking the Foundation's activities to desired outcomes, including assumptions, risks, and external factors;</li>
+          <li><strong>Programmatic Pillars:</strong> The core program areas (Fellowship, Living Labs, Observatory, Research & Publications, Executive Education, Policy & Institutional Transformation) with objectives, indicators, and milestones for the planning period;</li>
+          <li><strong>Financial Strategy:</strong> Revenue diversification targets, reserve policy, investment strategy, and capital expenditure plan;</li>
+          <li><strong>Organizational Development:</strong> Governance maturity targets, staffing plan, infrastructure needs, and succession roadmap;</li>
+          <li><strong>Partnership & Ecosystem Strategy:</strong> Key institutional relationships, geographic focus, and collaborative frameworks (including the c-ECO network and Amazon Living Lab);</li>
+          <li><strong>Risk & Resilience Framework:</strong> Identification of strategic risks (financial, operational, reputational, scientific, geopolitical) and resilience strategies, including the c-ECO macro-prudential approach;</li>
+          <li><strong>Scientific Calibration Agenda:</strong> Priority thresholds for TFP/TDR calibration, publication roadmap, and data infrastructure investments.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-users icon"></i>Clause 14.3 — Strategic Planning Process</h3>
+        <p>The Strategic Plan shall be developed through a participatory process involving:</p>
+        <ul class="custom">
+          <li><strong>Board Retreat:</strong> A dedicated Board retreat (minimum one full day) held in Year 5 of the current plan to initiate the next planning cycle;</li>
+          <li><strong>Stakeholder Input:</strong> Structured consultation with Program Directors, the Calibration Council, Scientific Advisory Board, key donors, and partner institutions;</li>
+          <li><strong>Environmental Scan:</strong> Analysis of trends in ecological economics, Amazonian governance, climate finance, technology, and regulatory landscapes;</li>
+          <li><strong>Gap Analysis:</strong> Assessment of the Foundation's current capabilities against the aspirations of the new plan;</li>
+          <li><strong>Draft & Review:</strong> Draft prepared by the President, reviewed by the Governance & Nominations Committee, and presented to the Board for debate and amendment;</li>
+          <li><strong>Board Adoption:</strong> Final approval by two-thirds (2/3) supermajority vote, as required by Clause 10.3.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-chart-line icon"></i>Clause 14.4 — Annual Strategic Review</h3>
+        <p>Each year, the Board shall conduct a strategic review assessing:</p>
+        <ul class="custom">
+          <li>Progress toward five-year objectives, with quantitative indicators where possible;</li>
+          <li>Changes in the external environment that may require plan adaptation;</li>
+          <li>Lessons learned from program evaluation, audits, and stakeholder feedback;</li>
+          <li>Alignment between the Annual Operational Plan and the Strategic Plan;</li>
+          <li>Governance maturity and organizational capacity gaps.</li>
+        </ul>
+        <p style="margin-top:1rem;">The annual strategic review shall be documented in a written report, presented at the Board meeting following the fiscal year-end, and published (in summary form) on the Foundation's website.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-flag-checkered icon"></i>Clause 14.5 — Transition Planning</h3>
+        <p>The Strategic Plan shall include a <strong>founder transition roadmap</strong> that addresses the evolution from founder-led governance to institutionalized leadership. The roadmap shall identify:</p>
+        <ul class="custom">
+          <li>Triggers for transition (e.g., funding milestones, Board maturity, organizational scale);</li>
+          <li>Competencies required in a non-founder President/CEO;</li>
+          <li>Timeline and phasing for delegation, recruitment, and handover;</li>
+          <li>Role of the Founder in post-transition governance (e.g., Scientific Director Emeritus, Board member, or senior advisor);</li>
+          <li>Communication strategy for staff, donors, and partners.</li>
+        </ul>
+        <div class="note"><strong>Note:</strong> The founder transition is not a sign of failure but of institutional maturity. The Board shall treat this as a strategic priority, not an administrative afterthought.</div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 15: PERFORMANCE REVIEW -->
+    <section class="chapter" id="ch15">
+      <div class="chapter-header">
+        <span class="chapter-num">15</span>
+        <h2 class="chapter-title">Performance Review</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-clipboard-check icon"></i>Clause 15.1 — Board Self-Assessment</h3>
+        <p>The Board shall conduct an annual self-assessment evaluating its effectiveness in fulfilling fiduciary duties, governing strategically, and supporting the Foundation's mission. The assessment shall cover:</p>
+        <ul class="custom">
+          <li>Attendance, preparation, and engagement at meetings;</li>
+          <li>Quality of deliberation, debate, and decision-making;</li>
+          <li>Composition, diversity, and skill gaps;</li>
+          <li>Relationship with management and advisory bodies;</li>
+          <li>Performance of committees and individual Directors;</li>
+          <li>Adherence to this Manual and governance best practices.</li>
+        </ul>
+        <p style="margin-top:1rem;">The Governance & Nominations Committee shall administer the self-assessment, compile results, and present findings with recommendations for improvement to the Board. Results shall be kept confidential to the Board.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-user-tie icon"></i>Clause 15.2 — President Performance Evaluation</h3>
+        <p>The President shall be evaluated annually by the full Board (in executive session, without the President present), led by the Compensation Committee or the President of the Board. The evaluation shall assess:</p>
+        <ul class="custom">
+          <li>Achievement of Annual Plan and Strategic Plan objectives;</li>
+          <li>Financial stewardship and budget management;</li>
+          <li>Programmatic impact and scientific quality;</li>
+          <li>External relations, partnership development, and fundraising;</li>
+          <li>Leadership of staff and organizational culture;</li>
+          <li>Compliance, risk management, and ethical conduct;</li>
+          <li>Board relations and communication.</li>
+        </ul>
+        <p style="margin-top:1rem;">The evaluation shall be documented in writing, shared with the President, and used to set performance goals and compensation for the following year. A 360-degree component (input from Executive Officers and key staff) may be included at the Board's discretion.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-users-cog icon"></i>Clause 15.3 — Executive Officer Performance Review</h3>
+        <p>The President shall conduct annual performance reviews of all Executive Officers, using criteria aligned with their role descriptions and the Annual Plan. Reviews shall include:</p>
+        <ul class="custom">
+          <li>Objective achievement against agreed Key Performance Indicators (KPIs);</li>
+          <li>Competency assessment (leadership, technical, collaborative);</li>
+          <li>Professional development needs and opportunities;</li>
+          <li>Compensation adjustment recommendations, subject to Compensation Committee approval.</li>
+        </ul>
+        <p style="margin-top:1rem;">Executive Officer performance reviews shall be documented and maintained in confidential personnel records.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-award icon"></i>Clause 15.4 — Program Evaluation</h3>
+        <p>Each institutional program shall undergo an annual evaluation assessing:</p>
+        <ul class="custom">
+          <li>Relevance to the Foundation's mission and Strategic Plan;</li>
+          <li>Effectiveness in achieving stated outcomes;</li>
+          <li>Efficiency in resource use;</li>
+          <li>Quality of scientific output, methodological rigor, and peer engagement;</li>
+          <li>Stakeholder satisfaction (fellows, partners, communities, donors);</li>
+          <li>Sustainability and scalability potential.</li>
+        </ul>
+        <p style="margin-top:1rem;">Program evaluations shall be conducted by the relevant Program Director with input from the Calibration Council and Scientific Advisory Board. Findings shall be reported to the Board and used to inform the next Annual Plan.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-handshake icon"></i>Clause 15.5 — External Evaluation</h3>
+        <p>At least once every five (5) years, the Board shall commission an independent external evaluation of the Foundation's governance, programs, and organizational health. The external evaluator shall be selected by the Governance & Nominations Committee and shall report directly to the Board. The evaluation shall assess:</p>
+        <ul class="custom">
+          <li>Organizational governance maturity against sector benchmarks;</li>
+          <li>Program impact and theory of change validity;</li>
+          <li>Financial health and sustainability;</li>
+          <li>Compliance with law, regulation, and donor requirements;</li>
+          <li>Recommendations for improvement.</li>
+        </ul>
+        <p style="margin-top:1rem;">The Board shall respond to the external evaluation with a written action plan, approved within ninety (90) days of receiving the report.</p>
+      </div>
+    </section>
+
+    <!-- CHAPTER 16: CONTINUOUS IMPROVEMENT -->
+    <section class="chapter" id="ch16">
+      <div class="chapter-header">
+        <span class="chapter-num">16</span>
+        <h2 class="chapter-title">Continuous Improvement</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-sync icon"></i>Clause 16.1 — Governance Maturity Model</h3>
+        <p>The Foundation adopts a <strong>Governance Maturity Model</strong> to guide its evolution from early-stage to fully institutionalized governance. The model recognizes five stages:</p>
+        <table>
+          <tr><th>Stage</th><th>Characteristics</th><th>Target Timeline</th></tr>
+          <tr><td>1. Foundational</td><td>Founder-led, informal processes, small Board, limited documentation</td><td>Years 1–2</td></tr>
+          <tr><td>2. Emerging</td><td>Basic policies in place, Board committees formed, initial strategic planning</td><td>Years 2–4</td></tr>
+          <tr><td>3. Developing</td><td>Full policy suite, annual planning cycle, performance reviews, external audit</td><td>Years 4–6</td></tr>
+          <tr><td>4. Mature</td><td>Independent governance, diversified funding, robust evaluation, sector leadership</td><td>Years 6–10</td></tr>
+          <tr><td>5. Exemplary</td><td>Thought leadership, governance innovation, replication of models, global recognition</td><td>Years 10+</td></tr>
+        </table>
+        <p style="margin-top:1rem;">The Board shall assess the Foundation's maturity stage annually and identify specific actions to advance to the next stage. The Governance & Nominations Committee shall maintain a maturity action plan.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-lightbulb icon"></i>Clause 16.2 — Innovation and Learning</h3>
+        <p>The Foundation shall cultivate a culture of <strong>adaptive learning</strong> and <strong>governance innovation</strong>. This includes:</p>
+        <ul class="custom">
+          <li>Regular exposure to emerging practices in nonprofit governance, ecological economics, and systems science;</li>
+          <li>Piloting new governance tools (e.g., pre-mortem analysis, red-teaming, scenario planning) in Board deliberations;</li>
+          <li>Documenting lessons learned from successes and failures, and integrating them into policy and practice;</li>
+          <li>Encouraging constructive dissent and intellectual honesty in Board and committee discussions;</li>
+          <li>Investing in professional development for Directors, Officers, and staff.</li>
+        </ul>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-file-contract icon"></i>Clause 16.3 — Manual Amendment</h3>
+        <p>This Manual may be amended by a two-thirds (2/3) supermajority vote of the entire Board, as required by Clause 10.3. Proposed amendments shall be:</p>
+        <ul class="custom">
+          <li>Drafted by the Governance & Nominations Committee or the President, with legal review if material;</li>
+          <li>Circulated to all Directors at least fourteen (14) days before the vote;</li>
+          <li>Accompanied by a written rationale explaining the need for the amendment and its implications;</li>
+          <li>Documented in the minutes, with the amended text archived per Appendix B.</li>
+        </ul>
+        <p style="margin-top:1rem;">Amendments shall be reflected in the version control system (Appendix B) and communicated to all Directors, Officers, and key personnel within seven (7) days of adoption.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-infinity icon"></i>Clause 16.4 — Institutional Memory</h3>
+        <p>The Foundation shall maintain robust <strong>institutional memory</strong> to ensure continuity across leadership transitions. This includes:</p>
+        <ul class="custom">
+          <li>Comprehensive, well-organized corporate records (minutes, contracts, policies, evaluations);</li>
+          <li>A documented history of strategic decisions, including rationale and lessons learned;</li>
+          <li>Knowledge management systems for scientific methodologies, partnerships, and stakeholder relationships;</li>
+          <li>Oral history interviews with founders and key leaders, archived for future reference;</li>
+          <li>Board alumni network to retain access to historical perspective and expertise.</li>
+        </ul>
+        <p style="margin-top:1rem;">The Secretary, in coordination with the President, shall be responsible for institutional memory systems.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-seedling icon"></i>Clause 16.5 — Legacy and Impact</h3>
+        <p>The Foundation's ultimate measure of success is not its perpetuity but its <strong>impact</strong>. The Board shall periodically consider:</p>
+        <ul class="custom">
+          <li>Whether the Foundation's mission might be better served through merger, partnership, or spin-off;</li>
+          <li>Whether the Foundation's assets should be spent down (sunset) or preserved in perpetuity (endowment);</li>
+          <li>How the Foundation's models, tools, and frameworks (TFP, TDR, SIL, ESL) can be disseminated and replicated;</li>
+          <li>What legacy the Foundation seeks to leave in Amazonian governance and ecological economics.</li>
+        </ul>
+        <div class="note"><strong>Principle:</strong> The Foundation exists to serve its mission, not itself. Governance must remain humble, adaptive, and oriented toward impact rather than institutional preservation.</div>
+      </div>
+    </section>
+
+    <!-- APPENDIX A: GLOSSARY -->
+    <section class="chapter" id="appendix-a">
+      <div class="chapter-header">
+        <span class="chapter-num">A</span>
+        <h2 class="chapter-title">Glossary</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-book icon"></i>Defined Terms</h3>
+        <div class="definition">
+          <dt>Annual Operational Plan (AOP)</dt>
+          <dd>The Foundation's one-year operational and financial plan, translating the Strategic Plan into concrete objectives, budgets, and milestones for a single fiscal year.</dd>
+        </div>
+        <div class="definition">
+          <dt>Articles of Incorporation</dt>
+          <dd>The foundational corporate document filed with the State of Missouri establishing the Foundation as a nonprofit corporation. Controls over this Manual and the Bylaws in case of conflict.</dd>
+        </div>
+        <div class="definition">
+          <dt>Board</dt>
+          <dd>The Board of Directors of the Johann Christian Hasse Foundation, exercising fiduciary oversight and strategic governance.</dd>
+        </div>
+        <div class="definition">
+          <dt>Bylaws</dt>
+          <dd>The corporate bylaws of the Foundation, governing internal procedures such as meetings, voting, and officer duties. Subordinate to the Articles of Incorporation but controlling over this Manual.</dd>
+        </div>
+        <div class="definition">
+          <dt>Calibration Council</dt>
+          <dd>The scientific governance body under the c-ECO Governance Framework responsible for methodological integrity, threshold validation, and peer review of TFP/TDR calibrations.</dd>
+        </div>
+        <div class="definition">
+          <dt>Cause (for removal)</dt>
+          <dd>Grounds for removal of a Director or Officer, including breach of fiduciary duty, material policy violation, prolonged unexcused absence, felony conviction, or conduct causing reputational harm.</dd>
+        </div>
+        <div class="definition">
+          <dt>c-ECO Governance Framework</dt>
+          <dd>The systemic governance methodology developed by c-ECO (ecological economics and sustainability) that integrates scientific calibration, threshold dynamics, and anticipatory governance into organizational decision-making.</dd>
+        </div>
+        <div class="definition">
+          <dt>Conflict of Interest</dt>
+          <dd>A situation in which a Director, Officer, or decision-maker has an outside interest or relationship that conflicts or may conflict with their ability to act in the Foundation's best interests.</dd>
+        </div>
+        <div class="definition">
+          <dt>Director</dt>
+          <dd>A member of the Board of Directors with voting authority and fiduciary duties.</dd>
+        </div>
+        <div class="definition">
+          <dt>Duty of Care</dt>
+          <dd>The fiduciary obligation to act with the care an ordinarily prudent person in a like position would exercise under similar circumstances.</dd>
+        </div>
+        <div class="definition">
+          <dt>Duty of Loyalty</dt>
+          <dd>The fiduciary obligation to act in good faith in the best interests of the Foundation, placing organizational interests above personal interests.</dd>
+        </div>
+        <div class="definition">
+          <dt>Duty of Obedience</dt>
+          <dd>The fiduciary obligation to ensure that the Foundation's activities further its stated mission and comply with applicable laws and regulations.</dd>
+        </div>
+        <div class="definition">
+          <dt>ESL</dt>
+          <dd>Economic Sustainability Laboratory — a c-ECO program and framework for applied research in ecological economics and sustainability governance.</dd>
+        </div>
+        <div class="definition">
+          <dt>Executive Officer</dt>
+          <dd>A senior staff member appointed by the President to manage a specific function (e.g., COO, CFO, Program Director), subject to Board confirmation for roles with material authority.</dd>
+        </div>
+        <div class="definition">
+          <dt>Founder-Led</dt>
+          <dd>An organizational stage in which the founder (Jacqueline Alves) serves as both President and primary strategic leader, with governance evolving toward institutionalized leadership.</dd>
+        </div>
+        <div class="definition">
+          <dt>Governance Before Collapse</dt>
+          <dd>The Foundation's overarching principle: governance systems must detect, deliberate, and act upon early-warning signals before thresholds of irreversibility are crossed.</dd>
+        </div>
+        <div class="definition">
+          <dt>Independent Director</dt>
+          <dd>A Director who has no material financial, familial, or business relationship that could impair objective judgment, as determined by IRS tests and Missouri law.</dd>
+        </div>
+        <div class="definition">
+          <dt>IRS Form 990-PF</dt>
+          <dd>The annual information return filed by private foundations with the U.S. Internal Revenue Service, disclosing finances, activities, governance, and compliance.</dd>
+        </div>
+        <div class="definition">
+          <dt>Key Person</dt>
+          <dd>An individual (Director, Officer, or highly compensated employee) whose compensation, transactions, or relationships must be disclosed on IRS Form 990-PF.</dd>
+        </div>
+        <div class="definition">
+          <dt>Living Lab</dt>
+          <dd>A c-ECO applied research and engagement platform (e.g., the Amazon Living Lab) integrating scientific observation, community participation, and policy experimentation in a real-world setting.</dd>
+        </div>
+        <div class="definition">
+          <dt>Officer</dt>
+          <dd>A statutory corporate officer (President, Vice President, Treasurer, Secretary) elected by the Board, with duties defined by Missouri law and this Manual.</dd>
+        </div>
+        <div class="definition">
+          <dt>Quorum</dt>
+          <dd>The minimum number of Directors required to be present for a Board meeting to transact business. For the Foundation, a majority of Directors in office (four of seven).</dd>
+        </div>
+        <div class="definition">
+          <dt>Related-Party Transaction</dt>
+          <dd>Any transaction in which a Director, Officer, key person, or their family member has a direct or indirect financial interest.</dd>
+        </div>
+        <div class="definition">
+          <dt>SIL</dt>
+          <dd>Systemic Intelligence Library — a c-ECO knowledge architecture and analytical framework for sectoral intelligence and systemic risk assessment.</dd>
+        </div>
+        <div class="definition">
+          <dt>Strategic Plan</dt>
+          <dd>The Foundation's five-year directional document articulating vision, priorities, resource strategy, and impact theory.</dd>
+        </div>
+        <div class="definition">
+          <dt>Supermajority</dt>
+          <dd>A vote requiring approval by two-thirds (2/3) of the Directors then in office, reserved for fundamental governance decisions per Clause 10.3.</dd>
+        </div>
+        <div class="definition">
+          <dt>TDR</dt>
+          <dd>Threshold Dynamics Research — the c-ECO scientific methodology for identifying, calibrating, and monitoring systemic thresholds and tipping points.</dd>
+        </div>
+        <div class="definition">
+          <dt>TFP</dt>
+          <dd>Theoretical Framework for Practice — the c-ECO conceptual architecture linking ecological economics, governance science, and applied research to institutional action.</dd>
+        </div>
+        <div class="definition">
+          <dt>Whistleblower</dt>
+          <dd>An individual who reports fraud, illegal practices, or policy violations through the Foundation's Whistleblower Policy, protected against retaliation.</dd>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPENDIX B: DOCUMENT CONTROL -->
+    <section class="chapter" id="appendix-b">
+      <div class="chapter-header">
+        <span class="chapter-num">B</span>
+        <h2 class="chapter-title">Document Control</h2>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-code-branch icon"></i>Version Control</h3>
+        <p>This Manual is maintained under a formal version control system administered by the Secretary. All versions shall be numbered sequentially (e.g., v1.0, v1.1, v2.0) and archived with the following metadata:</p>
+        <table>
+          <tr><th>Metadata Field</th><th>Description</th></tr>
+          <tr><td>Version Number</td><td>Major.Minor format (major = Board-approved amendment; minor = editorial or formatting correction)</td></tr>
+          <tr><td>Effective Date</td><td>Date on which the version becomes authoritative</td></tr>
+          <tr><td>Approval Authority</td><td>Board vote date and resolution number</td></tr>
+          <tr><td>Changes Summary</td><td>Brief description of amendments, additions, or deletions</td></tr>
+          <tr><td>Author</td><td>Person(s) responsible for drafting the changes</td></tr>
+          <tr><td>Reviewer</td><td>Legal counsel or governance consultant who reviewed the changes</td></tr>
+          <tr><td>Distribution List</td><td>Persons and systems to which the version was distributed</td></tr>
+        </table>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-history icon"></i>Change Log</h3>
+        <table>
+          <tr><th>Version</th><th>Date</th><th>Changes</th><th>Approved By</th></tr>
+          <tr><td>v1.0</td><td>July 2026</td><td>Initial adoption — Master Edition covering Chapters 1–16 and Appendices A–B</td><td>Board of Directors</td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+        </table>
+        <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-muted);">Future amendments shall be logged in this table with complete version history maintained permanently.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-archive icon"></i>Archival and Access</h3>
+        <p>All versions of this Manual shall be archived in:</p>
+        <ul class="custom">
+          <li><strong>Physical Records:</strong> A signed, dated master copy maintained in the Foundation's corporate records;</li>
+          <li><strong>Digital Repository:</strong> A secure, backed-up digital archive (e.g., cloud storage with version history) accessible to all current Directors and Officers;</li>
+          <li><strong>Public Website:</strong> The current authoritative version (v1.0) shall be published on hasse.foundation in unredacted form, excluding confidential personnel or proprietary scientific matters.</li>
+        </ul>
+        <p style="margin-top:1rem;">Obsolete versions shall be retained for a minimum of seven (7) years for legal and audit purposes but clearly marked as superseded.</p>
+      </div>
+      <div class="clause-box">
+        <h3><i class="fas fa-file-alt icon"></i>Related Documents</h3>
+        <p>This Manual shall be read in conjunction with the following subordinate documents, each subject to its own version control:</p>
+        <ul class="custom">
+          <li>Articles of Incorporation (State of Missouri);</li>
+          <li>Bylaws of the Johann Christian Hasse Foundation;</li>
+          <li>Conflict of Interest Policy;</li>
+          <li>Whistleblower Policy;</li>
+          <li>Document Retention and Destruction Policy;</li>
+          <li>Delegation of Authority Policy;</li>
+          <li>Signature Authority Policy;</li>
+          <li>Code of Business Conduct and Ethics;</li>
+          <li>AI Governance Guidelines;</li>
+          <li>Committee Charters (Audit & Finance, Governance & Nominations, Compensation, Development);</li>
+          <li>Compensation Policy (including IRS rebuttable presumption procedure);</li>
+          <li>Investment Policy Statement;</li>
+          <li>Grantmaking and Fellowship Policies;</li>
+          <li>c-ECO Governance Framework (scientific governance document);</li>
+          <li>Amazon Living Lab Engagement Protocol.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="references">
+    <h3><i class="fas fa-bookmark" style="margin-right:0.5rem;color:var(--primary);"></i>References & Authorities</h3>
+    <ol>
+      <li>Missouri Revised Statutes, Chapter 355 — Nonprofit Corporations.</li>
+      <li>Internal Revenue Code, Section 501(c)(3) — Exemption from Tax on Corporations, Certain Trusts, etc.</li>
+      <li>Internal Revenue Code, Section 4941–4945 — Private Foundation Excise Taxes (self-dealing, minimum distribution, excess business holdings, jeopardizing investments, taxable expenditures).</li>
+      <li>IRS Form 990-PF — Return of Private Foundation or Section 4947(a)(1) Trust Treated as Private Foundation.</li>
+      <li>IRS Publication 1828 — Tax Guide for Churches and Religious Organizations (applicable principles for private foundations).</li>
+      <li>IRS Rebuttable Presumption Procedure — Safe harbor for setting compensation of disqualified persons (IRC § 4958).</li>
+      <li>Sarbanes-Oxley Act of 2002, Section 802 — Criminal Penalties for Altering, Destroying, Mutilating, or Concealing Records in Federal Investigations and Bankruptcy.</li>
+      <li>BoardSource — <em>The Source: Twelve Principles of Governance That Power Exceptional Boards</em> (Washington, D.C.: BoardSource, 2023).</li>
+      <li>Independent Sector — <em>Principles for Good Governance and Ethical Practice: A Guide for Charities and Foundations</em> (Washington, D.C.: Independent Sector, 2015, updated 2023).</li>
+      <li>Council on Foundations — <em>Legal Compendium for Private Foundations</em> (Washington, D.C.: Council on Foundations, 2022).</li>
+      <li>National Council of Nonprofits — <em>Nonprofit Governance: A Guide for Small and Mid-Sized Organizations</em> (Washington, D.C.: National Council of Nonprofits, 2023).</li>
+      <li>c-ECO Governance Framework — <em>Theoretical Framework for Practice (TFP) and Threshold Dynamics Research (TDR): Governance Integration Protocol</em> (c-ECO, 2026).</li>
+    </ol>
+  </section>
+
+  <div class="copyright">
+    <p><strong>Johann Christian Hasse Foundation</strong></p>
+    <p>A Missouri nonprofit corporation | Section 501(c)(3) private foundation</p>
+    <p>hasse.foundation | c-eco.org</p>
+    <p style="margin-top:0.5rem;">© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
+    <p>Master Edition v1.0 — Controlling version: English</p>
+    <p style="margin-top:0.5rem;font-size:0.7rem;">This document is a governance instrument and does not constitute legal advice. The Foundation's Articles of Incorporation and Bylaws control in case of conflict.</p>
+  </div>
+</main>
+
+<button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print / PDF</button>
+
+<script>
+  function setActive(el) {
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+  }
+  
+  // Auto-highlight nav on scroll
+  const chapters = document.querySelectorAll('.chapter');
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    chapters.forEach(chapter => {
+      const chapterTop = chapter.offsetTop;
+      if (scrollY >= chapterTop - 200) {
+        current = chapter.getAttribute('id');
+      }
+    });
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') === '#' + current) {
+        item.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
