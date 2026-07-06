@@ -23,356 +23,336 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ACT II — CLEAN FACTUAL TEXT SECTION */
-        .act-two-viewport {
+        /* ACT I — MISSION */
+        .act-one-container {
             max-width: 850px;
             margin: 0 auto;
-            padding: 120px 40px 60px;
+            padding: 140px 40px 60px;
             text-align: left;
-            background-color: var(--parchment);
         }
 
-        .act-title {
+        .act-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .main-heading {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 38px; 
+            font-size: 48px;
             font-weight: 400;
-            margin: 0 0 24px 0;
-            color: var(--charcoal);
+            line-height: 1.25;
+            margin: 0 0 32px 0;
             letter-spacing: -0.01em;
         }
 
-        .act-intro {
+        .editorial-p {
             font-size: 16px;
             font-weight: 300;
-            line-height: 1.75; 
+            line-height: 1.75;
             color: var(--charcoal);
-            margin-bottom: 40px;
+            margin-bottom: 24px;
+            text-align: justify;
         }
 
-        .factual-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .factual-item {
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 32px;
-            font-weight: 300;
-            color: var(--charcoal);
-        }
-
-        .factual-item strong {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 500;
-            display: block;
-            color: var(--gold);
-            margin-bottom: 6px;
-        }
-
-        /* ACT III — EDITORIAL ALTERNATING RHYTHM */
-        .act-three-title-block {
-            max-width: 900px;
-            margin: 80px auto 0;
-            padding: 0 40px;
-            text-align: left;
-        }
-
-        .act-three-heading {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--muted);
+        /* STRUCTURAL QUESTION ZONE */
+        .question-zone {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 40px;
+            text-align: center;
             border-top: 1px solid var(--line);
-            padding-top: 24px;
-            margin: 0;
-        }
-
-        .system-row {
-            display: flex;
-            align-items: center;
-            min-height: 100vh;
-            padding: 120px 8%;
-            box-sizing: border-box;
-            gap: 8%;
-            background-color: var(--parchment);
             border-bottom: 1px solid var(--line);
         }
 
-        /* Alternância Visual de Revista de Prestígio (Padrão Apple) */
-        .system-row:nth-child(even) {
-            flex-direction: row-reverse;
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 26px;
+            line-height: 1.4;
+            color: var(--gold);
+            max-width: 680px;
+            margin: 0 auto;
         }
 
-        .system-media-container {
-            flex: 0 0 60%; /* Fotografia documental imponente ocupando a maior parte */
+        /* ACT II — SECTOR MODULES */
+        .sector-block {
+            max-width: 900px;
+            margin: 120px auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .sector-photography {
+            width: 100%;
             height: 70vh;
             background-color: #f2ede0; 
             border-radius: 2px;
-            border: 1px solid rgba(24, 12, 4, 0.05);
+            margin-bottom: 36px;
         }
 
-        .system-text-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column; 
-            justify-content: center;
-        }
-
-        .system-label {
-            font-size: 12px;
-            font-weight: 500; 
+        .sector-num {
+            font-size: 13px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--charcoal);
-            margin-bottom: 20px;
+            letter-spacing: 0.12em;
+            margin-bottom: 18px;
         }
 
-        .system-quote {
+        .sector-phrase {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: 26px;
             line-height: 1.35;
             color: var(--gold);
             margin-bottom: 24px;
+            max-width: 85%;
         }
 
-        .system-body-text {
-            font-size: 15px;
+        .sector-summary {
+            font-size: 15.5px;
             font-weight: 300;
             line-height: 1.68;
-            text-align: justify; 
-            margin-bottom: 28px;
-            color: var(--charcoal);
+            max-width: 760px;
+            text-align: justify;
+            margin-bottom: 24px;
         }
 
-        .system-footer-link {
-            font-size: 11px;
+        .evasive-link {
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.10em;
+            letter-spacing: 0.08em;
             color: var(--gold);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             display: inline-block;
-            align-self: flex-start;
             border-bottom: 1px solid transparent;
             transition: border 0.3s ease;
         }
 
-        .system-footer-link:hover {
+        .evasive-link:hover {
             border-bottom-color: var(--gold);
         }
 
-        @media(max-width: 950px) {
-            .system-row, .system-row:nth-child(even) {
-                flex-direction: column;
-                padding: 60px 20px;
-                min-height: auto;
-            }
-            .system-media-container, .system-text-container {
-                flex: 0 0 100%;
-                width: 100%;
-            }
-            .system-media-container {
-                height: 45vh;
-                margin-bottom: 32px;
-            }
+        /* ACT V — WHY THE FOUNDATION? */
+        .why-hasse-container {
+            max-width: 850px;
+            margin: 120px auto;
+            padding: 40px;
+            border-top: 1px solid var(--line);
+        }
+
+        .why-hasse-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .why-hasse-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .why-unit strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .why-unit p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* THE SILENT PAUSE */
+        .macro-pause-view {
+            width: 100%;
+            height: 100vh;
+            background-color: #eae5d4; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .macro-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 34px;
+            color: var(--charcoal);
+            max-width: 750px;
+            line-height: 1.4;
+        }
+
+        /* ACT VI — CLIMAX ZONE */
+        .climax-dark-zone {
+            background-color: var(--charcoal);
+            color: var(--parchment);
+            padding: 140px 10%;
+            text-align: center;
+        }
+
+        .climax-head {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 400;
+            color: var(--parchment);
+            margin: 0 0 40px 0;
+        }
+
+        .agenda-grid {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: left;
+            border-top: 1px solid rgba(252, 250, 238, 0.15);
+            padding-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .agenda-unit strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .agenda-unit p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--parchment);
+            opacity: 0.75;
+        }
+
+        .pre-cta-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--parchment);
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .btn-final-mission {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 18px 48px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-final-mission:hover {
+            background-color: #7a7162;
         }
     </style>
 </head>
 <body>
 
     <!-- ACT I -->
-    <section class="section-container">
-        <div class="section-tag">Our Mission</div>
-        <h1 class="monumental-title">Building governance for an increasingly interconnected world.</h1>
+    <section class="act-one-container">
+        <div class="act-tag">Our Mission</div>
+        <h1 class="main-heading">Modern societies depend on systems that were designed to operate independently. Reality no longer behaves that way.</h1>
         <p class="editorial-p">
-            Modern civilization depends on systems that no longer operate independently. Energy affects artificial intelligence. Water affects agriculture. Climate affects finance. Biodiversity affects supply chains. Institutions designed for isolated problems increasingly face interconnected realities.
+            Across energy, water, artificial intelligence, finance, ecosystems, infrastructure, and public institutions, our research identified the same recurring pattern: institutions consistently recognize systemic risk only after critical thresholds have already begun to close.
+        </p>
+        <p class="editorial-p">
+            The consequence is not simply slower decision-making[cite: 2]. It is the gradual, compounding loss of the opportunity to act while meaningful choices still exist[cite: 2]. Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond[cite: 2]. We define this structural disconnect as the **Recognition-Action Gap**[cite: 2].
         </p>
     </section>
 
-    <!-- THE QUESTION -->
+    <!-- ACT II — THE QUESTION -->
     <section class="question-zone">
         <div class="question-text">
-            "Can institutions designed for the twentieth century govern twenty-first century systemic risks?"
+            "Can institutions designed for the twentieth century govern twenty-first century systemic risks?"[cite: 2]
         </div>
     </section>
 
-    <!-- LOOKING FOR THE ANSWER -->
-    <section class="section-container" style="padding-top: 20px;">
-        <p class="editorial-p">
-            Answering that question required looking beyond individual sectors. Rather than studying water, energy, finance, artificial intelligence, or ecosystems independently, the research examined where these systems intersect—and how governance performs under increasing systemic complexity. This work became the foundation of the *U.S. Memorandum* series.
-        </p>
-        <p class="editorial-p">
-            Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond. We define this structural disconnect as the **Recognition-Action Gap**.
-        </p>
-    </section>
-
-    <!-- ACT II — WHY EXISTING FRAMEWORKS ARE NO LONGER ENOUGH -->
-    <section class="act-two-viewport">
-        <h2 class="act-title">The Limitations of Contemporary Governance</h2>
-        <p class="act-intro">Traditional response mechanisms fall short against interconnected risks for three observable reasons:</p>
-        <ul class="factual-list">
-            <li class="factual-item">
-                <strong>Jurisdictional Silos:</strong> \n                Agencies manage independent sectors, leaving cross-sector feedback loops and cascade dynamics unmonitored.
-            </li>
-            <li class="factual-item">
-                <strong>Lagging Indicators:</strong> \n                Current frameworks measure damage after thresholds have been crossed, rather than forecasting the baseline velocity of stress.
-            </li>
-            <li class="factual-item">
-                <strong>Reactive Posture:</strong> \n                Public and private structures mobilize capital post-hoc, attempting to restore systems after reversibility has been operationally lost.
-            </li>
-        </ul>
-    </section>
-
-    <!-- ACT III — THE SYSTEMS WE DEPEND ON -->
-    <div class="act-three-title-block">
-        <h2 class="act-three-heading">The Systems We Depend On (The Empirical Evidence)</h2>
-    </div>
-
-    <!-- 01 // Water Security (Image Left / Text Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">01 // Water Security</div>
-            <div class="system-quote">"Every civilization has been shaped by water. The next century will be defined by how we govern it."</div>
-            <div class="system-body-text">Water systems no longer fail only because of drought or contamination. They collapse when governance, infrastructure, finance, cybersecurity, and public policy become structurally disconnected.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Water Governance Tracts → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 02 // Energy Systems (Text Left / Image Right — Automático via CSS) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">02 // Energy Systems</div>
-            <div class="system-quote">"Electrification is accelerating. Governance must accelerate with it."</div>
-            <div class="system-body-text">Building more generation alone is not enough. As exponential technology and data loads outpace traditional transmission, governance frameworks must evolve alongside physical infrastructure to ensure long-term stability and investment.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Grid Interconnection Blueprints → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 03 // Artificial Intelligence (Image Left / Text Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">03 // Artificial Intelligence</div>
-            <div class="system-quote">"The question is no longer whether AI will transform society, but whether governance can evolve at the same pace."</div>
-            <div class="system-body-text">Advanced computation is overriding biophysical boundaries, devouring massive regional resource allocations. The Foundation develops the legal parameters and accountability protocols to govern automated decision systems within real-world limits.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Algorithmic Accountability Frameworks → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 04 // Forests & Biodiversity (Text Left / Image Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">04 // Forests & Biodiversity</div>
-            <div class="system-quote">"The future of forests is no longer only an environmental question. It is a question of governance."</div>
-            <div class="system-body-text">Forests influence climate stability, water cycles, agriculture, financial markets, and global supply chains. Understanding these interconnected macro-feedbacks is essential for modern institutional foresight.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Amazon Living Lab Field Reports → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 05 // Financial Stability (Image Left / Text Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">05 // Financial Stability</div>
-            <div class="system-quote">"Climate-correlated natural catastrophes are contracting the boundaries of property insurability."</div>
-            <div class="system-body-text">Annual catastrophic losses are creating systemic vulnerabilities across real estate and credit markets. We design the macroprudential backstops and capital absorption models necessary to anchor long-term fiscal resilience.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Macroprudential Insurance Analytics → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 06 // Critical Infrastructure & Logistics (Text Left / Image Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">06 // Critical Infrastructure & Logistics</div>
-            <div class="system-quote">"Saturated transport corridors break global supply chains before resource exhaustion does."</div>
-            <div class="system-body-text">U.S. logistics and port infrastructures face critical capital deficits through 2033. When physical hubs choke, the entire transmission of resource security fails. We map the legal frameworks required for sustained intermodal investment continuity.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Intermodal Logistics Assessment → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- 07 // Public Governance (Image Left / Text Right) -->
-    <section class="system-row">
-        <div class="system-media-container"></div>
-        <div class="system-text-container">
-            <div class="system-label">07 // Public Governance</div>
-            <div class="system-quote">"The fragmentation of regulatory jurisdiction is the greatest amplifier of cascade risk."</div>
-            <div class="system-body-text">When risks cross traditional agency boundaries, isolated policy playbooks ensure systemic delay. The Foundation designs cross-jurisdictional governance tools capable of orchestrating response velocity across public and private lines.</div>
-            <a href="https://c-eco.org" class="system-footer-link">Continue reading: Cross-Jurisdictional Policy Models → c-eco.org</a>
-        </div>
-    </section>
-
-    <!-- ACT III — ALTERNATING CYCLES (EXAMPLE SYSTEM 1: IMAGE LEFT) -->
-    <section class="sector-block-alternating">
+    <!-- ACT III — CHAPTER EXAMPLE -->
+    <section class="sector-block">
         <div class="sector-photography"></div>
-        <div class="sector-content">
-            <div class="sector-num">01 // Water Security</div>
-            <div class="sector-phrase">"Every civilization has been shaped by water. The next century will be defined by how we govern it."</div>
-            <div class="sector-summary">Water systems no longer fail only because of drought or contamination. They collapse when governance, infrastructure, finance, cybersecurity, and public policy become disconnected.</div>
-            <a href="https://c-eco.org" class="hub-link">Continue reading: Water Governance Tracts →</a>
+        <div class="sector-num">01 // Water Security</div>
+        <div class="sector-phrase">"Every civilization has been shaped by water. The next century will be defined by how we govern it."[cite: 2]</div>
+        <div class="sector-summary">
+            Water systems no longer fail only because of drought or contamination[cite: 2]. They collapse when governance, infrastructure, finance, cybersecurity, and public policy become structurally disconnected[cite: 2].
         </div>
+        <a href="https://c-eco.org" class="evasive-link">Continue reading: Water Governance Tracts →[cite: 2]</a>
     </section>
 
-    <!-- ALTERNATING CYCLES (EXAMPLE SYSTEM 2: IMAGE RIGHT / REVERSE) -->
-    <section class="sector-block-alternating reverse">
-        <div class="sector-photography"></div>
-        <div class="sector-content">
-            <div class="sector-num">02 // Energy Systems</div>
-            <div class="sector-phrase">"Electrification is accelerating. Governance must accelerate with it."</div>
-            <div class="sector-summary">Building more generation alone is not enough. As exponential technology and data loads outpace traditional transmission, governance frameworks must evolve alongside physical infrastructure to ensure long-term stability and investment.</div>
-            <a href="https://c-eco.org" class="hub-link">Continue reading: Grid Interconnection Blueprints →</a>
-        </div>
-    </section>
-
-    <!-- ACT IV — WHY AN INDEPENDENT FOUNDATION -->
-    <section class="why-independent-container">
-        <div class="why-independent-title">Why an Independent Foundation?</div>
-        <ul class="why-independent-list">
-            <li>Long-term questions rarely fit within election cycles.</li>
-            <li>Interdisciplinary research rarely fits within institutional boundaries.</li>
-            <li>Global systemic risks rarely fit within national jurisdictions.</li>
-        </ul>
-        <div class="why-independent-footer">
-            For these reasons, independent institutions play an essential role in developing long-term governance capacity. The Johann Christian Hasse Foundation was created to contribute to that mission.
+    <!-- ACT V — WHY THE FOUNDATION? -->
+    <section class="why-hasse-container">
+        <div class="why-hasse-title">Why the Johann Christian Hasse Foundation?</div>
+        <div class="why-hasse-grid">
+            <div class="why-unit">
+                <strong>Independent</strong>
+                <p>We pursue long-term questions that extend beyond electoral cycles, market incentives, or individual institutions[cite: 2].</p>
+            </div>
+            <div class="why-unit">
+                <strong>Interdisciplinary</strong>
+                <p>Our work connects law, science, governance, technology, economics, and ecological systems[cite: 2].</p>
+            </div>
+            <div class="why-unit">
+                <strong>Global</strong>
+                <p>From the Amazon Living Lab to a growing international research network, our work is designed to generate knowledge with global relevance[cite: 2].</p>
+            </div>
+            <div class="why-unit">
+                <strong>Long-Term</strong>
+                <p>Institutional resilience is measured in decades, not news cycles[cite: 2].</p>
+            </div>
         </div>
     </section>
 
     <!-- THE SILENT PAUSE -->
     <section class="macro-pause-view">
-        <div class="macro-text">"Every resilient future begins with institutions capable of seeing what others overlook."</div>
+        <div class="macro-text">"Every resilient future begins with institutions capable of seeing what others overlook."[cite: 1, 2]</div>
     </section>
 
-    <!-- ACT V — THE AGENDA & FINAL CTA -->
+    <!-- ACT VI -->
     <section class="climax-dark-zone">
-        <h2 class="climax-head">Governance Before Collapse</h2>
+        <h2 class="climax-head">The Future Is Built Before It Is Needed.</h2>
         
         <div class="agenda-grid">
             <div class="agenda-unit">
                 <strong>Continue the Research</strong>
-                <p>The Memoranda are not an endpoint. They are the foundation of a broader research and institutional agenda that is only beginning.</p>
+                <p>The Memoranda are not an endpoint[cite: 2]. They are the foundation of a broader research and institutional agenda that is only beginning[cite: 2].</p>
             </div>
             <div class="agenda-unit">
                 <strong>Transform Knowledge into Institutions</strong>
-                <p>Driving legal innovation and structural frameworks for system-wide resilience.</p>
+                <p>Driving legal innovation and structural frameworks for system-wide resilience[cite: 2].</p>
             </div>
             <div class="agenda-unit">
                 <strong>Build the Living Labs Network</strong>
-                <p>Connecting long-term scientific research directly with real-world institutional capacity.</p>
+                <p>Connecting long-term scientific research directly with real-world institutional capacity[cite: 2].</p>
             </div>
             <div class="agenda-unit">
                 <strong>Prepare Future Leaders</strong>
-                <p>Equipping the next generation of civilizational governance through strategic international collaboration.</p>
+                <p>Equipping the next generation of civilizational governance through strategic international collaboration[cite: 2].</p>
             </div>
         </div>
 
-        <div class="pre-cta-quote">"Institutions cannot be built at the moment they are needed."</div>
+        <div class="pre-cta-quote">"Every institution that shapes the future begins with people willing to invest before the need becomes obvious."[cite: 2]</div>
         <button class="btn-final-mission">Support the Mission</button>
     </section>
 
