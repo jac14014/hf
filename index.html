@@ -11,7 +11,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <script type="module" crossorigin src="./assets/index-DB9sFV2e.js"></script>
+  <script type="module" crossorigin src="./assets/index-DB9sFV2e.js?v=20260705-copy"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-3CUQCPMQ.css">
     <style>
       .mobile-menu-button,
@@ -217,12 +217,6 @@
           return;
         }
         if (routeMap[key]) link.setAttribute("href", routeMap[key]);
-      });
-
-      const resourceLinks = [...document.querySelectorAll("a")]
-        .filter((link) => normalizeLabel(link.textContent) === "OPEN RESOURCE");
-      ["./doctrine.html", "./hasse.html", "./amazon-lab.html"].forEach((href, index) => {
-        if (resourceLinks[index]) resourceLinks[index].setAttribute("href", href);
       });
 
       const topLinks = [
