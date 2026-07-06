@@ -162,19 +162,26 @@
         }
 
         /* ACT III — CHAPTER EXAMPLE */
-        .sector-block {
-            max-width: 900px;
-            margin: 120px auto;
-            padding: 0 40px;
-            box-sizing: border-box;
-        }
 
-        .sector-photography {
+        .sector-video-container {
             width: 100%;
             height: 70vh;
-            background-color: #f2ede0; 
+            overflow: hidden;
+            position: relative;
             border-radius: 2px;
             margin-bottom: 36px;
+            border: 1px solid var(--line);
+            background-color: var(--charcoal); /* Fundo de segurança se o vídeo demorar a carregar */
+        }
+
+        .sector-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz o vídeo se comportar como background-size: cover, preenchendo o espaço sem distorcer */
+            opacity: 0.85; /* Integra sutilmente o vídeo à paleta escura e sofisticada do site */
+            filter: grayscale(0.2) contrast(1.05); /* Ajuste fino de cor para remover saturações berrantes */
+            display: block;
+        }
         }
 
         .sector-num {
@@ -595,9 +602,14 @@
     </div>
 </section>
 
-    <!-- ACT III — CHAPTER EXAMPLE -->
+    <!-- ACT III — CHAPTER EXAMPLE WITH LIVE CINEMATIC VIDEO -->
     <section class="sector-block">
-        <div class="sector-photography"></div>
+        <div class="sector-video-container">
+            <!-- O vídeo roda em loop, sem som, direto no carregamento e sem controles visuais -->
+            <video autoplay loop muted playsinline>
+                <source src="videos/water-security.mp4" type="video/mp4">
+            </video>
+        </div>
         <div class="sector-num">01 // Water Security</div>
         <div class="sector-phrase">"Every civilization has been shaped by water. The next century will be defined by how we govern it."</div>
         <div class="sector-summary">
