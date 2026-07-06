@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support the Mission — Johann Christian Hasse Foundation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --parchment: #fcfaee;
@@ -22,11 +23,16 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        .mobile-nav-toggle,
+        .mobile-nav-panel {
+            display: none;
+        }
+
         /* ACT I — MISSION */
         .act-one-container {
             max-width: 850px;
             margin: 0 auto;
-            padding: 140px 40px 60px;
+            padding: 180px 40px 60px;
             text-align: left;
         }
 
@@ -104,7 +110,7 @@
             display: inline-flex;
             gap: 40px;
             /* Centraliza perfeitamente o primeiro e o último slide na tela */
-            padding: 0 calc(50% - 400px); 
+            padding: 0 calc(50% - 400px);
         }
 
         .carousel-slide {
@@ -112,22 +118,22 @@
             width: 800px;
             scroll-snap-align: center;
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
-            opacity: 0.35; 
+            opacity: 0.35;
             transform: scale(0.92);
         }
 
         /* Efeito de foco central (Cannes-style focus) */
         .carousel-slide.active {
             opacity: 1;
-            transform: scale(1.02); 
+            transform: scale(1.02);
         }
 
         .carousel-slide img {
             width: 100%;
             height: auto;
             display: block;
-            border: 1px solid rgba(24, 12, 4, 0.15); 
-            border-radius: 2px; 
+            border: 1px solid rgba(24, 12, 4, 0.15);
+            border-radius: 2px;
             box-shadow: 0 20px 45px rgba(24, 12, 4, 0.08);
         }
 
@@ -136,7 +142,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 13px;
             font-weight: 500;
-            color: var(--gold); 
+            color: var(--gold);
             letter-spacing: 0.15em;
         }
 
@@ -182,7 +188,7 @@
             filter: grayscale(0.2) contrast(1.05); /* Ajuste fino de cor para remover saturações berrantes */
             display: block;
         }
-        
+
 
         /* CONFIGURAÇÃO DE SEGURANÇA RESTRITA - CORREÇÃO DE CORTE */
         .sector-block {
@@ -291,7 +297,7 @@
         .macro-pause-view {
             width: 100%;
             height: 100vh;
-            background-color: #eae5d4; 
+            background-color: #eae5d4;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -406,7 +412,7 @@
 .carousel-track {
     display: inline-flex;
     gap: 50px;
-    padding: 0 calc(50% - 400px); 
+    padding: 0 calc(50% - 400px);
 }
 
 .carousel-slide {
@@ -414,13 +420,13 @@
     width: 800px;
     scroll-snap-align: center;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
-    opacity: 0.3; 
+    opacity: 0.3;
     transform: scale(0.92);
 }
 
 .carousel-slide.active {
     opacity: 1;
-    transform: scale(1.02); 
+    transform: scale(1.02);
 }
 
 .slide-card-wrapper {
@@ -452,7 +458,7 @@
     height: 100%;
     transform: translate(-50%, -50%); /* Garante centralização cirúrgica */
     object-fit: cover;
-    opacity: 0.45; 
+    opacity: 0.45;
     filter: grayscale(0.2) contrast(1.1);
     z-index: -1; /* Joga o vídeo para a camada mais baixa de dentro do card */
 }
@@ -522,7 +528,7 @@
     .slide-title { font-size: 22px; }
     .slide-subtitle { font-size: 13px; }
 }
-        .slide-overlay-content {
+.slide-overlay-content {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     /* Gradiente sutil nas bordas para blindar a leitura contra qualquer linha do gráfico */
@@ -534,9 +540,264 @@
     text-align: left;
     box-sizing: border-box;
 }
+
+.candid-support {
+    max-width: 980px;
+    margin: 100px auto 0;
+    padding: 0 40px;
+}
+
+.candid-support-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 34px 38px;
+    border: 1px solid rgba(147, 137, 119, 0.28);
+    background: rgba(255, 255, 255, 0.52);
+}
+
+.bridge-kicker {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.candid-support h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 8px;
+}
+
+.candid-support p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.giving-panel {
+    background-color: #eae5d4;
+    padding: 110px 40px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 110px;
+}
+
+.giving-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.giving-head {
+    max-width: 720px;
+    margin-bottom: 46px;
+}
+
+.giving-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    line-height: 1.12;
+    font-weight: 400;
+    margin: 0 0 18px;
+}
+
+.giving-head p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.giving-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(24, 12, 4, 0.1);
+    border: 1px solid rgba(24, 12, 4, 0.1);
+}
+
+.giving-unit {
+    background: var(--parchment);
+    padding: 34px 30px;
+    min-height: 250px;
+}
+
+.giving-unit span {
+    display: block;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 34px;
+}
+
+.giving-unit h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0 0 14px;
+}
+
+.giving-unit p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.donation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.mission-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 2px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.why-give-section {
+    max-width: 900px;
+    margin: 120px auto 0;
+    padding: 0 40px;
+}
+
+.why-give-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    margin: 0 0 30px;
+}
+
+.why-give-section p {
+    color: var(--muted);
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 22px;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none !important;
+    }
+
+    .mobile-nav-toggle {
+        display: block !important;
+        background: transparent;
+        border: none;
+        color: #180c04;
+        font-size: 34px;
+        cursor: pointer;
+        z-index: 10000;
+    }
+
+    body.mobile-nav-open .mobile-nav-panel {
+        display: flex !important;
+        position: fixed;
+        top: 92px;
+        left: 18px;
+        right: 18px;
+        z-index: 9999;
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px;
+        background: rgba(252, 250, 238, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .mobile-nav-panel a {
+        color: #180c04;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .act-one-container {
+        padding-top: 150px;
+    }
+
+    .main-heading,
+    .climax-head {
+        font-size: 38px;
+    }
+
+    .editorial-p,
+    .sector-summary {
+        text-align: left;
+    }
+
+    .agenda-grid,
+    .why-hasse-grid,
+    .giving-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .climax-dark-zone,
+    .giving-panel {
+        padding: 80px 24px;
+    }
+
+    .candid-support {
+        padding: 0 24px;
+        margin: 70px auto;
+    }
+
+    .why-give-section {
+        padding: 0 24px;
+        margin: 70px auto 0;
+    }
+
+    .why-give-section p {
+        text-align: left;
+    }
+
+    .candid-support-box {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">Hasse Foundation</a>
+            <button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
+            <div class="nav-links">
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/hasse.html" class="nav-link">Johann Christian Hasse</a>
+                <a href="/governance.html" class="nav-link">Governance</a>
+                <a href="/donate.html" class="nav-link">Donate</a>
+                <a href="/doctrine.html" class="nav-link">Doctrine</a>
+                <a href="/fellowship.html" class="nav-link">Fellowship</a>
+                <a href="/amazon-lab.html" class="nav-link">Living Labs</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- ACT I -->
     <section class="act-one-container">
@@ -546,8 +807,9 @@
             Across energy, water, artificial intelligence, finance, ecosystems, infrastructure, and public institutions, our research identified the same recurring pattern: institutions consistently recognize systemic risk only after critical thresholds have already begun to close.
         </p>
         <p class="editorial-p">
-            The consequence is not simply slower decision-making. It is the gradual, compounding loss of the opportunity to act while meaningful choices still exist. Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond. We define this structural disconnect as the **Recognition-Action Gap**.
+            The consequence is not simply slower decision-making. It is the gradual, compounding loss of the opportunity to act while meaningful choices still exist. Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond. We define this structural disconnect as the <strong>Recognition-Action Gap</strong>.
         </p>
+    </section>
 
     <!-- ACT II — THE QUESTION -->
     <section class="question-zone">
@@ -560,7 +822,7 @@
     <section class="storytelling-carousel-section">
         <div class="carousel-container" id="hasseCarousel">
             <div class="carousel-track">
-                
+
                 <!-- PANEL 1: IMAGE MODE -->
                 <div class="carousel-slide active">
                     <div class="slide-card-wrapper image-mode" style="background-image: url('images/panel1.jpg');">
@@ -757,6 +1019,66 @@
         </div>
     </section>
 
+    <section class="why-give-section">
+        <div class="bridge-kicker">Why Give</div>
+        <h2>Support anticipatory governance before thresholds close.</h2>
+        <p>The world has entered an era in which the speed of systemic change increasingly exceeds the capacity of institutions to recognize, coordinate, and respond. Across critical infrastructure, energy systems, water security, artificial intelligence, public health, financial stability, and ecological resilience, evidence points to the same structural pattern: governance is becoming progressively more reactive while the cost of delayed action continues to rise.</p>
+        <p>Our research has documented this convergence across multiple sectors. Delays measured in months or years between the recognition of emerging risks and effective institutional response are no longer isolated administrative challenges; they have become a defining feature of modern governance. As systems grow more interconnected, these delays compound, increasing the probability that manageable risks evolve into irreversible crises.</p>
+        <p>The Johann Christian Hasse Foundation was established to address this governance gap. Rather than focusing on individual disasters, we develop the legal, scientific, and institutional frameworks that enable earlier recognition, more informed decision-making, and coordinated action before critical thresholds are crossed. Our work integrates interdisciplinary research, legal architecture, predictive governance methodologies, and international collaboration into practical tools that can be adapted by governments, research institutions, civil society, and the private sector.</p>
+        <p>Support for the Foundation directly advances the development of the c-ECO Governance Framework, Threshold Dynamics Research, the Amazon Living Lab, institutional fellowships, and the preservation of knowledge required to strengthen long-term societal resilience. Every contribution helps build the governance capacity needed not simply to respond to crises, but to reduce the likelihood that they become irreversible in the first place.</p>
+        <p>Investing in this work is an investment in the future capacity of institutions to anticipate systemic risk, protect communities, and preserve the conditions for long-term resilience in an increasingly complex world.</p>
+    </section>
+
+    <section class="giving-panel" id="give">
+        <div class="giving-inner">
+            <div class="giving-head">
+                <div class="bridge-kicker">Ways to Give</div>
+                <h2>Support the Foundation's research, field work, and public-interest institutional design.</h2>
+                <p>Contributions may be made online, by wire transfer, or through in-kind institutional support.</p>
+            </div>
+
+            <div class="giving-grid">
+                <div class="giving-unit">
+                    <span>01</span>
+                    <h3>Online</h3>
+                    <p>Secure online donation via Give Lively with Stripe. Recommended for one-time and recurring contributions.</p>
+                    <div class="donation-actions">
+                        <a href="https://hasse.foundation/donate#" class="mission-link-button">Donate Now</a>
+                    </div>
+                </div>
+                <div class="giving-unit">
+                    <span>02</span>
+                    <h3>Wire Transfer</h3>
+                    <p>For larger contributions or institutional giving. Contact us directly for wire instructions and donor acknowledgment.</p>
+                    <div class="donation-actions">
+                        <a href="mailto:contact@c-eco.org?subject=Wire Transfer Donation Instructions" class="mission-link-button">Request Wire Info</a>
+                    </div>
+                </div>
+                <div class="giving-unit">
+                    <span>03</span>
+                    <h3>In-Kind</h3>
+                    <p>Research partnerships, pro bono legal services, technical infrastructure, or field equipment for the Amazon Living Lab.</p>
+                    <div class="donation-actions">
+                        <a href="mailto:contact@c-eco.org?subject=In-Kind Contribution" class="mission-link-button">Propose In-Kind</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="candid-support">
+        <div class="candid-support-box">
+            <div>
+                <div class="bridge-kicker">Transparency</div>
+                <h2>Candid Gold Seal of Transparency</h2>
+                <p>View the Foundation's public Candid profile for independent nonprofit transparency information.</p>
+            </div>
+            <a href="https://app.candid.org/profile/16566998/johann-christian-hasse-foundation-41-4138929/?pkId=bbb618e5-9c99-4280-ae51-ceca9f73810a" target="_blank" rel="noopener noreferrer" class="candid-seal-link" aria-label="View Johann Christian Hasse Foundation profile on Candid">
+                <img src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16566998/svg" alt="" class="candid-seal" loading="lazy">
+            </a>
+        </div>
+    </section>
+
     <!-- THE SILENT PAUSE -->
     <section class="macro-pause-view">
         <div class="macro-text">"Every resilient future begins with institutions capable of seeing what others overlook."</div>
@@ -765,7 +1087,7 @@
     <!-- ACT VI -->
     <section class="climax-dark-zone">
         <h2 class="climax-head">The Future Is Built Before It Is Needed.</h2>
-        
+
         <div class="agenda-grid">
             <div class="agenda-unit">
                 <strong>Continue the Research</strong>
@@ -786,9 +1108,22 @@
         </div>
 
         <div class="pre-cta-quote">"Every institution that shapes the future begins with people willing to invest before the need becomes obvious."</div>
-        
+
     </section>
-    
+
+    <footer class="site-footer">
+        <p class="footer-quote">Law. Science. Institutional Resilience.</p>
+        <div class="footer-links">
+            <a href="https://c-eco.io" target="_blank" rel="noopener noreferrer">c-ECO</a>
+            <a href="https://github.com/jac14014/lab" target="_blank" rel="noopener noreferrer">Lab</a>
+            <a href="sitemap.html">Site Map</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
+        </div>
+    </footer>
+
     <!-- CAROUSEL SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -836,6 +1171,27 @@
 
             // Inicialização no load
             updateActiveSlide();
+        });
+    </script>
+    <script>
+        const mobileToggle = document.querySelector(".mobile-nav-toggle");
+
+        const panel = document.createElement("div");
+        panel.className = "mobile-nav-panel";
+        panel.innerHTML = `
+            <a href="/about.html">About</a>
+            <a href="/hasse.html">Johann Christian Hasse</a>
+            <a href="/governance.html">Governance</a>
+            <a href="/donate.html">Donate</a>
+            <a href="/doctrine.html">Doctrine</a>
+            <a href="/fellowship.html">Fellowship</a>
+            <a href="/amazon-lab.html">Living Labs</a>
+        `;
+        document.body.appendChild(panel);
+
+        mobileToggle.addEventListener("click", function () {
+            document.body.classList.toggle("mobile-nav-open");
+            mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
         });
     </script>
 </body>

@@ -1,175 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  .mobile-nav-toggle,
-  .mobile-nav-panel {
-    display: none;
-  }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support the Johann Christian Hasse Foundation's work on anticipatory governance, institutional memory, and living systems research.">
+    <title>Donate — Johann Christian Hasse Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --parchment: #fcfaee;
+            --charcoal: #180c04;
+            --gold: #938977;
+            --muted: #696969;
+            --line: rgba(24, 12, 4, 0.08);
+        }
 
-  @media (max-width: 768px) {
+        body {
+            margin: 0;
+            background-color: var(--parchment);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .mobile-nav-toggle,
+        .mobile-nav-panel {
+            display: none;
+        }
+
+        /* ACT I — MISSION */
+        .act-one-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 180px 40px 60px;
+            text-align: left;
+        }
+
+        .act-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .main-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.25;
+            margin: 0 0 32px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .editorial-p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+            text-align: justify;
+        }
+
+        /* STRUCTURAL QUESTION ZONE */
+        .question-zone {
+            max-width: 850px;
+            margin: 60px auto 20px;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--line);
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 26px;
+            line-height: 1.4;
+            color: var(--gold);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================
+           NARRATIVE CAROUSEL SECTION (NEW MODULE)
+           ========================================== */
+        .storytelling-carousel-section {
+            padding: 40px 0 80px;
+            background-color: var(--parchment);
+            text-align: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .carousel-container {
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            white-space: nowrap;
+            padding: 50px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Oculta scrollbar mantendo comportamento nativo */
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-track {
+            display: inline-flex;
+            gap: 40px;
+            /* Centraliza perfeitamente o primeiro e o último slide na tela */
+            padding: 0 calc(50% - 400px);
+        }
+
+        .carousel-slide {
+            flex: 0 0 800px;
+            width: 800px;
+            scroll-snap-align: center;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+            opacity: 0.35;
+            transform: scale(0.92);
+        }
+
+        /* Efeito de foco central (Cannes-style focus) */
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid rgba(24, 12, 4, 0.15);
+            border-radius: 2px;
+            box-shadow: 0 20px 45px rgba(24, 12, 4, 0.08);
+        }
+
+        .carousel-indicator {
+            margin-top: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+        }
+
+        .carousel-indicator .current-slide {
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .carousel-indicator .divider {
+            margin: 0 6px;
+            opacity: 0.5;
+        }
+
+        /* Ajuste responsivo básico para manter proporção se a tela for menor que o card */
+        @media (max-width: 840px) {
+            .carousel-track {
+                padding: 0 20px;
+            }
+            .carousel-slide {
+                flex: 0 0 calc(100vw - 40px);
+                width: calc(100vw - 40px);
+            }
+        }
+
+        /* ACT III — CHAPTER EXAMPLE */
+
+        .sector-video-container {
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            position: relative;
+            border-radius: 2px;
+            margin-bottom: 36px;
+            border: 1px solid var(--line);
+            background-color: var(--charcoal); /* Fundo de segurança se o vídeo demorar a carregar */
+        }
+
+        .sector-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz o vídeo se comportar como background-size: cover, preenchendo o espaço sem distorcer */
+            opacity: 0.85; /* Integra sutilmente o vídeo à paleta escura e sofisticada do site */
+            filter: grayscale(0.2) contrast(1.05); /* Ajuste fino de cor para remover saturações berrantes */
+            display: block;
+        }
+
+
+        /* CONFIGURAÇÃO DE SEGURANÇA RESTRITA - CORREÇÃO DE CORTE */
+        .sector-block {
+            max-width: 900px;
+            margin: 120px auto;
+            padding: 0 40px;
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total do elemento */
+            width: 100%; /* Permite que o container encolha em telas menores */
+        }
+
+        .sector-num {
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .sector-phrase {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 26px;
+            line-height: 1.35;
+            color: var(--gold);
+            margin-bottom: 24px;
+            max-width: 100%; /* Corrigido de 85% para 100% para evitar saltos de linha agressivos */
+            white-space: normal; /* Garante que o texto quebre as linhas de forma nativa e flua para baixo */
+        }
+
+        .sector-summary {
+            font-size: 15.5px;
+            font-weight: 300;
+            line-height: 1.68;
+            max-width: 100%; /* Corrigido para ocupar o espaço disponível com elegância */
+            text-align: justify;
+            margin-bottom: 24px;
+            white-space: normal;
+        }
+
+        .evasive-link {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: border 0.3s ease;
+            max-width: 100%;
+        }
+
+        /* AJUSTE MOBILE CRUCIAL (Telas de Celular) */
+        @media (max-width: 768px) {
+            .sector-block {
+                padding: 0 24px; /* Diminui ligeiramente as margens em telas muito pequenas para o texto ganhar espaço */
+                margin: 60px auto; /* Reduz o espaçamento vertical excessivo no mobile */
+            }
+            .sector-phrase {
+                font-size: 22px; /* Reduz sutilmente a fonte do título de água no mobile para uma leitura equilibrada */
+            }
+            .sector-summary {
+                font-size: 14.5px;
+            }
+        }
+
+        /* ACT V — WHY THE FOUNDATION? */
+        .why-hasse-container {
+            max-width: 850px;
+            margin: 120px auto;
+            padding: 40px;
+            border-top: 1px solid var(--line);
+        }
+
+        .why-hasse-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .why-hasse-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .why-unit strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .why-unit p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* THE SILENT PAUSE */
+        .macro-pause-view {
+            width: 100%;
+            height: 100vh;
+            background-color: #eae5d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .macro-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 34px;
+            color: var(--charcoal);
+            max-width: 750px;
+            line-height: 1.4;
+        }
+
+        /* ACT VI — CLIMAX ZONE */
+        .climax-dark-zone {
+            background-color: var(--charcoal);
+            color: var(--parchment);
+            padding: 140px 10%;
+            text-align: center;
+        }
+
+        .climax-head {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 400;
+            color: var(--parchment);
+            margin: 0 0 40px 0;
+        }
+
+        .agenda-grid {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: left;
+            border-top: 1px solid rgba(252, 250, 238, 0.15);
+            padding-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .agenda-unit strong {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .agenda-unit p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--parchment);
+            opacity: 0.75;
+        }
+
+        .pre-cta-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--parchment);
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .btn-final-mission {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 18px 48px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-final-mission:hover {
+            background-color: #7a7162;
+        }
+        /* ===================================================
+   NARRATIVE CAROUSEL WITH TEXT OVERLAY
+   =================================================== */
+.storytelling-carousel-section {
+    padding: 60px 0 100px;
+    background-color: var(--parchment);
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+}
+
+.carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+    padding: 30px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-track {
+    display: inline-flex;
+    gap: 50px;
+    padding: 0 calc(50% - 400px);
+}
+
+.carousel-slide {
+    flex: 0 0 800px;
+    width: 800px;
+    scroll-snap-align: center;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+    opacity: 0.3;
+    transform: scale(0.92);
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.slide-card-wrapper {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(24, 12, 4, 0.2);
+    border-radius: 2px;
+    box-shadow: 0 30px 70px rgba(24, 12, 4, 0.12);
+    position: relative;
+    box-sizing: border-box;
+    white-space: normal;
+    /* BLINDAGEM DE OVERFLOW */
+    overflow: hidden; /* Impede estritamente que qualquer vídeo saia das linhas do card */
+    z-index: 1;
+}
+
+.slide-card-wrapper.video-mode {
+    background-color: var(--charcoal);
+}
+
+/* Força o vídeo a ficar preso no fundo absoluto, sem sobrepor o HTML irmão */
+.slide-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%); /* Garante centralização cirúrgica */
+    object-fit: cover;
+    opacity: 0.45;
+    filter: grayscale(0.2) contrast(1.1);
+    z-index: -1; /* Joga o vídeo para a camada mais baixa de dentro do card */
+}
+
+/* Garante que o texto fique por cima de tudo com contraste */
+.slide-overlay-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(24, 12, 4, 0.4) 0%, rgba(24, 12, 4, 0.85) 90%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    box-sizing: border-box;
+    z-index: 2; /* Garante que o texto fique visível acima do vídeo */
+}
+
+/* Filtro escuro sutil para garantir legibilidade absoluta do texto */
+.slide-overlay-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(24, 12, 4, 0.2) 0%, rgba(24, 12, 4, 0.85) 100%);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Tipografia Editorial de Luxo baseada no DNA da Fundação */
+.slide-metric {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    color: var(--parchment);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+}
+
+.slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--gold);
+    margin: 0 0 14px 0;
+    font-weight: 500;
+}
+
+.slide-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--parchment);
+    opacity: 0.85;
+    margin: 0;
+    font-weight: 300;
+    max-width: 680px;
+}
+
+/* Ajustes Responsivos de Tela */
+@media (max-width: 860px) {
+    .carousel-track { padding: 0 20px; gap: 20px; }
+    .carousel-slide { flex: 0 0 calc(100vw - 40px); width: calc(100vw - 40px); }
+    .slide-card-wrapper { height: 460px; }
+    .slide-metric { font-size: 38px; }
+    .slide-title { font-size: 22px; }
+    .slide-subtitle { font-size: 13px; }
+}
+        .slide-overlay-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Gradiente sutil nas bordas para blindar a leitura contra qualquer linha do gráfico */
+    background: linear-gradient(180deg, rgba(24, 12, 4, 0.4) 0%, rgba(24, 12, 4, 0.85) 90%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Mantém os textos ancorados na base com elegância */
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.support-bridge {
+    max-width: 980px;
+    margin: 110px auto;
+    padding: 0 40px;
+}
+
+.support-bridge-inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.bridge-kicker {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.bridge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0;
+}
+
+.bridge-copy p {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 18px;
+}
+
+.giving-panel {
+    background-color: #eae5d4;
+    padding: 110px 40px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.giving-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.giving-head {
+    max-width: 720px;
+    margin-bottom: 46px;
+}
+
+.giving-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    line-height: 1.12;
+    font-weight: 400;
+    margin: 0 0 18px;
+}
+
+.giving-head p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.giving-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(24, 12, 4, 0.1);
+    border: 1px solid rgba(24, 12, 4, 0.1);
+}
+
+.giving-unit {
+    background: var(--parchment);
+    padding: 34px 30px;
+    min-height: 250px;
+}
+
+.giving-unit span {
+    display: block;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 34px;
+}
+
+.giving-unit h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0 0 14px;
+}
+
+.giving-unit p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.candid-support {
+    max-width: 980px;
+    margin: 100px auto 0;
+    padding: 0 40px;
+}
+
+.candid-support-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 34px 38px;
+    border: 1px solid rgba(147, 137, 119, 0.28);
+    background: rgba(255, 255, 255, 0.52);
+}
+
+.candid-support h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 8px;
+}
+
+.candid-support p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.donation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.mission-link-button,
+.mission-link-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.mission-link-button {
+    background: var(--gold);
+    color: #fff;
+}
+
+.mission-link-ghost {
+    border: 1px solid rgba(252, 250, 238, 0.45);
+    color: var(--parchment);
+}
+
+.btn-final-mission {
+    text-decoration: none;
+    display: inline-flex;
+}
+
+@media (max-width: 900px) {
+    .support-bridge-inner,
+    .giving-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .candid-support-box {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .agenda-grid,
+    .why-hasse-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
     .nav-links {
-      display: none !important;
+        display: none !important;
     }
 
     .mobile-nav-toggle {
-      display: block !important;
-      background: transparent;
-      border: none;
-      color: #180c04;
-      font-size: 34px;
-      cursor: pointer;
-      z-index: 10000;
+        display: block !important;
+        background: transparent;
+        border: none;
+        color: #180c04;
+        font-size: 34px;
+        cursor: pointer;
+        z-index: 10000;
     }
 
     body.mobile-nav-open .mobile-nav-panel {
-      display: flex !important;
-      position: fixed;
-      top: 92px;
-      left: 18px;
-      right: 18px;
-      z-index: 9999;
-      flex-direction: column;
-      gap: 18px;
-      padding: 24px;
-      background: rgba(252, 250, 238, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.18);
+        display: flex !important;
+        position: fixed;
+        top: 92px;
+        left: 18px;
+        right: 18px;
+        z-index: 9999;
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px;
+        background: rgba(252, 250, 238, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.18);
     }
 
     .mobile-nav-panel a {
-      color: #180c04;
-      text-decoration: none;
-      font-family: Inter, sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+        color: #180c04;
+        text-decoration: none;
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
     }
-  }
-</style>
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Support the Johann Christian Hasse Foundation — donate to advance legal architecture for anticipatory governance and living systems." />
-  <title>Donate — Johann Christian Hasse Foundation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+
+    .act-one-container {
+        padding-top: 150px;
+    }
+
+    .main-heading,
+    .climax-head {
+        font-size: 38px;
+    }
+
+    .editorial-p,
+    .sector-summary {
+        text-align: left;
+    }
+
+    .support-bridge,
+    .candid-support {
+        padding: 0 24px;
+        margin: 70px auto;
+    }
+
+    .giving-panel,
+    .climax-dark-zone {
+        padding: 80px 24px;
+    }
+}
+    </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">Hasse Foundation</a>
-
-<button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
-
-<div class="nav-links">
-        <a href="/about.html" class="nav-link">About</a>
-        <a href="/hasse.html" class="nav-link">Johann Christian Hasse</a>
-        <a href="/governance.html" class="nav-link">Governance</a>
-        <a href="/donate.html" class="nav-link">Donate</a>
-        <a href="/doctrine.html" class="nav-link">Doctrine</a>
-        <a href="/fellowship.html" class="nav-link">Fellowship</a>
-        <a href="/amazon-lab.html" class="nav-link">Living Labs</a>
-      </div>
-    </div>
-  </nav>
-
-  <header class="page-header">
-    <p class="overline">Support the Mission</p>
-    <h1 class="page-title">Donate</h1>
-    <p class="page-subtitle">Your contribution supports the development of legal architecture for anticipatory governance, institutional memory, and living systems research.</p>
-  </header>
-
-  <main class="page-content">
-    <section class="section blockquote">
-      <h2>Why Give</h2>
-      <p>The world has entered an era in which the speed of systemic change increasingly exceeds the capacity of institutions to recognize, coordinate, and respond. Across critical infrastructure, energy systems, water security, artificial intelligence, public health, financial stability, and ecological resilience, evidence points to the same structural pattern: governance is becoming progressively more reactive while the cost of delayed action continues to rise.</p>
-      <p>Our research has documented this convergence across multiple sectors. Delays measured in months or years between the recognition of emerging risks and effective institutional response are no longer isolated administrative challenges; they have become a defining feature of modern governance. As systems grow more interconnected, these delays compound, increasing the probability that manageable risks evolve into irreversible crises.</p>
-      <p>The Johann Christian Hasse Foundation was established to address this governance gap. Rather than focusing on individual disasters, we develop the legal, scientific, and institutional frameworks that enable earlier recognition, more informed decision-making, and coordinated action before critical thresholds are crossed. Our work integrates interdisciplinary research, legal architecture, predictive governance methodologies, and international collaboration into practical tools that can be adapted by governments, research institutions, civil society, and the private sector.</p>
-      <p>Support for the Foundation directly advances the development of the c-ECO Governance Framework, Threshold Dynamics Research, the Amazon Living Lab, institutional fellowships, and the preservation of knowledge required to strengthen long-term societal resilience. Every contribution helps build the governance capacity needed not simply to respond to crises, but to reduce the likelihood that they become irreversible in the first place.</p>
-      <p>Investing in this work is an investment in the future capacity of institutions to anticipate systemic risk, protect communities, and preserve the conditions for long-term resilience in an increasingly complex world.</p>
-    </section>
-
-
-    <section class="section candid-feature">
-      <div class="candid-copy">
-        <p class="overline">Transparency</p>
-        <h2>Candid Gold Seal of Transparency</h2>
-        <p>View the Foundation's public Candid profile for independent nonprofit transparency information.</p>
-      </div>
-      <a href="https://app.candid.org/profile/16566998/johann-christian-hasse-foundation-41-4138929/?pkId=bbb618e5-9c99-4280-ae51-ceca9f73810a" target="_blank" rel="noopener noreferrer" class="candid-seal-link" aria-label="View Johann Christian Hasse Foundation profile on Candid">
-        <img src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16566998/svg" alt="" class="candid-seal" loading="lazy" />
-      </a>
-    </section>
-
-    <section class="section">
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:#180c04;margin-bottom:24px;">Ways to Give</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Online</h3>
-          <p>Secure online donation via Give Lively with Stripe. Recommended for one-time and recurring contributions.</p>
-          <p style="margin-top:16px;"><a href="#" class="btn-donate" onclick="alert('Give Lively donation link will be activated once the Foundation completes Stripe for Nonprofits setup. Contact us for direct wire instructions in the meantime.'); return false;">Donate Now</a></p>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">Hasse Foundation</a>
+            <button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
+            <div class="nav-links">
+                <a href="/about.html" class="nav-link">About</a>
+                <a href="/hasse.html" class="nav-link">Johann Christian Hasse</a>
+                <a href="/governance.html" class="nav-link">Governance</a>
+                <a href="/donate.html" class="nav-link">Donate</a>
+                <a href="/doctrine.html" class="nav-link">Doctrine</a>
+                <a href="/fellowship.html" class="nav-link">Fellowship</a>
+                <a href="/amazon-lab.html" class="nav-link">Living Labs</a>
+            </div>
         </div>
-        <div class="card">
-          <h3>Wire Transfer</h3>
-          <p>For larger contributions or institutional giving. Contact us directly for wire instructions and donor acknowledgment.</p>
-          <p style="margin-top:16px;"><a href="mailto:contact@c-eco.org?subject=Wire Transfer Donation Instructions" class="btn">Request Wire Info</a></p>
+    </nav>
+
+    <!-- ACT I -->
+    <section class="act-one-container">
+        <div class="act-tag">Our Mission</div>
+        <h1 class="main-heading">Modern societies depend on systems that were designed to operate independently. Reality no longer behaves that way.</h1>
+        <p class="editorial-p">
+            Across energy, water, artificial intelligence, finance, ecosystems, infrastructure, and public institutions, our research identified the same recurring pattern: institutions consistently recognize systemic risk only after critical thresholds have already begun to close.
+        </p>
+        <p class="editorial-p">
+            The consequence is not simply slower decision-making. It is the gradual, compounding loss of the opportunity to act while meaningful choices still exist. Our research suggests that one of the defining challenges of contemporary governance is the growing gap between the speed of systemic change and the capacity of institutions to respond. We define this structural disconnect as the <strong>Recognition-Action Gap</strong>.
+        </p>
+    </section>
+
+    <!-- ACT II — THE QUESTION -->
+    <section class="question-zone">
+        <div class="question-text">
+            "Can institutions designed for the twentieth century govern twenty-first century systemic risks?"
         </div>
-        <div class="card">
-          <h3>In-Kind</h3>
-          <p>Research partnerships, pro bono legal services, technical infrastructure, or field equipment for the Amazon Living Lab.</p>
-          <p style="margin-top:16px;"><a href="mailto:contact@c-eco.org?subject=In-Kind Contribution" class="btn">Propose In-Kind</a></p>
+    </section>
+
+ <!-- NEW NARRATIVE HORIZONTAL CAROUSEL MODULE (TECH TERMINAL HYBRID) -->
+    <section class="storytelling-carousel-section">
+        <div class="carousel-container" id="hasseCarousel">
+            <div class="carousel-track">
+
+                <!-- PANEL 1: IMAGE MODE -->
+                <div class="carousel-slide active">
+                    <div class="slide-card-wrapper image-mode" style="background-image: url('images/panel1.jpg');">
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">$3.7 Trillion / $5T</div>
+                            <h3 class="slide-title">The Investment Deficit</h3>
+                            <p class="slide-subtitle">The cumulative cost of infrastructure deterioration acts as a permanent tax on capital, projected to erase $5 trillion from U.S. GDP by 2040 and increase household costs by $3,300 annually.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 2: VIDEO MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper video-mode">
+                        <video autoplay loop muted playsinline class="slide-video-bg">
+                            <source src="videos/panel2-chart.mp4" type="video/mp4">
+                        </video>
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">7 to 10 Years</div>
+                            <h3 class="slide-title">Decades vs. Election Cycles</h3>
+                            <p class="slide-subtitle">Federal environmental and extraction permitting for strategic copper and lithium reserves averages 8.4 years, decoupling long-term industrial strategy from 4-year political lifespans.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 3: VIDEO MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper video-mode">
+                        <video autoplay loop muted playsinline class="slide-video-bg">
+                            <source src="videos/panel3-chart.mp4" type="video/mp4">
+                        </video>
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">55 Months / 2.3 TW</div>
+                            <h3 class="slide-title">Trapped in the Queue</h3>
+                            <p class="slide-subtitle">Over 2,300 gigawatts of generation and storage sit frozen in interconnection queues. Systemic capacity metrics reveal that 77% of these vital projects withdraw due to unviable transmission upgrade fees.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 4: IMAGE MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper image-mode" style="background-image: url('images/panel4-chart.jpg');">
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">$112.7 Billion / 1 in 8</div>
+                            <h3 class="slide-title">The Uninsurable Spiral</h3>
+                            <p class="slide-subtitle">Climate-driven losses reached $112.7 billion in private insured damages. State residual markets (FAIR plans) face systemic insolvency as 12% of domestic properties migrate to uninsurable status.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 5: VIDEO MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper video-mode">
+                        <video autoplay loop muted playsinline class="slide-video-bg">
+                            <source src="videos/panel5-chart.mp4" type="video/mp4">
+                        </video>
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">40% by 2027</div>
+                            <h3 class="slide-title">Constrained Compute</h3>
+                            <p class="slide-subtitle">Hyperscale data centers and electrification require a 300% expansion in regional grid capacity. Power allocation analysis indicates 40% of advanced AI nodes will face physical grid curtailment by 2027.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 6: VIDEO MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper video-mode">
+                        <video autoplay loop muted playsinline class="slide-video-bg">
+                            <source src="videos/panel6-chart.mp4" type="video/mp4">
+                        </video>
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">40% Volume</div>
+                            <h3 class="slide-title">Sovereign Pharma Risk</h3>
+                            <p class="slide-subtitle">Active Pharmaceutical Ingredients (APIs) for critical generic antibiotics remain highly centralized. Foreign manufacturing monopolies control 40% of key volume nodes, leaving public health exposed to trade weaponization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 7: IMAGE MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper image-mode" style="background-image: url('images/panel7.jpg');">
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">$38 Billion / Grade C</div>
+                            <h3 class="slide-title">Saturated Hubs</h3>
+                            <p class="slide-subtitle">U.S. maritime infrastructure faces a $38B investment deficit through 2033. Supply chain modeling shows that container dwell times double instantly when key ports operate at over 85% continuous capacity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 8: VIDEO MODE -->
+                <div class="carousel-slide">
+                    <div class="slide-card-wrapper video-mode">
+                        <video autoplay loop muted playsinline class="slide-video-bg">
+                            <source src="videos/panel8-chart.mp4" type="video/mp4">
+                        </video>
+                        <div class="slide-overlay-content">
+                            <div class="slide-metric">44 Severe Incidents</div>
+                            <h3 class="slide-title">Fragile Connectivity</h3>
+                            <p class="slide-subtitle">Suboceanic digital infrastructure lacks geographic routing diversity. Forty-four separate subsea fiber cable cuts in a single year highlight that 99% of transoceanic internet traffic relies on just a few vulnerable bottlenecks.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-      </div>
+        <!-- Minimalist Indicator -->
+        <div class="carousel-indicator">
+            <span class="current-slide" id="currentIndicator">01</span>
+            <span class="divider">/</span>
+            <span class="total-slides">08</span>
+        </div>
+         <p><a href="#give" class="btn-final-mission">Support the Mission</a></p>
+    </section>
+    <!-- ACT III — CHAPTER EXAMPLE WITH LIVE CINEMATIC VIDEO -->
+    <section class="sector-block">
+        <div class="sector-video-container">
+            <!-- O vídeo roda em loop, sem som, direto no carregamento e sem controles visuais -->
+            <video autoplay loop muted playsinline>
+                <source src="videos/water-security.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="sector-num">01 // Water Security</div>
+        <div class="sector-phrase">"Every civilization has been shaped by water. The next century will be defined by how we govern it."</div>
+        <div class="sector-summary">
+            Water systems no longer fail only because of drought or contamination. They collapse when governance, infrastructure, finance, cybersecurity, and public policy become structurally disconnected.
+        </div>
+        <a href="https://c-eco.org/field-notes/index.html" class="evasive-link">Continue reading: Water Governance Tracts →</a>
+    </section>
+    <!-- ACT III (CONTINUED) — SECTOR MODULE 02 -->
+    <section class="sector-block">
+        <div class="sector-video-container">
+            <video autoplay loop muted playsinline>
+                <source src="videos/minerals-permitting.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="sector-num">02 // Critical Minerals</div>
+        <div class="sector-phrase">"Decades-long industrial strategies cannot survive when bound strictly to short-term electoral lifespans."</div>
+        <div class="sector-summary">
+            Federal environmental and extraction permitting for strategic copper and lithium reserves averages nearly a decade. This structural inertia decouples raw material security from the exponential speed of technological and industrial transitions.
+        </div>
+        <a href="https://c-eco.org/field-notes/index.html" class="evasive-link">Continue reading: Permitting Dynamics Tracts →</a>
     </section>
 
-    <section class="section blockquote">
-      <h2>Transparency</h2>
-      <p>The Foundation is committed to full donor transparency. Upon request, we provide detailed allocation reports showing how contributions are directed across research, field operations, and institutional infrastructure. All donations are acknowledged in accordance with applicable tax regulations.</p>
-      <p>For questions about giving, donor recognition, or institutional partnerships, please contact us directly.</p>
+    <!-- ACT III (CONTINUED) — SECTOR MODULE 03 -->
+    <section class="sector-block">
+        <div class="sector-video-container">
+            <video autoplay loop muted playsinline>
+                <source src="videos/energy-grid.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="sector-num">03 // Energy Infrastructure</div>
+        <div class="sector-phrase">"The active generation queue doubles national capacity, yet systemic friction forces the majority to withdraw."</div>
+        <div class="sector-summary">
+            Over 2,300 gigawatts of generation and storage sit frozen in interconnection queues facing an average 4.5-year backlog. Systemic capacity metrics reveal that 77% of these vital projects withdraw before commercial operation due to unviable transmission upgrade fees.
+        </div>
+        <a href="https://c-eco.org/field-notes/index.html" class="evasive-link">Continue reading: Grid Interconnection Tracts →</a>
     </section>
 
-    <section class="section" style="display:flex; gap:16px; flex-wrap:wrap;">
-      <a href="mailto:contact@c-eco.org?subject=Donation Inquiry" class="btn">Contact Us</a>
-      <a href="/" class="btn-ghost">← Back to Home</a>
+    <!-- ACT III (CONTINUED) — SECTOR MODULE 04 -->
+    <section class="sector-block">
+        <div class="sector-video-container">
+            <video autoplay loop muted playsinline>
+                <source src="videos/compute-load.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="sector-num">04 // Advanced Compute</div>
+        <div class="sector-phrase">"Artificial intelligence is driving massive grid load growth, moving faster than physical infrastructure can scale."</div>
+        <div class="sector-summary">
+            Hyperscale data centers and rapid electrification require a 300% expansion in regional grid capacity. Power allocation analysis indicates 40% of advanced AI nodes will face physical grid curtailment and operational power shortages within three years.
+        </div>
+        <a href="https://c-eco.org/field-notes/index.html" class="evasive-link">Continue reading: Compute Infrastructure Tracts →</a>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <p class="footer-quote">Law. Science. Institutional Resilience.</p>
-    <div class="footer-links">
-      <a href="https://c-eco.io" target="_blank" rel="noopener noreferrer">c-ECO</a>
-      <a href="https://github.com/jac14014/lab" target="_blank" rel="noopener noreferrer">Lab</a>
-      <a href="sitemap.html">Site Map</a>
-      <a href="donate.html">Donate</a>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
-    </div>
-  </footer>
-  <script>
-  const mobileToggle = document.querySelector(".mobile-nav-toggle");
+    <!-- ACT V — WHY GIVE THROUGH THE FOUNDATION? -->
+    <section class="support-bridge">
+        <div class="support-bridge-inner">
+            <div>
+                <div class="bridge-kicker">Why Give</div>
+                <h2 class="bridge-title">The work is slow by design, because institutions are built before crises arrive.</h2>
+            </div>
+            <div class="bridge-copy">
+                <p>Support for the Foundation advances legal architecture, research memoranda, threshold dynamics analysis, living systems field work, and the institutional memory required to make anticipatory governance practical.</p>
+                <p>Contributions help translate research into usable frameworks for public institutions, civil society, research partners, and communities facing systemic risk before the visible emergency begins.</p>
+            </div>
+        </div>
+    </section>
 
-  const panel = document.createElement("div");
-  panel.className = "mobile-nav-panel";
-  panel.innerHTML = `
-    <a href="/about.html">About</a>
-    <a href="/hasse.html">Johann Christian Hasse</a>
-    <a href="/governance.html">Governance</a>
-    <a href="/donate.html">Donate</a>
-    <a href="/doctrine.html">Doctrine</a>
-    <a href="/fellowship.html">Fellowship</a>
-    <a href="/amazon-lab.html">Living Labs</a>
-  `;
-  document.body.appendChild(panel);
+    <section class="why-hasse-container">
+        <div class="why-hasse-title">Why the Johann Christian Hasse Foundation?</div>
+        <div class="why-hasse-grid">
+            <div class="why-unit">
+                <strong>Independent</strong>
+                <p>We pursue long-term questions that extend beyond electoral cycles, market incentives, or individual institutions.</p>
+            </div>
+            <div class="why-unit">
+                <strong>Interdisciplinary</strong>
+                <p>Our work connects law, science, governance, technology, economics, and ecological systems.</p>
+            </div>
+            <div class="why-unit">
+                <strong>Field-Grounded</strong>
+                <p>The Amazon Living Lab connects legal theory with territory, evidence, and lived institutional constraints.</p>
+            </div>
+            <div class="why-unit">
+                <strong>Long-Term</strong>
+                <p>Institutional resilience is measured in decades, not news cycles.</p>
+            </div>
+        </div>
+    </section>
 
-  mobileToggle.addEventListener("click", function () {
-    document.body.classList.toggle("mobile-nav-open");
-    mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
-  });
-</script>
+    <section class="giving-panel" id="give">
+        <div class="giving-inner">
+            <div class="giving-head">
+                <div class="bridge-kicker">Ways to Give</div>
+                <h2>Contributions support research capacity, field infrastructure, and public-interest institutional design.</h2>
+                <p>For now, donor inquiries are handled directly while online donation infrastructure is finalized.</p>
+            </div>
+
+            <div class="giving-grid">
+                <div class="giving-unit">
+                    <span>01</span>
+                    <h3>Online Giving</h3>
+                    <p>Secure online giving will be activated after the Foundation completes its donation processor setup.</p>
+                    <div class="donation-actions">
+                        <a href="mailto:contact@c-eco.org?subject=Donation Inquiry" class="mission-link-button">Donation Inquiry</a>
+                    </div>
+                </div>
+                <div class="giving-unit">
+                    <span>02</span>
+                    <h3>Wire Transfer</h3>
+                    <p>For larger contributions, institutional gifts, or restricted support, contact us for wire instructions and acknowledgment details.</p>
+                    <div class="donation-actions">
+                        <a href="mailto:contact@c-eco.org?subject=Wire Transfer Donation Instructions" class="mission-link-button">Request Wire Info</a>
+                    </div>
+                </div>
+                <div class="giving-unit">
+                    <span>03</span>
+                    <h3>In-Kind Support</h3>
+                    <p>Research partnerships, pro bono legal services, technical infrastructure, and field equipment can directly strengthen the Foundation's work.</p>
+                    <div class="donation-actions">
+                        <a href="mailto:contact@c-eco.org?subject=In-Kind Contribution" class="mission-link-button">Propose In-Kind</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="candid-support">
+        <div class="candid-support-box">
+            <div>
+                <div class="bridge-kicker">Transparency</div>
+                <h2>Candid Gold Seal of Transparency</h2>
+                <p>View the Foundation's public Candid profile for independent nonprofit transparency information.</p>
+            </div>
+            <a href="https://app.candid.org/profile/16566998/johann-christian-hasse-foundation-41-4138929/?pkId=bbb618e5-9c99-4280-ae51-ceca9f73810a" target="_blank" rel="noopener noreferrer" class="candid-seal-link" aria-label="View Johann Christian Hasse Foundation profile on Candid">
+                <img src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16566998/svg" alt="" class="candid-seal" loading="lazy">
+            </a>
+        </div>
+    </section>
+
+    <!-- THE SILENT PAUSE -->
+    <section class="macro-pause-view">
+        <div class="macro-text">"Every resilient future begins with institutions capable of seeing what others overlook."</div>
+    </section>
+
+    <!-- ACT VI -->
+    <section class="climax-dark-zone">
+        <h2 class="climax-head">The Future Is Built Before It Is Needed.</h2>
+
+        <div class="agenda-grid">
+            <div class="agenda-unit">
+                <strong>Continue the Research</strong>
+                <p>The memoranda are a foundation for a broader research and institutional agenda.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Transform Knowledge into Institutions</strong>
+                <p>Developing legal tools and structural frameworks for system-wide resilience.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Build the Living Labs Network</strong>
+                <p>Connecting long-term scientific research directly with field evidence and institutional capacity.</p>
+            </div>
+            <div class="agenda-unit">
+                <strong>Prepare Future Leaders</strong>
+                <p>Equipping a new generation to govern systemic risk before thresholds close.</p>
+            </div>
+        </div>
+
+        <div class="pre-cta-quote">"Every institution that shapes the future begins with people willing to invest before the need becomes obvious."</div>
+        <div class="donation-actions" style="justify-content:center;">
+            <a href="mailto:contact@c-eco.org?subject=Donation Inquiry" class="mission-link-button">Contact the Foundation</a>
+            <a href="/" class="mission-link-ghost">Back to Home</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p class="footer-quote">Law. Science. Institutional Resilience.</p>
+        <div class="footer-links">
+            <a href="https://c-eco.io" target="_blank" rel="noopener noreferrer">c-ECO</a>
+            <a href="https://github.com/jac14014/lab" target="_blank" rel="noopener noreferrer">Lab</a>
+            <a href="sitemap.html">Site Map</a>
+            <a href="donate.html">Donate</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- CAROUSEL SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('hasseCarousel');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const currentIndicator = document.getElementById('currentIndicator');
+
+            let isScrolling;
+
+            const updateActiveSlide = () => {
+                const containerCenter = container.getBoundingClientRect().left + (container.offsetWidth / 2);
+                let closestSlideIndex = 0;
+                let minDistance = Infinity;
+
+                slides.forEach((slide, index) => {
+                    const slideRect = slide.getBoundingClientRect();
+                    const slideCenter = slideRect.left + (slideRect.width / 2);
+                    const distance = Math.abs(containerCenter - slideCenter);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestSlideIndex = index;
+                    }
+                });
+
+                // Atualiza classes active para o efeito transform de Cannes
+                slides.forEach((slide, index) => {
+                    if (index === closestSlideIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Atualiza o contador numérico (ex: 01, 02)
+                const formattedNum = String(closestSlideIndex + 1).padStart(2, '0');
+                currentIndicator.textContent = formattedNum;
+            };
+
+            // Escuta a rolagem com otimização de renderização nativa
+            container.addEventListener('scroll', () => {
+                window.cancelAnimationFrame(isScrolling);
+                isScrolling = window.requestAnimationFrame(updateActiveSlide);
+            });
+
+            // Inicialização no load
+            updateActiveSlide();
+        });
+    </script>
+    <script>
+        const mobileToggle = document.querySelector(".mobile-nav-toggle");
+
+        const panel = document.createElement("div");
+        panel.className = "mobile-nav-panel";
+        panel.innerHTML = `
+            <a href="/about.html">About</a>
+            <a href="/hasse.html">Johann Christian Hasse</a>
+            <a href="/governance.html">Governance</a>
+            <a href="/donate.html">Donate</a>
+            <a href="/doctrine.html">Doctrine</a>
+            <a href="/fellowship.html">Fellowship</a>
+            <a href="/amazon-lab.html">Living Labs</a>
+        `;
+        document.body.appendChild(panel);
+
+        mobileToggle.addEventListener("click", function () {
+            document.body.classList.toggle("mobile-nav-open");
+            mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
+        });
+    </script>
 </body>
 </html>
