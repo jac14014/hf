@@ -423,7 +423,6 @@
     transform: scale(1.02); 
 }
 
-/* Wrapper que puxa o fundo gerado por IA com baixa opacidade interna */
 .slide-card-wrapper {
     width: 100%;
     height: 500px;
@@ -434,7 +433,42 @@
     box-shadow: 0 30px 70px rgba(24, 12, 4, 0.12);
     position: relative;
     box-sizing: border-box;
-    white-space: normal; /* Permite que o texto quebre linhas corretamente */
+    white-space: normal;
+    /* BLINDAGEM DE OVERFLOW */
+    overflow: hidden; /* Impede estritamente que qualquer vídeo saia das linhas do card */
+    z-index: 1;
+}
+
+.slide-card-wrapper.video-mode {
+    background-color: var(--charcoal);
+}
+
+/* Força o vídeo a ficar preso no fundo absoluto, sem sobrepor o HTML irmão */
+.slide-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%); /* Garante centralização cirúrgica */
+    object-fit: cover;
+    opacity: 0.45; 
+    filter: grayscale(0.2) contrast(1.1);
+    z-index: -1; /* Joga o vídeo para a camada mais baixa de dentro do card */
+}
+
+/* Garante que o texto fique por cima de tudo com contraste */
+.slide-overlay-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(24, 12, 4, 0.4) 0%, rgba(24, 12, 4, 0.85) 90%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    box-sizing: border-box;
+    z-index: 2; /* Garante que o texto fique visível acima do vídeo */
 }
 
 /* Filtro escuro sutil para garantir legibilidade absoluta do texto */
