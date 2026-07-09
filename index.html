@@ -249,9 +249,60 @@
 
     }
 
+    function updateFoundationCopy() {
+      const replacements = new Map([
+        [
+          "MANDATE",
+          "FOUNDATION MANDATE"
+        ],
+        [
+          "Preserve. Research. Activate.",
+          "Preserve memory. Build doctrine. Activate governance."
+        ],
+        [
+          "The Foundation should read as an institution of record: quiet, researched, legally literate, and built for longevity. We preserve institutional memory as a public asset, develop legal frameworks for systemic and ecological risk, and translate archival continuity into research, doctrine, and field action. The Foundation is the institutional container; its programs are the operational arms.",
+          "The Johann Christian Hasse Foundation is an institution of record for legal memory, systemic-risk research, and long-term civic resilience. It preserves documentary continuity as a public asset, develops legal architecture for ecological and institutional thresholds, and translates that work into doctrine, fellowship, and field research. The Foundation remains the institutional home; its programs carry the work into law, research, and territory."
+        ],
+        [
+          "ARCHIVE",
+          "INSTITUTIONAL MEMORY"
+        ],
+        [
+          "Built from documentary memory",
+          "Documentary continuity as public infrastructure"
+        ],
+        [
+          "2026 — Foundation year. The institutional premise begins: time is life as memory. Kiel — Juridical lineage. A legal and scholarly inheritance carried through institutions, not nostalgia. Amazon — Living systems. Field intelligence where territory, law, climate, and public duty meet.",
+          "Archive here means more than storage. It is the disciplined preservation of lineage, memoranda, legal records, and research materials so institutional memory can remain usable over time. Kiel anchors the juridical lineage; the Foundation year marks the contemporary container; the Amazon gives the work its living-system test."
+        ],
+        [
+          "PROGRAMS",
+          "OPERATIONAL PROGRAMS"
+        ],
+        [
+          "Research, doctrine, field work",
+          "Doctrine, fellowship, living labs"
+        ],
+        [
+          "c-ECO and the living labs appear as initiatives of the Foundation, while the Foundation remains the institutional container. c-ECO Doctrine offers predictive governance and legal activation for ecological thresholds. Institutional Memory provides archival structure for memoranda, lineage records, and foundation documents. Living Labs conduct applied research in territory, with special focus on Amazon governance.",
+          "c-ECO Doctrine, the Fellowship Program, and the Living Labs operate as the Foundation's applied arms. c-ECO develops predictive governance and legal activation for systemic thresholds. The Fellowship trains case-based analysis and institutional translation. The Living Labs test research in territory, with the Amazon as the primary field context."
+        ]
+      ]);
+
+      document.querySelectorAll("h1, h2, h3, h4, p, span, li, a").forEach((node) => {
+        const text = node.textContent.trim().replace(/\s+/g, " ");
+        if (replacements.has(text)) {
+          node.textContent = replacements.get(text);
+        }
+      });
+    }
+
     window.addEventListener("load", updateIndexLinks);
+    window.addEventListener("load", updateFoundationCopy);
     setTimeout(updateIndexLinks, 150);
     setTimeout(updateIndexLinks, 800);
+    setTimeout(updateFoundationCopy, 150);
+    setTimeout(updateFoundationCopy, 800);
 
     const menuButton = document.createElement("button");
     menuButton.className = "mobile-menu-button";
