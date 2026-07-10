@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>CDRI Proposal PMO Dashboard | Johann Christian Hasse Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A227; --gold-light:#D4AF37; --gold-dark:#8B6914; --gold-pale:#F5F0E8;
+  --green:#1E3A2F; --green-soft:#EEF4EF; --blue:#263F5F; --red:#7A2F2F;
+  --ink:#1A1A1A; --ink-light:#444; --cream:#FDFCF8; --paper:#FFFFFF; --soft:#F8F5EE;
+  --line:#D8C99A; --shadow:0 0 30px rgba(0,0,0,.12);
+  --font-main:"Cormorant Garamond", Garamond, Georgia, serif;
+  --font-display:"Cormorant Garamond", Garamond, Georgia, serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-main); background:linear-gradient(135deg,#f5f0e8 0%,#ede6d8 100%);
+  color:var(--ink); line-height:1.62; font-size:11pt; min-height:100vh; padding-bottom:.75in;
+}
+.nav-tabs{
+  display:flex; justify-content:center; gap:0; background:white; border-bottom:1px solid var(--gold);
+  position:sticky; top:0; z-index:50; flex-wrap:wrap;
+}
+.nav-tab{
+  padding:.1in .16in; border:none; background:transparent; font-family:var(--font-display);
+  font-size:8.2pt; font-weight:600; color:#777; cursor:pointer; text-transform:uppercase;
+  letter-spacing:.08em; border-bottom:2px solid transparent; transition:all .25s ease;
+}
+.nav-tab:hover,.nav-tab.active{
+  color:var(--gold-dark); border-bottom-color:var(--gold); background:#fffaf0;
+}
+.print-bar{
+  position:fixed; bottom:0; left:0; right:0; background:white; border-top:2px solid var(--gold);
+  padding:.12in; display:flex; justify-content:center; gap:.15in;
+  box-shadow:0 -4px 15px rgba(0,0,0,.1); z-index:100;
+}
+.btn{
+  padding:.08in .25in; border:1px solid var(--gold); background:white; color:var(--gold-dark);
+  font-family:var(--font-display); font-size:9pt; font-weight:600; cursor:pointer;
+  text-transform:uppercase; letter-spacing:.08em;
+}
+.btn:hover,.btn-primary{background:var(--gold);color:white;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.page{
+  width:8.5in; min-height:11in; margin:0 auto .35in; background:white; position:relative;
+  box-shadow:var(--shadow); padding:0 .75in .75in; overflow:hidden;
+}
+.page::before{
+  content:''; position:absolute; top:.3in; left:.3in; right:.3in; bottom:.3in;
+  border:1.5px solid var(--gold); pointer-events:none; z-index:1;
+}
+.page::after{
+  content:''; position:absolute; top:.4in; left:.4in; right:.4in; bottom:.4in;
+  border:.5px solid var(--gold-light); pointer-events:none; opacity:.55; z-index:1;
+}
+.letterhead{
+  text-align:center; padding:.4in .75in .2in; border-bottom:1px solid var(--gold);
+  background:white; position:relative; z-index:2;
+}
+.org-name{
+  font-family:var(--font-display); font-size:15pt; font-weight:600; color:var(--gold-dark);
+  letter-spacing:.10em; text-transform:uppercase;
+}
+.org-address{font-size:9pt; color:#666; margin-top:.03in; font-style:italic;}
+.org-motto{
+  font-size:8pt; color:var(--gold); letter-spacing:.15em; text-transform:uppercase; margin-top:.05in;
+}
+.content{padding-top:.3in; position:relative; z-index:2;}
+.doc-title{text-align:center; margin-bottom:.28in;}
+.chapter-kicker{
+  font-family:var(--font-display); font-size:8.5pt; font-weight:600; color:var(--gold);
+  text-transform:uppercase; letter-spacing:.14em; margin-bottom:.08in;
+}
+.doc-title h1{
+  font-family:var(--font-display); font-size:19pt; font-weight:600; color:var(--gold-dark);
+  text-transform:uppercase; letter-spacing:.08em; line-height:1.25;
+}
+.doc-title .subtitle{
+  font-family:var(--font-main); font-size:10.5pt; color:#666; font-style:italic; margin-top:.08in;
+}
+.dashboard-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:.14in; margin:.2in 0;
+}
+.metric-card{
+  border:1px solid var(--line); background:#fff; padding:.13in; border-top:4px solid var(--gold);
+  text-align:center; break-inside:avoid;
+}
+.metric-number{font-size:22pt; color:var(--green); font-weight:700; line-height:1;}
+.metric-label{font-size:9.5pt; color:#555; line-height:1.45; margin-top:.06in;}
+.metric-number.danger{color:var(--red);}
+.metric-number.warning{color:var(--gold-dark);}
+.metric-number.success{color:var(--green);}
+.progress-bar-container{
+  background:#eee; border-radius:3px; height:8px; margin-top:8px; overflow:hidden;
+}
+.progress-bar-fill{
+  height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  border-radius:3px; transition:width .5s ease;
+}
+.progress-bar-fill.danger{background:linear-gradient(90deg,var(--red),#a05050);}
+.progress-bar-fill.warning{background:linear-gradient(90deg,var(--gold-dark),var(--gold));}
+.progress-bar-fill.success{background:linear-gradient(90deg,var(--green),#3d7a5f);}
+.table-wrapper{overflow-x:auto; margin:.16in 0;}
+table{
+  width:100%; border-collapse:collapse; font-size:8.8pt; background:#fff; break-inside:auto;
+}
+th{
+  background:var(--gold-pale); border-bottom:2px solid var(--gold); padding:.06in;
+  text-align:left; vertical-align:top; color:var(--ink); font-weight:700;
+}
+td{border-bottom:1px solid #eee; padding:.06in; vertical-align:top;}
+tr{break-inside:avoid;} tr:nth-child(even){background:#faf8f3;}
+.status-badge{
+  display:inline-block; padding:2px 8px; border-radius:2px; font-size:7.5pt;
+  font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+}
+.status-active{background:#E8F5E9;color:#2E7D32;}
+.status-pending{background:#FFF3E0;color:#E65100;}
+.status-progress{background:#E3F2FD;color:#1565C0;}
+.status-done{background:#ECEFF1;color:#455A64;}
+.status-monitoring{background:#F3E5F5;color:#6A1B9A;}
+.highlight-box,.note-box,.method-box,.warning-box,.analysis-box{
+  background:linear-gradient(135deg,#FDFCF8 0%,#F5F0E8 100%); border:1px solid var(--gold-light);
+  border-left:5px solid var(--gold); padding:.14in .16in; margin:.16in 0; border-radius:2px; break-inside:avoid;
+}
+.analysis-box{border-left-color:var(--green);background:#FBFCFA;}
+.method-box{border-left-color:var(--green);background:var(--green-soft);}
+.warning-box{border-left-color:var(--red);background:#FBF1EF;}
+.section-header{
+  font-family:var(--font-display); font-size:11.5pt; font-weight:600; color:var(--gold-dark);
+  text-transform:uppercase; letter-spacing:.08em; margin:.25in 0 .12in;
+  border-left:3px solid var(--gold); padding-left:.1in;
+}
+.subsection-header{
+  font-family:var(--font-display); font-size:10pt; font-weight:600; color:var(--green);
+  text-transform:uppercase; letter-spacing:.06em; margin:.18in 0 .08in;
+}
+.checkbox-cell{text-align:center; cursor:pointer; font-size:14pt; user-select:none;}
+.checkbox-cell:hover{background:#f5f0e8;}
+.site-footer{
+  width:100%; max-width:900px; margin:8px auto 0; padding:6px 12px;
+  border-top:.6px solid rgba(201,162,39,.45); font-family:var(--font-main); font-size:9pt;
+  font-weight:400; line-height:1.2; letter-spacing:.02em; text-align:center; color:#666;
+}
+@media(max-width:900px){
+  body{font-size:12pt;}
+  .page{width:100%;min-height:auto;margin:0;padding:0 .35in .55in;}
+  .page::before,.page::after{display:none;}
+  .dashboard-grid{grid-template-columns:repeat(2,1fr);}
+  .print-bar{position:static;}
+}
+@media(max-width:768px){
+  .letterhead{padding:.28in .24in .16in;}
+  .org-name{font-size:14pt;line-height:1.35;letter-spacing:.075em;}
+  .doc-title h1{font-size:16pt;}
+  .nav-tab{font-size:7.8pt;padding:.08in .12in;}
+  .dashboard-grid{grid-template-columns:1fr;}
+}
+@media print{
+  body{background:white;padding-bottom:0;}
+  .nav-tabs,.print-bar{display:none !important;}
+  .tab-content{display:block !important;}
+  .page{width:8.5in;min-height:11in;margin:0;box-shadow:none;page-break-after:always;}
+  .metric-card,.highlight-box,.note-box,.method-box,.warning-box,.analysis-box{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab(event,'dashboard')">Dashboard</button>
+  <button class="nav-tab" onclick="showTab(event,'leadership')">Leadership</button>
+  <button class="nav-tab" onclick="showTab(event,'consortium')">Consortium</button>
+  <button class="nav-tab" onclick="showTab(event,'scientific')">Scientific</button>
+  <button class="nav-tab" onclick="showTab(event,'proposal')">Proposal</button>
+  <button class="nav-tab" onclick="showTab(event,'finance')">Finance</button>
+  <button class="nav-tab" onclick="showTab(event,'government')">Government</button>
+  <button class="nav-tab" onclick="showTab(event,'advisory')">Advisory</button>
+  <button class="nav-tab" onclick="showTab(event,'milestones')">Milestones</button>
+  <button class="nav-tab" onclick="showTab(event,'decisions')">Decisions</button>
+  <button class="nav-tab" onclick="showTab(event,'risks')">Risks</button>
+  <button class="nav-tab" onclick="showTab(event,'contacts')">Contacts</button>
+  <button class="nav-tab" onclick="showTab(event,'deliverables')">Deliverables</button>
+</div>
+
+<div class="print-bar">
+  <button class="btn" onclick="window.print()">Print All</button>
+  <button class="btn btn-primary" onclick="printCurrent()">Print Current</button>
+  <button class="btn" onclick="saveData()">Save Data</button>
+  <button class="btn" onclick="document.getElementById('fileInput').click()">Load Data</button>
+  <input type="file" id="fileInput" style="display:none" accept=".json" onchange="loadDataFile(event)">
+</div>
+
+<!-- =========================
+     TAB 1: DASHBOARD
+========================= -->
+<section id="dashboard" class="tab-content active">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+      <div class="org-motto">Governance Before Collapse</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Project Management Office</div>
+        <h1>CDRI Proposal PMO Dashboard</h1>
+        <div class="subtitle">Real-Time Progress Tracking & Team Coordination</div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <div class="metric-number" id="dash-total">34</div>
+          <div class="metric-label"><strong>Total Deliverables</strong></div>
+          <div class="progress-bar-container"><div class="progress-bar-fill" id="bar-total" style="width:0%"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number success" id="dash-complete">0</div>
+          <div class="metric-label"><strong>Completed</strong></div>
+          <div class="progress-bar-container"><div class="progress-bar-fill success" id="bar-complete" style="width:0%"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number warning" id="dash-progress">0</div>
+          <div class="metric-label"><strong>In Progress</strong></div>
+          <div class="progress-bar-container"><div class="progress-bar-fill warning" id="bar-progress" style="width:0%"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number danger" id="dash-pending">34</div>
+          <div class="metric-label"><strong>Pending</strong></div>
+          <div class="progress-bar-container"><div class="progress-bar-fill danger" id="bar-pending" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <div class="metric-number" id="dash-weeks">4</div>
+          <div class="metric-label"><strong>Weeks to Deadline</strong><br>August 4, 2026</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="dash-overall">0%</div>
+          <div class="metric-label"><strong>Overall Completion</strong></div>
+          <div class="progress-bar-container"><div class="progress-bar-fill" id="bar-overall" style="width:0%"></div></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="dash-risks">12</div>
+          <div class="metric-label"><strong>Active Risks</strong><br>Monitoring</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="dash-decisions">10</div>
+          <div class="metric-label"><strong>Pending Decisions</strong></div>
+        </div>
+      </div>
+      <div class="section-header">Key Information</div>
+      <div class="highlight-box">
+        <table style="border:none;background:transparent;margin:0;">
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;width:35%;">Funding Call</td><td style="border:none;">CDRI Urban Infrastructure Resilience Programme</td></tr>
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;">Submission Deadline</td><td style="border:none;">August 4, 2026 — 23:59 IST</td></tr>
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;">Lead Organization</td><td style="border:none;">Johann Christian Hasse Foundation</td></tr>
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;">Current Stage</td><td style="border:none;">Consortium Development</td></tr>
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;">Current Version</td><td style="border:none;">v1.0</td></tr>
+          <tr style="background:transparent;"><td style="border:none;font-weight:700;">Last Updated</td><td style="border:none;" id="last-updated">2026-07-10</td></tr>
+        </table>
+      </div>
+      <div class="section-header">Quick Actions</div>
+      <div class="analysis-box">
+        <p><strong>How to use this dashboard:</strong></p>
+        <ul>
+          <li>Click any tab above to navigate between workstreams</li>
+          <li>Click checkboxes (☐) to mark milestones as complete</li>
+          <li>Click status badges to cycle through: Pending → In Progress → Complete</li>
+          <li>All changes are saved to your browser's local storage automatically</li>
+          <li>Use "Save Data" to export a backup file; "Load Data" to restore</li>
+          <li>Click "Print Current" to generate a PDF of the active tab</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 2: LEADERSHIP
+========================= -->
+<section id="leadership" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 1</div>
+        <h1>Leadership & Coordination</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Function</th><th>Lead</th><th>Priority</th><th>Immediate Actions</th><th>Expected Deliverables</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Overall Project Leadership</td><td>Jacqueline Alves</td>
+              <td><span class="status-badge status-active">P1 — Critical</span></td>
+              <td>Coordinate consortium; define strategy; assign workstreams; supervise proposal development</td>
+              <td>Proposal direction; decision log; final approval</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td>
+            </tr>
+            <tr>
+              <td>Proposal Management</td><td>Bonnie Blair</td>
+              <td><span class="status-badge status-active">P1 — Critical</span></td>
+              <td>Monitor proposal schedule; coordinate workstreams; review deliverables; conduct final proposal review</td>
+              <td>Proposal tracker; review reports; final quality assurance</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td>
+            </tr>
+            <tr>
+              <td>Proposal Operations</td><td>Bahman (Eric) Naraghi</td>
+              <td><span class="status-badge status-pending">P2 — High</span></td>
+              <td>Create proposal workflow; monitor milestones; organize documentation</td>
+              <td>Proposal management system; process documentation</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 3: CONSORTIUM
+========================= -->
+<section id="consortium" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 2</div>
+        <h1>Consortium Development</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Task</th><th>Lead</th><th>Support</th><th>Deliverable</th><th>Deadline</th><th>Next Action</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Confirm Lead Applicant</td><td>Jacqueline</td><td>UFAM</td><td>Applicant confirmed</td><td>Week 1</td><td>Draft confirmation letter</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Confirm Brazilian University</td><td>Jacqueline</td><td>Guilherme</td><td>Institutional confirmation</td><td>Week 1</td><td>Schedule meeting with rector</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Meet UFAM (Prof. Paulo Rodrigues)</td><td>Jacqueline</td><td>Guilherme</td><td>Meeting report; action items</td><td>Monday</td><td>Prepare agenda and briefing</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Engage Government Partner</td><td>Guilherme</td><td>UFAM</td><td>Government focal point identified</td><td>Week 2</td><td>Identify potential government partners</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Confirm International Advisors</td><td>Jacqueline</td><td>Andrew</td><td>Advisory team confirmed</td><td>Week 2</td><td>Send collaboration briefs</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Draft Consortium Agreement</td><td>Rudy</td><td>Brent</td><td>Consortium Agreement v0.1</td><td>Week 3</td><td>Review template agreement</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Letter of Support — UFAM</td><td>Jacqueline</td><td>Guilherme</td><td>Signed letter of support</td><td>Week 3</td><td>Request from Prof. Paulo</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Letter of Support — Government</td><td>Guilherme</td><td>UFAM</td><td>Signed letter of support</td><td>Week 3</td><td>Coordinate with state government</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 4: SCIENTIFIC
+========================= -->
+<section id="scientific" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 3</div>
+        <h1>Scientific & Technical Development</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Workstream</th><th>Task</th><th>Lead</th><th>Support</th><th>Deliverable</th><th>Deadline</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>GOVSYS Governance</strong></td><td>Develop GOVSYS Framework v1</td><td>Jacqueline</td><td>Ravi; Vijay</td><td>GOVSYS Framework v1</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td><strong>GOVSYS Governance</strong></td><td>Define governance principles & thresholds</td><td>Jacqueline</td><td>Andrew</td><td>Governance Principles Document</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>GOVSCAN</strong></td><td>Develop GOVSCAN Methodology</td><td>Jacqueline</td><td>Ravi</td><td>GOVSCAN Overview Document</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>GOVSCAN</strong></td><td>Design scanning protocols & indicators</td><td>Ravi</td><td>Vijay</td><td>Scanning Protocol v1</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>TFP</strong></td><td>Develop Theoretical Framework for Practice</td><td>Jacqueline</td><td>Andrew; Ravi</td><td>TFP Architecture v1</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td><strong>TFP</strong></td><td>Map sectoral applications (infrastructure)</td><td>Jacqueline</td><td>Vijay</td><td>Sectoral Application Map</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>Dashboard</strong></td><td>Develop Technical Architecture</td><td>Vijay</td><td>Ravi</td><td>Digital Architecture Blueprint</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>Dashboard</strong></td><td>Design UI/UX for monitoring dashboard</td><td>Vijay</td><td>Eric</td><td>Dashboard Wireframes</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>MEL</strong></td><td>Design MEL framework</td><td>Andrew</td><td>Ravi</td><td>MEL Framework v1</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>MEL</strong></td><td>Define KPIs and reporting structure</td><td>Andrew</td><td>Bonnie</td><td>KPI Matrix & Reporting Template</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>Scientific Validation</strong></td><td>Peer review of technical components</td><td>Ravi</td><td>Vijay</td><td>Validation Memo</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td><strong>Infrastructure Engineering</strong></td><td>Engineering strategy for resilience</td><td>UFAM</td><td>Foundation</td><td>Engineering Strategy Document</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 5: PROPOSAL
+========================= -->
+<section id="proposal" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 4</div>
+        <h1>Proposal Development</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Section</th><th>Lead</th><th>Support</th><th>Reviewer</th><th>Deliverable</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Executive Summary</td><td>Jacqueline</td><td>Bonnie</td><td>Bonnie</td><td>Executive Summary v1</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Project Concept Note</td><td>Jacqueline</td><td>Entire Team</td><td>Bonnie</td><td>Concept Note v1</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Theory of Change</td><td>Jacqueline</td><td>Andrew</td><td>Bonnie</td><td>ToC Diagram & Narrative</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Logical Framework</td><td>Andrew</td><td>Ravi</td><td>Bonnie</td><td>LogFrame Matrix</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Results Framework</td><td>Andrew</td><td>Ravi</td><td>Bonnie</td><td>Results Matrix & Indicators</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Technical Methodology</td><td>Jacqueline</td><td>Vijay; Ravi</td><td>Bonnie</td><td>Methodology Document</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Budget Narrative</td><td>Bonnie</td><td>Kunal; Sandy</td><td>Bonnie</td><td>Budget Narrative v1</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Sustainability Plan</td><td>Andrew</td><td>Kunal</td><td>Bonnie</td><td>Sustainability Strategy Document</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Risk Analysis</td><td>Brent</td><td>Sandy</td><td>Bonnie</td><td>Risk Register & Mitigation Plan</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Gender & Social Inclusion</td><td>Jacqueline</td><td>Andrew</td><td>Bonnie</td><td>GSI Strategy</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Environmental & Social Safeguards</td><td>Brent</td><td>Sandy</td><td>Bonnie</td><td>Safeguards Assessment</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Annexes & Supporting Documents</td><td>Eric</td><td>All</td><td>Bonnie</td><td>Complete Annex Package</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     TAB 6: FINANCE
+========================= -->
+<section id="finance" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 5</div>
+        <h1>Finance, Governance & Compliance</h1>
+      </div>
+      <div class="subsection-header">5.1 Financial Strategy</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Task</th><th>Lead</th><th>Support</th><th>Deliverable</th><th>Deadline</th><th>Status</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Develop overall financial strategy</td><td>Sandy</td><td>Kunal</td><td>Financial Strategy Document</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Align with CDRI funding guidelines</td>
+            </tr>
+            <tr><td>Infrastructure financing plan</td><td>Kunal</td><td>Sandy</td><td>Financing Plan v1</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Include co-financing sources</td>
+            </tr>
+            <tr><td>Budget ceiling allocation</td><td>Bonnie + Sandy + Kunal</td><td>—</td><td>Budget Allocation Matrix</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Pending decision register</td>
+            </tr>
+            <tr><td>Cost-benefit analysis</td><td>Kunal</td><td>Sandy</td><td>CBA Report</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Focus on resilience metrics</td>
+            </tr>
+            <tr><td>Financial sustainability model</td><td>Kunal</td><td>Andrew</td><td>Sustainability Financial Model</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Post-project viability</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="subsection-header">5.2 Compliance</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Task</th><th>Lead</th><th>Support</th><th>Deliverable</th><th>Deadline</th><th>Status</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compliance review & checklist</td><td>Brent</td><td>Lazaro</td><td>Compliance Checklist</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>CDRI-specific requirements</td>
+            </tr>
+            <tr><td>Risk compliance assessment</td><td>Brent</td><td>Sandy</td><td>Risk Compliance Report</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>ISO alignment</td>
+            </tr>
+            <tr><td>Environmental & social safeguards compliance</td><td>Brent</td><td>Sandy</td><td>Safeguards Compliance Memo</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>World Bank/IFC standards</td>
+            </tr>
+            <tr><td>Audit readiness preparation</td><td>Brent</td><td>Lazaro</td><td>Audit Readiness Package</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Financial & operational</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="subsection-header">5.3 Legal & Licensing</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Task</th><th>Lead</th><th>Support</th><th>Deliverable</th><th>Deadline</th><th>Status</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Licensing strategy for IP & software</td><td>Rudy</td><td>Lazaro</td><td>Licensing Framework</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Open-source vs proprietary</td>
+            </tr>
+            <tr><td>Consortium agreements drafting</td><td>Rudy</td><td>Brent</td><td>Consortium Agreement v1</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Multi-party legal framework</td>
+            </tr>
+            <tr><td>NDA & confidentiality protocols</td><td>Rudy</td><td>Lazaro</td><td>NDA Templates</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>For all partners & advisors</td>
+            </tr>
+            <tr><td>Legal review of proposal terms</td><td>Rudy</td><td>Brent</td><td>Legal Review Memo</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>CDRI contractual terms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 7: GOVERNMENT
+========================= -->
+<section id="government" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 6</div>
+        <h1>Government & Institutional Engagement</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Institution</th><th>Lead</th><th>Primary Contact</th><th>Objective</th><th>Next Action</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UFAM (Universidade Federal do Amazonas)</td><td>Jacqueline / Guilherme</td><td>Prof. Paulo Rodrigues</td><td>Academic Partner; Engineering & Research</td><td>Schedule meeting; prepare agenda</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>CCA (Centro de Ciências do Ambiente)</td><td>Jacqueline</td><td>Prof. André</td><td>Climate expertise; environmental assessment</td><td>Send collaboration brief</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>State Government (Pará)</td><td>Guilherme</td><td>TBD</td><td>Government Partner; policy alignment</td><td>Identify focal point</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Municipality (Beneficiary City)</td><td>Guilherme</td><td>TBD</td><td>Beneficiary City; implementation site</td><td>Await UFAM confirmation</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>PRODEPA</td><td>Guilherme</td><td>TBD</td><td>Digital infrastructure; data systems</td><td>Initial outreach</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Civil Defense (Defesa Civil)</td><td>Guilherme</td><td>TBD</td><td>Risk Management; emergency protocols</td><td>Coordinate with state government</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>SEMAS (Secretaria de Meio Ambiente)</td><td>Guilherme</td><td>TBD</td><td>Environmental licensing & permits</td><td>Pending government partner</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>FUNAI / ICMBio</td><td>Guilherme</td><td>TBD</td><td>Indigenous & protected areas coordination</td><td>Pending scope definition</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 8: ADVISORY
+========================= -->
+<section id="advisory" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 7</div>
+        <h1>International Advisory Engagement</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Advisor</th><th>Immediate Action</th><th>Requested Deliverable</th><th>Expected Contribution</th><th>Deadline</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Vijayakumar</td><td>Send Collaboration Brief</td><td>Technical Architecture Review</td><td>Review technical architecture; AI integration; academic partnerships</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Ravi</td><td>Technical meeting</td><td>Scientific Validation Memo</td><td>Scientific validation; peer review; methodology assessment</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Andrew</td><td>Governance review</td><td>Governance Review Memo</td><td>Governance framework; MEL design; institutional strategy</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Sandy</td><td>Financial review</td><td>Financial Strategy Review</td><td>Infrastructure finance; investment structuring; sustainability</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Kunal</td><td>Financing strategy meeting</td><td>Investment & Sustainability Assessment</td><td>Investment analysis; sustainability modeling; co-financing</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Brent</td><td>Compliance review</td><td>Compliance & Risk Assessment</td><td>Risk management; quality assurance; ISO alignment</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Rudy</td><td>Licensing discussion</td><td>International Legal Strategy Memo</td><td>Licensing framework; IP strategy; legal compliance</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Lazaro</td><td>Legal coordination</td><td>Brazil Legal Compliance Checklist</td><td>Brazilian legal framework; regulatory compliance</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     TAB 9: MILESTONES
+========================= -->
+<section id="milestones" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 8</div>
+        <h1>Weekly Milestones</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Week</th><th>Milestone</th><th>Owner</th><th>Deliverable</th><th>Completion</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Week 1</td><td>Leadership & Consortium Foundation</td><td>Jacqueline</td><td>Leadership confirmed; UFAM meeting held; applicant identified</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Week 1</td><td>Advisory Team Engagement</td><td>Jacqueline</td><td>All advisors contacted; collaboration briefs sent</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+            </tr>
+            <tr><td>Week 1</td><td>Initial Risk Assessment</td><td>Brent</td><td>Preliminary risk register drafted</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 2</td><td>Consortium Agreements</td><td>Rudy</td><td>Consortium agreement template drafted</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 2</td><td>GOVSYS Framework v1</td><td>Jacqueline</td><td>GOVSYS Framework initial draft</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 2</td><td>Financial Strategy Outline</td><td>Sandy + Kunal</td><td>Financial strategy document v0.1</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 2</td><td>Government Partner Identified</td><td>Guilherme</td><td>Government focal point confirmed</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 3</td><td>Technical Architecture Blueprint</td><td>Vijay</td><td>Digital architecture document</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 3</td><td>Budget Narrative v1</td><td>Bonnie</td><td>Budget narrative draft completed</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 3</td><td>Compliance Checklist</td><td>Brent</td><td>Full compliance checklist for CDRI</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 3</td><td>Letters of Support</td><td>Jacqueline + Guilherme</td><td>Signed letters from UFAM & government</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 4</td><td>Proposal Draft v0.5</td><td>Bonnie</td><td>Complete proposal first draft</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 4</td><td>Scientific Validation</td><td>Ravi</td><td>Validation memo completed</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Week 4</td><td>Final Review & Submission Prep</td><td>Bonnie + Jacqueline</td><td>Proposal ready for final review</td>
+              <td class="checkbox-cell" onclick="toggleCheckbox(this)">☐</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 10: DECISIONS
+========================= -->
+<section id="decisions" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 9</div>
+        <h1>Decision Register</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Decision</th><th>Owner</th><th>Due Date</th><th>Decision Date</th><th>Approved By</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lead Applicant (Johann Christian Hasse Foundation)</td><td>Jacqueline</td><td>Week 1</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Beneficiary City</td><td>Jacqueline + UFAM</td><td>Week 1</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Government Partner (State / Municipality)</td><td>Guilherme</td><td>Week 2</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Final Consortium Composition</td><td>Jacqueline</td><td>Week 2</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>GOVSYS Scope & Technical Boundaries</td><td>Jacqueline</td><td>Week 2</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Budget Ceiling Allocation</td><td>Bonnie + Sandy + Kunal</td><td>Week 3</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>International Advisor Contracts</td><td>Jacqueline</td><td>Week 2</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Proposal Submission Format (Online Platform)</td><td>Bonnie</td><td>Week 3</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Risk Acceptance Threshold</td><td>Brent + Jacqueline</td><td>Week 3</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+            <tr><td>Final Proposal Approval</td><td>Jacqueline + Bonnie</td><td>Week 4</td><td class="editable" contenteditable="true"></td><td class="editable" contenteditable="true"></td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     TAB 11: RISKS
+========================= -->
+<section id="risks" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 10</div>
+        <h1>Risks & Issues Register</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Risk / Issue</th><th>Owner</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UFAM declines partnership</td><td>Jacqueline</td><td>Medium</td><td>Critical</td><td>Engage alternative universities (UFPA, UNIFAP); leverage Prof. Paulo relationship</td><td>Pivot to UFPA as academic partner</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Government delays engagement</td><td>Guilherme</td><td>Medium</td><td>High</td><td>Early outreach; multiple government layers; leverage CCA connections</td><td>Proceed with civil society partners</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>No municipality confirmed as beneficiary</td><td>Guilherme</td><td>Medium</td><td>Critical</td><td>Pre-identify 2-3 candidate cities; prepare municipality profiles</td><td>Expand to state-level beneficiary</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Budget exceeds CDRI ceiling ($150K-$500K)</td><td>Bonnie + Sandy</td><td>Low</td><td>High</td><td>Strict budget control; tiered scope options; co-financing plan</td><td>Scope reduction to single-city focus</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>International advisor unavailable</td><td>Jacqueline</td><td>Low</td><td>Medium</td><td>Engage backup advisors; staggered engagement timeline</td><td>Redistribute tasks to internal team</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Letter of support delayed</td><td>Jacqueline + Guilherme</td><td>Medium</td><td>High</td><td>Early request; draft templates; follow-up schedule</td><td>Submit without letter (if allowed); explain in narrative</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Consortium agreement disputes</td><td>Rudy</td><td>Low</td><td>Medium</td><td>Clear terms from outset; template-based approach; legal review</td><td>Bilateral agreements instead of multilateral</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>CDRI eligibility criteria not met</td><td>Brent</td><td>Low</td><td>Critical</td><td>Pre-screen against criteria; compliance checklist; legal review</td><td>Pivot to alternative funding call</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Technical methodology rejected by reviewers</td><td>Jacqueline + Ravi</td><td>Low</td><td>High</td><td>Peer review before submission; scientific validation; alignment with CDRI priorities</td><td>Revise methodology based on feedback</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Competing priorities delay proposal development</td><td>Bonnie</td><td>Medium</td><td>Medium</td><td>Dedicated proposal development sprints; protected time blocks</td><td>Extend timeline; request deadline extension</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Brazilian legal/regulatory barriers</td><td>Rudy + Lazaro</td><td>Medium</td><td>High</td><td>Early legal review; regulatory mapping; PRODEPA coordination</td><td>Structure as international consortium with Brazilian sub-contract</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+            <tr><td>Data availability for GOVSYS/GOVSCAN</td><td>Vijay + Ravi</td><td>Medium</td><td>Medium</td><td>Identify open data sources; UFAM data partnerships; PRODEPA data access</td><td>Simplified methodology with available data</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="monitoring"><span class="status-badge status-monitoring">Monitoring</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 12: CONTACTS
+========================= -->
+<section id="contacts" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 11</div>
+        <h1>Contact Directory</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Organization</th><th>Contact Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Relationship</th><th>Status</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Johann Christian Hasse Foundation</td><td>Jacqueline Alves</td><td class="editable" contenteditable="true">jacqueline@hasse.foundation</td><td class="editable" contenteditable="true">—</td><td>Founder & Project Lead</td><td>Lead Applicant</td><td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td><td>Overall coordination</td></tr>
+            <tr><td>Johann Christian Hasse Foundation</td><td>Bonnie Blair</td><td class="editable" contenteditable="true">bonnie@hasse.foundation</td><td class="editable" contenteditable="true">—</td><td>Proposal Manager</td><td>Core Team</td><td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td><td>Quality assurance & review</td></tr>
+            <tr><td>Johann Christian Hasse Foundation</td><td>Bahman (Eric) Naraghi</td><td class="editable" contenteditable="true">eric@hasse.foundation</td><td class="editable" contenteditable="true">—</td><td>Operations Manager</td><td>Core Team</td><td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td><td>Workflow & documentation</td></tr>
+            <tr><td>UFAM</td><td>Prof. Paulo Rodrigues</td><td class="editable" contenteditable="true">paulo.rodrigues@ufam.edu.br</td><td class="editable" contenteditable="true">—</td><td>Academic Partner Lead</td><td>Consortium Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td><td>Meeting scheduled Monday</td></tr>
+            <tr><td>CCA</td><td>Prof. André</td><td class="editable" contenteditable="true">andre@cca.ufam.edu.br</td><td class="editable" contenteditable="true">—</td><td>Climate Expert</td><td>Consortium Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Awaiting collaboration brief</td></tr>
+            <tr><td>State Government (Pará)</td><td class="editable" contenteditable="true">TBD</td><td class="editable" contenteditable="true">—</td><td class="editable" contenteditable="true">—</td><td>Government Focal Point</td><td>Government Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>To be identified by Guilherme</td></tr>
+            <tr><td>Municipality</td><td class="editable" contenteditable="true">TBD</td><td class="editable" contenteditable="true">—</td><td class="editable" contenteditable="true">—</td><td>Beneficiary City Rep</td><td>Government Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Awaiting UFAM confirmation</td></tr>
+            <tr><td>PRODEPA</td><td class="editable" contenteditable="true">TBD</td><td class="editable" contenteditable="true">—</td><td class="editable" contenteditable="true">—</td><td>Digital Infrastructure</td><td>Government Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Initial outreach pending</td></tr>
+            <tr><td>Civil Defense</td><td class="editable" contenteditable="true">TBD</td><td class="editable" contenteditable="true">—</td><td class="editable" contenteditable="true">—</td><td>Risk Management</td><td>Government Partner</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Coordinate via state government</td></tr>
+            <tr><td>—</td><td>Vijayakumar</td><td class="editable" contenteditable="true">vijay@example.edu</td><td class="editable" contenteditable="true">—</td><td>Technical Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Technical architecture review</td></tr>
+            <tr><td>—</td><td>Ravi</td><td class="editable" contenteditable="true">ravi@example.edu</td><td class="editable" contenteditable="true">—</td><td>Scientific Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Scientific validation</td></tr>
+            <tr><td>—</td><td>Andrew</td><td class="editable" contenteditable="true">andrew@example.org</td><td class="editable" contenteditable="true">—</td><td>Governance Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Governance & MEL review</td></tr>
+            <tr><td>—</td><td>Sandy</td><td class="editable" contenteditable="true">sandy@example.org</td><td class="editable" contenteditable="true">—</td><td>Finance Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Infrastructure finance</td></tr>
+            <tr><td>—</td><td>Kunal</td><td class="editable" contenteditable="true">kunal@example.org</td><td class="editable" contenteditable="true">—</td><td>Investment Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Investment & sustainability</td></tr>
+            <tr><td>—</td><td>Brent</td><td class="editable" contenteditable="true">brent@example.org</td><td class="editable" contenteditable="true">—</td><td>Compliance Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Risk & quality assurance</td></tr>
+            <tr><td>—</td><td>Rudy</td><td class="editable" contenteditable="true">rudy@example.org</td><td class="editable" contenteditable="true">—</td><td>Legal Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>International legal strategy</td></tr>
+            <tr><td>—</td><td>Lazaro</td><td class="editable" contenteditable="true">lazaro@example.org</td><td class="editable" contenteditable="true">—</td><td>Brazil Legal Advisor</td><td>International Advisor</td><td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td><td>Brazilian legal compliance</td></tr>
+            <tr><td>—</td><td>Guilherme</td><td class="editable" contenteditable="true">guilherme@example.org</td><td class="editable" contenteditable="true">—</td><td>Brazil Coordinator</td><td>Core Team</td><td class="status-cell" onclick="cycleStatus(this)" data-status="active"><span class="status-badge status-active">Active</span></td><td>Government & institutional engagement</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAB 13: DELIVERABLES
+========================= -->
+<section id="deliverables" class="tab-content">
+  <div class="page">
+    <div class="letterhead">
+      <div class="org-name">Johann Christian Hasse Foundation</div>
+      <div class="org-address">CDRI Proposal Development Action Plan</div>
+    </div>
+    <div class="content">
+      <div class="doc-title">
+        <div class="chapter-kicker">Workstream 12</div>
+        <h1>Deliverables Tracker</h1>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Deliverable</th><th>Owner</th><th>Reviewer</th><th>Due Date</th><th>Status</th><th>File Link / Location</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Concept Note</td><td>Jacqueline</td><td>Bonnie</td><td>Week 1</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Core narrative for CDRI call</td>
+            </tr>
+            <tr><td>GOVSYS Framework v1</td><td>Jacqueline</td><td>Ravi</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Governance system architecture</td>
+            </tr>
+            <tr><td>GOVSCAN Methodology</td><td>Jacqueline</td><td>Ravi</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Scanning & monitoring protocol</td>
+            </tr>
+            <tr><td>TFP Architecture Document</td><td>Jacqueline</td><td>Andrew; Ravi</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="progress"><span class="status-badge status-progress">In Progress</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Theoretical Framework for Practice</td>
+            </tr>
+            <tr><td>Digital Architecture Blueprint</td><td>Vijay</td><td>Ravi</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Technical infrastructure design</td>
+            </tr>
+            <tr><td>Dashboard Wireframes</td><td>Vijay</td><td>Eric</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>UI/UX for monitoring system</td>
+            </tr>
+            <tr><td>MEL Framework v1</td><td>Andrew</td><td>Bonnie</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Monitoring, Evaluation & Learning</td>
+            </tr>
+            <tr><td>KPI Matrix & Reporting Template</td><td>Andrew</td><td>Bonnie</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Performance indicators</td>
+            </tr>
+            <tr><td>Scientific Validation Memo</td><td>Ravi</td><td>Vijay</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Peer review of technical components</td>
+            </tr>
+            <tr><td>Engineering Strategy Document</td><td>UFAM</td><td>Jacqueline</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Infrastructure engineering plan</td>
+            </tr>
+            <tr><td>Financial Strategy Document</td><td>Sandy</td><td>Kunal</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Overall financial approach</td>
+            </tr>
+            <tr><td>Financing Plan v1</td><td>Kunal</td><td>Sandy</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Co-financing & investment structure</td>
+            </tr>
+            <tr><td>Budget Narrative</td><td>Bonnie</td><td>Sandy; Kunal</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>CDRI-aligned budget justification</td>
+            </tr>
+            <tr><td>Budget Allocation Matrix</td><td>Bonnie + Sandy + Kunal</td><td>Jacqueline</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Pending decision register</td>
+            </tr>
+            <tr><td>Sustainability Financial Model</td><td>Kunal</td><td>Andrew</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Post-project financial viability</td>
+            </tr>
+            <tr><td>Compliance Checklist</td><td>Brent</td><td>Lazaro</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>CDRI eligibility & requirements</td>
+            </tr>
+            <tr><td>Risk Compliance Report</td><td>Brent</td><td>Sandy</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>ISO & risk alignment</td>
+            </tr>
+            <tr><td>Safeguards Compliance Memo</td><td>Brent</td><td>Sandy</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Environmental & social safeguards</td>
+            </tr>
+            <tr><td>Audit Readiness Package</td><td>Brent</td><td>Lazaro</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Financial & operational audit prep</td>
+            </tr>
+            <tr><td>Licensing Framework</td><td>Rudy</td><td>Lazaro</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>IP & software licensing strategy</td>
+            </tr>
+            <tr><td>Consortium Agreement v1</td><td>Rudy</td><td>Brent</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Multi-party legal framework</td>
+            </tr>
+            <tr><td>NDA Templates</td><td>Rudy</td><td>Lazaro</td><td>Week 2</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>For all partners & advisors</td>
+            </tr>
+            <tr><td>Legal Review Memo</td><td>Rudy</td><td>Brent</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>CDRI contractual terms analysis</td>
+            </tr>
+            <tr><td>Letter of Support — UFAM</td><td>Jacqueline</td><td>Guilherme</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Signed institutional commitment</td>
+            </tr>
+            <tr><td>Letter of Support — Government</td><td>Guilherme</td><td>UFAM</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Signed government commitment</td>
+            </tr>
+            <tr><td>Theory of Change Diagram & Narrative</td><td>Jacqueline</td><td>Andrew</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Visual + textual ToC</td>
+            </tr>
+            <tr><td>LogFrame Matrix</td><td>Andrew</td><td>Ravi</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Logical framework for proposal</td>
+            </tr>
+            <tr><td>Results Matrix & Indicators</td><td>Andrew</td><td>Ravi</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Measurable outcomes</td>
+            </tr>
+            <tr><td>Risk Register & Mitigation Plan</td><td>Brent</td><td>Sandy</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Comprehensive risk assessment</td>
+            </tr>
+            <tr><td>GSI Strategy</td><td>Jacqueline</td><td>Andrew</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Gender & Social Inclusion</td>
+            </tr>
+            <tr><td>Safeguards Assessment</td><td>Brent</td><td>Sandy</td><td>Week 3</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Environmental & social assessment</td>
+            </tr>
+            <tr><td>Complete Annex Package</td><td>Eric</td><td>All</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>All supporting documents compiled</td>
+            </tr>
+            <tr><td>Proposal Draft v0.5</td><td>Bonnie</td><td>Jacqueline</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Complete first draft</td>
+            </tr>
+            <tr><td>Proposal Final v1.0</td><td>Bonnie + Jacqueline</td><td>All Advisors</td><td>Week 4</td>
+              <td class="status-cell" onclick="cycleStatus(this)" data-status="pending"><span class="status-badge status-pending">Pending</span></td>
+              <td class="editable" contenteditable="true">—</td><td>Submission-ready proposal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">Johann Christian Hasse Foundation · c-ECO Amazon Lab · CDRI Proposal PMO Dashboard v1.0</footer>
+
+<script>
+// =========================
+// TAB NAVIGATION
+// =========================
+function showTab(event, tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateDashboard();
+}
+
+function printCurrent() {
+  const active = document.querySelector('.tab-content.active');
+  document.querySelectorAll('.tab-content').forEach(t => {
+    if (t !== active) { t.dataset.wasHidden = 'true'; t.style.display = 'none'; }
+  });
+  window.print();
+  document.querySelectorAll('.tab-content').forEach(t => {
+    if (t.dataset.wasHidden) { t.style.display = ''; delete t.dataset.wasHidden; }
+  });
+}
+
+// =========================
+// STATUS CYCLING
+// =========================
+const statusCycle = {
+  'pending': { next: 'progress', label: 'In Progress', class: 'status-progress' },
+  'progress': { next: 'done', label: 'Complete', class: 'status-done' },
+  'done': { next: 'pending', label: 'Pending', class: 'status-pending' },
+  'active': { next: 'done', label: 'Complete', class: 'status-done' },
+  'monitoring': { next: 'done', label: 'Complete', class: 'status-done' }
+};
+
+function cycleStatus(cell) {
+  const current = cell.dataset.status;
+  const next = statusCycle[current] || statusCycle['pending'];
+  cell.dataset.status = next.next;
+  cell.innerHTML = '<span class="status-badge ' + next.class + '">' + next.label + '</span>';
+  saveToLocalStorage();
+  updateDashboard();
+}
+
+// =========================
+// CHECKBOX TOGGLE
+// =========================
+function toggleCheckbox(cell) {
+  cell.textContent = cell.textContent === '☐' ? '☑' : '☐';
+  saveToLocalStorage();
+  updateDashboard();
+}
+
+// =========================
+// DASHBOARD UPDATE
+// =========================
+function updateDashboard() {
+  const allStatusCells = document.querySelectorAll('.status-cell');
+  let total = 0, complete = 0, progress = 0, pending = 0;
+  allStatusCells.forEach(cell => {
+    const status = cell.dataset.status;
+    if (status === 'done' || status === 'complete') { complete++; }
+    else if (status === 'progress' || status === 'active' || status === 'monitoring') { progress++; }
+    else { pending++; }
+    total++;
+  });
+
+  const totalDeliverables = 34;
+  const overallPct = totalDeliverables > 0 ? Math.round((complete / totalDeliverables) * 100) : 0;
+
+  const dashTotal = document.getElementById('dash-total');
+  const dashComplete = document.getElementById('dash-complete');
+  const dashProgress = document.getElementById('dash-progress');
+  const dashPending = document.getElementById('dash-pending');
+  const dashOverall = document.getElementById('dash-overall');
+
+  if (dashTotal) dashTotal.textContent = totalDeliverables;
+  if (dashComplete) dashComplete.textContent = complete;
+  if (dashProgress) dashProgress.textContent = progress;
+  if (dashPending) dashPending.textContent = pending;
+  if (dashOverall) dashOverall.textContent = overallPct + '%';
+
+  const barComplete = document.getElementById('bar-complete');
+  const barProgress = document.getElementById('bar-progress');
+  const barPending = document.getElementById('bar-pending');
+  const barOverall = document.getElementById('bar-overall');
+
+  if (barComplete) barComplete.style.width = (complete / totalDeliverables * 100) + '%';
+  if (barProgress) barProgress.style.width = (progress / totalDeliverables * 100) + '%';
+  if (barPending) barPending.style.width = (pending / totalDeliverables * 100) + '%';
+  if (barOverall) barOverall.style.width = overallPct + '%';
+
+  // Weeks to deadline
+  const deadline = new Date('2026-08-04');
+  const now = new Date();
+  const diffTime = deadline - now;
+  const diffWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+  const dashWeeks = document.getElementById('dash-weeks');
+  if (dashWeeks) dashWeeks.textContent = diffWeeks > 0 ? diffWeeks : 0;
+}
+
+// =========================
+// LOCAL STORAGE
+// =========================
+function saveToLocalStorage() {
+  const data = {};
+  document.querySelectorAll('.status-cell').forEach((cell, idx) => {
+    data['status_' + idx] = cell.dataset.status;
+  });
+  document.querySelectorAll('.checkbox-cell').forEach((cell, idx) => {
+    data['checkbox_' + idx] = cell.textContent;
+  });
+  document.querySelectorAll('.editable').forEach((cell, idx) => {
+    data['editable_' + idx] = cell.innerHTML;
+  });
+  localStorage.setItem('cdri_pmo_data', JSON.stringify(data));
+}
+
+function loadFromLocalStorage() {
+  const saved = localStorage.getItem('cdri_pmo_data');
+  if (!saved) return;
+  const data = JSON.parse(saved);
+  document.querySelectorAll('.status-cell').forEach((cell, idx) => {
+    const key = 'status_' + idx;
+    if (data[key]) {
+      cell.dataset.status = data[key];
+      const next = statusCycle[data[key]];
+      if (next) {
+        cell.innerHTML = '<span class="status-badge ' + next.class + '">' + next.label + '</span>';
+      }
+    }
+  });
+  document.querySelectorAll('.checkbox-cell').forEach((cell, idx) => {
+    const key = 'checkbox_' + idx;
+    if (data[key]) cell.textContent = data[key];
+  });
+  document.querySelectorAll('.editable').forEach((cell, idx) => {
+    const key = 'editable_' + idx;
+    if (data[key]) cell.innerHTML = data[key];
+  });
+  updateDashboard();
+}
+
+// =========================
+// SAVE / LOAD FILE
+// =========================
+function saveData() {
+  const data = localStorage.getItem('cdri_pmo_data') || '{}';
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cdri_pmo_backup_' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function loadDataFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      localStorage.setItem('cdri_pmo_data', JSON.stringify(data));
+      loadFromLocalStorage();
+      alert('Data loaded successfully!');
+    } catch (err) {
+      alert('Error loading file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+// =========================
+// INIT
+// =========================
+document.addEventListener('DOMContentLoaded', function() {
+  loadFromLocalStorage();
+  updateDashboard();
+
+  // Auto-save on editable changes
+  document.querySelectorAll('.editable').forEach(cell => {
+    cell.addEventListener('blur', saveToLocalStorage);
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+
