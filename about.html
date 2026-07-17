@@ -58,6 +58,90 @@
         text-transform: uppercase;
       }
     }
+
+    .eligibility-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .eligibility-card {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.42);
+      padding: 28px 30px;
+    }
+
+    .eligibility-card h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .eligibility-card p,
+    .program-card p,
+    .meta-list li {
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .focus-panel {
+      border: 1px solid var(--border);
+      background: var(--gold-light);
+      padding: 28px 30px;
+      margin-top: 24px;
+    }
+
+    .meta-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .meta-list strong {
+      color: var(--charcoal);
+      font-weight: 600;
+    }
+
+    .program-card {
+      border-left: 2px solid var(--gold-muted);
+      padding: 26px 0 26px 24px;
+      margin-top: 24px;
+    }
+
+    .program-card h3 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .program-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .program-meta div {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .program-meta strong {
+      display: block;
+      color: var(--charcoal);
+      font-size: 11px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -91,6 +175,56 @@
       <p><strong>2016 — 2021</strong> — From Brazil to Boston. Paralegal Studies at Boston University, working as Contract Administrator at Bluebird Network, observing the same patterns: contracts designed for stability that become traps when external conditions change.</p>
       <p><strong>2021 — 2023</strong> — LL.M. in Business Law at Washington University in St. Louis. Formalization of the Recognition-Action Gap: legal systems recognize harm only after it materializes. There is no juridical category for <em>pre-threshold responsibility</em>.</p>
       <p><strong>2023 — 2024</strong> — COP30 and the Birth of the Doctrine. When Belém was selected to host COP30, the c-ECO framework crystallized as a legal architecture for anticipatory governance.</p>
+    </section>
+
+    <section class="section">
+      <p class="overline">Public Benefit Eligibility</p>
+      <h2 class="page-title" style="font-size:clamp(32px,3.4vw,46px); margin-bottom:18px;">Mission, Vision, and Programs</h2>
+      <div class="eligibility-grid">
+        <article class="eligibility-card">
+          <h3>Mission</h3>
+          <p>The Foundation operates on a strictly non-profit basis to benefit the community by advancing education and improving social welfare. We provide free open-source frameworks, public educational resources, and civic mentorship to protect public infrastructure and build community resilience against environmental and systemic risks.</p>
+        </article>
+        <article class="eligibility-card">
+          <h3>Vision</h3>
+          <p>A global civic education and public-benefit research ecosystem where communities, public-welfare managers, and local resilience leaders can access practical tools, open frameworks, and mentorship before environmental and systemic risks become humanitarian crises.</p>
+        </article>
+      </div>
+
+      <div class="focus-panel">
+        <h3>Our Focus</h3>
+        <ul class="meta-list">
+          <li><strong>Subject area:</strong> Science</li>
+          <li><strong>NTEE codes:</strong> Science and Technology Research Institutes, Services N.E.C. (U99)</li>
+          <li><strong>Geographic area served:</strong> Global</li>
+          <li><strong>Population served:</strong> General population</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:42px;">
+        <p class="overline">Programs</p>
+        <h3 style="font-size:30px; font-weight:500; margin-bottom:8px;">Total programs: 2</h3>
+
+        <article class="program-card">
+          <h3>c-ECO Fellowship Program</h3>
+          <p>The c-ECO Fellowship Program is the flagship humanitarian and community education initiative of the Johann Christian Hasse Foundation. It provides open-access training and collaborative mentorship in civic governance, systemic risk mitigation, and local community resilience through applied public-interest projects, civic partnerships, and free open-source frameworks. The program prepares grassroots community leaders, disaster-response coordinators, and public-welfare managers to implement resilience principles to address complex environmental and public infrastructure challenges, directly protecting vulnerable populations from systemic harm.</p>
+          <div class="program-meta">
+            <div><strong>Subject area</strong>Environment<br>Public safety and disaster management<br>Community and economic development</div>
+            <div><strong>Population served</strong>General population</div>
+            <div><strong>Geographic area served</strong>Global</div>
+          </div>
+        </article>
+
+        <article class="program-card">
+          <h3>c-ECO: Predictive Governance &amp; Systemic Resilience Initiative</h3>
+          <p>The c-ECO Initiative develops open-source risk-mitigation methodologies, provides free public educational resources, and supports collaborative civic projects to improve community decision-making under uncertainty. The program focuses strictly on the early detection of public risks and the implementation of practical resilience tools across environmental, public infrastructure, and civil society systems to prevent humanitarian crises and protect public welfare.</p>
+          <div class="program-meta">
+            <div><strong>Subject area</strong>Science<br>Public safety and disaster management<br>Environment</div>
+            <div><strong>Population served</strong>General population</div>
+            <div><strong>Geographic area served</strong>Global</div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="section blockquote">
