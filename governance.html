@@ -1,74 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  .mobile-nav-toggle,
-  .mobile-nav-panel {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none !important;
-    }
-
-    .mobile-nav-toggle {
-      display: block !important;
-      background: transparent;
-      border: none;
-      color: #180c04;
-      font-size: 34px;
-      cursor: pointer;
-      z-index: 10000;
-    }
-
-    body.mobile-nav-open .mobile-nav-panel {
-      display: flex !important;
-      position: fixed;
-      top: 92px;
-      left: 18px;
-      right: 18px;
-      z-index: 9999;
-      flex-direction: column;
-      gap: 18px;
-      padding: 24px;
-      background: rgba(252, 250, 238, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-
-    .mobile-nav-panel a {
-      color: #180c04;
-      text-decoration: none;
-      font-family: Inter, sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-  }
-</style>
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Foundation Governance — board, officers, compliance architecture, and institutional portfolios." />
-  <title>Governance — Johann Christian Hasse Foundation</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Foundation governance page temporarily offline for updates." />
+  <title>Governance Under Review — Johann Christian Hasse Foundation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .offline-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 120px 24px 80px;
+    }
+
+    .offline-panel {
+      width: min(720px, 100%);
+      border-left: 2px solid var(--gold-muted);
+      padding-left: 28px;
+    }
+
+    .offline-panel h1 {
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.08;
+      margin: 18px 0 20px;
+    }
+
+    .offline-panel p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+  </style>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-brand">Hasse Foundation</a>
-
-<button class="mobile-nav-toggle" aria-label="Open menu">☰</button>
-
-<div class="nav-links">
+      <div class="nav-links">
         <a href="/about.html" class="nav-link">About</a>
         <a href="/hasse.html" class="nav-link">Johann Christian Hasse</a>
-        <a href="/governance.html" class="nav-link">Governance</a>
         <a href="/donate.html" class="nav-link">Donate</a>
         <a href="/doctrine.html" class="nav-link">Doctrine</a>
         <a href="/fellowship.html" class="nav-link">Fellowship</a>
@@ -77,203 +55,13 @@
     </div>
   </nav>
 
-  <header class="page-header">
-    <p class="overline">Institutional Architecture</p>
-    <h1 class="page-title">Foundation Governance</h1>
-    <p class="page-subtitle">The Johann Christian Hasse Foundation separates executive administration, fiduciary oversight, technical integrity, compliance, and social resilience into distinct governance portfolios.</p>
-  </header>
-
-  <main class="page-content governance-content">
-    <section class="section people-section">
-      <div class="section-heading">
-        <p class="overline">Johann Christian Hasse Foundation</p>
-        <h2>Executive Leadership</h2>
-      </div>
-      <div class="people-grid officers-grid">
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/jacqueline-ennis.png" alt="Jacqueline Ennis" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Jacqueline Ennis</h3>
-            <p>President</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/andrew.png" alt="Andrew McElwaine" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Andrew McElwaine</h3>
-            <p>Vice President</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/sandy.jpeg" alt="Sandy Paik" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Sandy Paik</h3>
-            <p>Treasurer</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/bahman.png" alt="Bahman Naraghi" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Bahman Naraghi</h3>
-            <p>Executive Director / COO</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section people-section">
-      <div class="section-heading">
-        <h2>Board of Directors</h2>
-      </div>
-      <div class="people-grid">
-        <article class="person-card">
-          <img src="https://raw.githubusercontent.com/jac14014/c-eco/main/assets/img/rivera.png" alt="Rodolfo Ruby Rivera" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Rodolfo Ruby Rivera</h3>
-            <p>Board Director · International Legal Governance</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/acie.png" alt="Acie Douglas" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Acie Douglas</h3>
-            <p>Board Director</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/kunal.png" alt="Kunal Thakur" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Kunal Thakur</h3>
-            <p>Board Director</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/ravi.png" alt="Ravi Maharjan" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Ravi Maharjan</h3>
-            <p>Board Director</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section people-section">
-      <div class="section-heading">
-        <h2>Advisors</h2>
-      </div>
-      <div class="people-grid advisors-grid">
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/vika.png" alt="Viktoriya Zhelyazkova" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Viktoriya Zhelyazkova</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/agathe.png" alt="Agathe Rumanyika" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Agathe Rumanyika</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://raw.githubusercontent.com/jac14014/c-eco/main/assets/img/rick.jpg" alt="Richard &quot;Rick&quot; Ennis" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Richard "Rick" Ennis</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/daniel.png" alt="Daniel Ennis" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Daniel Ennis</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/erelyn-alves.png" alt="Erelyn Alves" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Erelyn Alves</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/joao.png" alt="João Martins" class="person-photo" loading="lazy" />
-          <div>
-            <h3>João Martins</h3>
-            <p>Advisor</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/barbara.JPG" alt="Barbara Oliva" class="person-photo barbara-photo" loading="lazy" />
-          <div>
-            <h3>Barbara Oliva</h3>
-            <p>Amazon & International Liaison</p>
-          </div>
-        </article>
-        <article class="person-card">
-          <img src="https://c-eco.org/assets/img/guilherme.png" alt="Guilherme Campbell" class="person-photo" loading="lazy" />
-          <div>
-            <h3>Guilherme Campbell</h3>
-            <p>Brazil & International Liaison</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-
-    <section class="section candid-strip">
-      <div>
-        <p class="overline">Public Transparency</p>
-        <h2>Candid Gold Seal</h2>
-        <p>The Foundation maintains a public Candid profile for nonprofit transparency and institutional accountability.</p>
-      </div>
-      <a href="https://app.candid.org/profile/16566998/johann-christian-hasse-foundation-41-4138929/?pkId=bbb618e5-9c99-4280-ae51-ceca9f73810a" target="_blank" rel="noopener noreferrer" class="candid-seal-link" aria-label="View Johann Christian Hasse Foundation profile on Candid">
-        <img src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16566998/svg" alt="" class="candid-seal small" loading="lazy" />
-      </a>
-    </section>
-
-    <section class="section action-row">
-      <a href="https://c-eco.org/foundation/org-chart.html" target="_blank" rel="noopener noreferrer" class="btn">Org Chart →</a>
-      <a href="https://c-eco.org/foundation/memo.html" target="_blank" rel="noopener noreferrer" class="btn">Memorandum →</a>
-      <a href="research/memo-us.html" class="btn">Memorandum II - US →</a>
-      <a href="mailto:contact@c-eco.org?subject=Request for Legal Documents" class="btn">Legal Documents →</a>
-      <a href="/" class="btn-ghost">← Back to Home</a>
+  <main class="offline-wrap">
+    <section class="offline-panel">
+      <p class="overline">Governance</p>
+      <h1>Page Under Review</h1>
+      <p>The Johann Christian Hasse Foundation governance page is temporarily offline while institutional information is reviewed and updated.</p>
+      <a href="/about.html" class="btn">Return to About</a>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <p class="footer-quote">Law. Science. Institutional Resilience.</p>
-    <div class="footer-links">
-      <a href="https://c-eco.io" target="_blank" rel="noopener noreferrer">c-ECO</a>
-      <a href="https://github.com/jac14014/lab" target="_blank" rel="noopener noreferrer">Lab</a>
-      <a href="sitemap.html">Site Map</a>
-      <a href="donate.html">Donate</a>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Johann Christian Hasse Foundation. All rights reserved.</p>
-    </div>
-  </footer>
-  <script>
-  const mobileToggle = document.querySelector(".mobile-nav-toggle");
-
-  const panel = document.createElement("div");
-  panel.className = "mobile-nav-panel";
-  panel.innerHTML = `
-    <a href="/about.html">About</a>
-    <a href="/hasse.html">Johann Christian Hasse</a>
-    <a href="/governance.html">Governance</a>
-    <a href="/donate.html">Donate</a>
-    <a href="/doctrine.html">Doctrine</a>
-    <a href="/fellowship.html">Fellowship</a>
-    <a href="/amazon-lab.html">Living Labs</a>
-  `;
-  document.body.appendChild(panel);
-
-  mobileToggle.addEventListener("click", function () {
-    document.body.classList.toggle("mobile-nav-open");
-    mobileToggle.textContent = document.body.classList.contains("mobile-nav-open") ? "×" : "☰";
-  });
-</script>
 </body>
 </html>
